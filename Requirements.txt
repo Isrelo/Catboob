@@ -1,0 +1,12 @@
+Title: Catboob (GGStream)
+
+7020 rez
+key map events
+sound and images
+system tray
+snaz
+snip
+sub alerts
+
+
+https://color.adobe.com/create/color-wheel/?base=2&rule=Complementary&selected=2&name=My%20Color%20Theme&mode=rgb&rgbvalues=0,0.69,0.6230639730643656,0.043999999999999984,0.43999999999999995,0.4015845410630272,0,0.99,0.8939613526575682,0.54,0.1725073195725645,0,0.99,0.3162634192163682,0&swatchOrder=0,1,2,3,4

@@ -6,19 +6,25 @@
         
         <Rectangle Height="64" HorizontalAlignment="Stretch" Name="rectangle1" Stroke="#FF00BCD4" VerticalAlignment="Top" Width="Auto" Fill="#FF00BCD4"></Rectangle>
         
-        <ListView Name="actions_listview" RenderTransformOrigin="0,0" BorderThickness="0" Margin="0,64,0,0">
+        <ListView Name="actions_listview" RenderTransformOrigin="0,0" BorderThickness="0" Margin="0,64,0,0" HorizontalContentAlignment="Stretch">
             
             <ListView.ItemTemplate>
                 
                 <DataTemplate>
                     
-                    <WrapPanel>
-
-                        <Image Width="64" Height="64" Source="{Binding ImageSource}"/>
-                        <TextBlock Text="{Binding ShortCut}"/>
-                        <Button Width="64" Height="64"/>
+                    <Grid>
                         
-                    </WrapPanel>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Width="64" Height="64" Source="{Binding ImageSource}" Grid.Column="0" />
+                        <TextBlock Text="{Binding ShortCut}" ClipToBounds="True" TextTrimming="CharacterEllipsis" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Width="64" Height="64" Grid.Column="2" />
+
+                    </Grid>
                     
                 </DataTemplate>
                 

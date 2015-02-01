@@ -40,9 +40,23 @@ namespace Catboob_GGStream
             List<Action> test_items = new List<Action>();
 
             Action test_action = new Action();
-            test_action.ImageSource = working_dir + "\\Images\\palette.png";
+            test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
             test_action.ShortCut = "Ctrl + F4";
+            test_items.Add(test_action);
 
+            test_action = new Action();
+            test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
+            test_action.ShortCut = "Ctrl + F3";
+            test_items.Add(test_action);
+
+            test_action = new Action();
+            test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
+            test_action.ShortCut = "Ctrl + F2";
+            test_items.Add(test_action);
+
+            test_action = new Action();
+            test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
+            test_action.ShortCut = "Ctrl + F1";
             test_items.Add(test_action);
 
             actions_listview.ItemsSource = test_items; 

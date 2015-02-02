@@ -9,9 +9,16 @@ namespace Catboob_GGStream
 {
     public class Action
     {
+        private int actionID;
         private String imageSource;
         private String shortCut;
         private String moreImageSource;
+
+        public int ActionID
+        {
+            get { return actionID; }
+            set { actionID = value; }
+        }
 
         public String ImageSource
         {

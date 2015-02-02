@@ -4,9 +4,9 @@
         Title="Catboob (GGStream)" Height="400" Width="300" ShowInTaskbar="False" SnapsToDevicePixels="True" WindowStyle="ThreeDBorderWindow" Closing="Window_Closing" MinWidth="300" Foreground="White" Topmost="False" Background="#FF00BCD4">
     <Grid>
 
-        <Grid Height="64" HorizontalAlignment="Stretch" Name="rectangle1" VerticalAlignment="Top" Width="Auto">
-                
-            <Button Width="48" Height="48" VerticalAlignment="Center" BorderThickness="0" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,8,8,8" HorizontalAlignment="Left" Grid.Column="0">
+        <Grid Name="main_toolbar" Height="64" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" MaxHeight="64">
+
+            <Button Width="48" Height="48" VerticalAlignment="Center" BorderThickness="0" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,8,8,8" HorizontalAlignment="Left" Grid.Column="0" Click="AppMenu_Clicked">
                 <Image Name="menu_button" Width="24" Height="24" VerticalAlignment="Center" />
             </Button>
 
@@ -17,42 +17,55 @@
             </Button>
 
         </Grid>
-        
-        <!-- The Padding=-1 is to remove the 1px border around the list view. -->
-        <ListView Name="actions_listview" RenderTransformOrigin="0,0" BorderThickness="0" Margin="0,64,0,0" HorizontalContentAlignment="Stretch" Padding="-1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+        <!-- Default Main Panel -->
+        <Grid Name="main_container" Margin="0,64,0,0">
+
+            <!-- The Padding=-1 is to remove the 1px border around the list view. -->
+            <ListView Name="actions_listview" RenderTransformOrigin="0,0" BorderThickness="0" Margin="0" HorizontalContentAlignment="Stretch" Padding="-1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Grid>
+
+                            <!-- Action Image Preview -->
+                            <Ellipse Width="56" Height="56" Margin="8,0,0,0" Grid.Column="0" HorizontalAlignment="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding ImageSource}" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <!-- Action Shortcut -->
+                            <TextBlock Text="{Binding ShortCut}" ClipToBounds="True" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="72,0,0,0" Grid.Column="1" FontWeight="Medium" FontSize="14" />
+
+                            <!-- Action More Optoins Button -->
+                            <Button Width="48" Height="48" VerticalAlignment="Center" BorderThickness="0" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,8,0,8" HorizontalAlignment="Right" Grid.Column="2">
+                                <Image Width="24" Height="24" VerticalAlignment="Center" Source="{Binding MoreImageSource}" />
+                            </Button>
+
+                        </Grid>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <!-- Add New Action Button -->
+            <Button Width="56" Height="56" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" Panel.ZIndex="1" Click="AddNewAction_Click">
+                <Image Name="add_action_button" Width="Auto" Height="Auto" VerticalAlignment="Center" />
+            </Button>
+
+        </Grid>
+
+        <Grid Name="add_action_container" Margin="0,64,0,0" Visibility="Collapsed" Background="White">
             
-            <ListView.ItemTemplate>
-                
-                <DataTemplate>
-                    
-                    <Grid>
+            <TextBlock Text="Test" Foreground="Black" />
+            
+        </Grid>
 
-                        <Ellipse Width="56" Height="56" Margin="8,0,0,0" Grid.Column="0" HorizontalAlignment="Left">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding ImageSource}" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        
-                        <TextBlock Text="{Binding ShortCut}" ClipToBounds="True" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="72,0,0,0" Grid.Column="1" FontWeight="Medium" FontSize="14" />
-
-                        <Button Width="48" Height="48" VerticalAlignment="Center" BorderThickness="0" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,8,0,8" HorizontalAlignment="Right" Grid.Column="2">
-                            <Image Width="24" Height="24" VerticalAlignment="Center" Source="{Binding MoreImageSource}" />
-                        </Button>
-
-                    </Grid>
-                    
-                </DataTemplate>
-                
-            </ListView.ItemTemplate>
-            <ListView.BorderBrush>
-                <SolidColorBrush />
-            </ListView.BorderBrush>
-        </ListView>
-
-        <Button Width="56" Height="56" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" Panel.ZIndex="1">
-            <Image Name="add_action_button" Width="Auto" Height="Auto" VerticalAlignment="Center" />            
-        </Button>
-        
     </Grid>
-    
+
 </Window>

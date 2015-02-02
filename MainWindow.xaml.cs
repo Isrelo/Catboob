@@ -36,27 +36,38 @@ namespace Catboob_GGStream
             // Keep Applicaion Open
             is_exiting = false;
 
+            // Set the application's title.
+            app_title.Text = "Catboob";
+
+            // Set the menu images.
+            menu_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_menu_white_48dp.png"));
+            menu_more_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_more_vert_white_48dp.png"));
+
             // Actions
             List<Action> test_items = new List<Action>();
 
             Action test_action = new Action();
             test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
             test_action.ShortCut = "Ctrl + F4";
+            test_action.MoreImageSource = working_dir + "\\Images\\ic_more_vert_black_48dp.png";
             test_items.Add(test_action);
 
             test_action = new Action();
-            test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
+            test_action.ImageSource = working_dir + "\\Images\\100_0105.jpg";
             test_action.ShortCut = "Ctrl + F3";
+            test_action.MoreImageSource = working_dir + "\\Images\\ic_more_vert_black_48dp.png";
             test_items.Add(test_action);
 
             test_action = new Action();
-            test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
+            test_action.ImageSource = working_dir + "\\Images\\EasyButton.jpg";
             test_action.ShortCut = "Ctrl + F2";
+            test_action.MoreImageSource = working_dir + "\\Images\\ic_more_vert_black_48dp.png";
             test_items.Add(test_action);
 
             test_action = new Action();
             test_action.ImageSource = working_dir + "\\Images\\GGButton.png";
             test_action.ShortCut = "Ctrl + F1";
+            test_action.MoreImageSource = working_dir + "\\Images\\ic_more_vert_black_48dp.png";
             test_items.Add(test_action);
 
             actions_listview.ItemsSource = test_items; 

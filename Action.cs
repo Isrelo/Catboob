@@ -11,6 +11,7 @@ namespace Catboob_GGStream
     {
         private String imageSource;
         private String shortCut;
+        private String moreImageSource;
 
         public String ImageSource
         {
@@ -22,6 +23,12 @@ namespace Catboob_GGStream
         {
             get { return shortCut; }
             set { shortCut = value; }
+        }
+
+        public String MoreImageSource
+        {
+            get { return moreImageSource; }
+            set { moreImageSource = value; }
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Catboob_GGStream
             // Set the menu images.
             menu_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_menu_white_48dp.png"));
             menu_more_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_more_vert_white_48dp.png"));
+            add_action_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_add_circle_orange_48dp.png"));
 
             // Actions
             List<Action> test_items = new List<Action>();

@@ -48,6 +48,10 @@
                 <SolidColorBrush />
             </ListView.BorderBrush>
         </ListView>
+
+        <Button Width="56" Height="56" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" Panel.ZIndex="1">
+            <Image Name="add_action_button" Width="Auto" Height="Auto" VerticalAlignment="Center" />            
+        </Button>
         
     </Grid>
     

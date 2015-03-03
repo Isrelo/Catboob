@@ -25,6 +25,7 @@ namespace Catboob_GGStream
     {
         private string working_dir;
         private bool is_exiting;
+        private ApplicationToolBar application_tool_bar;
         private List<Action> action_items;
 
         public MainWindow()
@@ -40,6 +41,10 @@ namespace Catboob_GGStream
 
             // Keep Applicaion Open
             is_exiting = false;
+
+            // Setup the application tool bar handler.
+            application_tool_bar = new ApplicationToolBar(working_dir);
+            application_tool_bar.TitleText = "Catboob";
 
             // Setup Layout Images            
             menu_more_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_more_vert_white_48dp.png"));
@@ -170,9 +175,10 @@ namespace Catboob_GGStream
             app_title.Text = "Catboob";
 
             // Display Main Menu Button
-            menu_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_menu_white_48dp.png"));
+            //application_tool_bar.ShowMenuAction_btn(main_action_btn);
 
             main_container.Visibility = System.Windows.Visibility.Visible;
+            menu_more_button.Visibility = System.Windows.Visibility.Visible;
             add_action_container.Visibility = System.Windows.Visibility.Collapsed;
         }
 
@@ -182,9 +188,10 @@ namespace Catboob_GGStream
             app_title.Text = "Add New Action";
 
             // Display Back Button
-            menu_button.Source = new BitmapImage(new Uri(working_dir + "\\Images\\ic_arrow_back_white_48dp.png"));
+            //application_tool_bar.ShowBackAction_btn(main_action_btn);
 
             main_container.Visibility = System.Windows.Visibility.Collapsed;
+            menu_more_button.Visibility = System.Windows.Visibility.Collapsed;
             add_action_container.Visibility = System.Windows.Visibility.Visible;
         }
     }

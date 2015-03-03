@@ -1,13 +1,13 @@
 ﻿<Window x:Class="Catboob_GGStream.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Catboob (GGStream)" Height="400" Width="300" ShowInTaskbar="False" SnapsToDevicePixels="True" WindowStyle="ThreeDBorderWindow" Closing="Window_Closing" MinWidth="300" Foreground="White" Topmost="False" Background="#FF00BCD4">
+        Title="Catboob (GGStream)" Height="400" Width="340" ShowInTaskbar="False" SnapsToDevicePixels="True" WindowStyle="ThreeDBorderWindow" Closing="Window_Closing" MinWidth="340" Foreground="White" Topmost="False" Background="#FF00BCD4">
     <Grid>
 
         <Grid Name="main_toolbar" Height="64" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" MaxHeight="64">
 
             <Button Width="48" Height="48" VerticalAlignment="Center" BorderThickness="0" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,8,8,8" HorizontalAlignment="Left" Grid.Column="0" Click="AppMenu_Clicked">
-                <Image Name="menu_button" Width="24" Height="24" VerticalAlignment="Center" />
+                <Image Name="main_action_btn" Width="24" Height="24" VerticalAlignment="Center" />
             </Button>
 
             <TextBlock Name="app_title" VerticalAlignment="Center" FontWeight="Medium" FontSize="20" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Grid.Column="1" Margin="72,0,0,0" />
@@ -22,13 +22,13 @@
         <Grid Name="main_container" Margin="0,64,0,0">
 
             <!-- The Padding=-1 is to remove the 1px border around the list view. -->
-            <ListView Name="actions_listview" RenderTransformOrigin="0,0" BorderThickness="0" Margin="0" HorizontalContentAlignment="Stretch" Padding="-1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView Name="actions_listview" RenderTransformOrigin="0,0" BorderThickness="0" Margin="0" HorizontalContentAlignment="Stretch" Padding="-1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="Black">
 
                 <ListView.ItemTemplate>
 
                     <DataTemplate>
 
-                        <Grid>
+                        <Grid>                            
 
                             <!-- Action Image Preview -->
                             <Ellipse Width="56" Height="56" Margin="8,0,0,0" Grid.Column="0" HorizontalAlignment="Left">
@@ -45,6 +45,8 @@
                                 <Image Width="24" Height="24" VerticalAlignment="Center" Source="{Binding MoreImageSource}" />
                             </Button>
 
+                            <Border BorderThickness="0,0,0,1" BorderBrush="#1E000000"/>
+
                         </Grid>
 
                     </DataTemplate>
@@ -60,11 +62,20 @@
 
         </Grid>
 
-        <Grid Name="add_action_container" Margin="0,64,0,0" Visibility="Collapsed" Background="White">
-            
-            <TextBlock Text="Test" Foreground="Black" />
-            
-        </Grid>
+        <ScrollViewer Name="add_action_container" Margin="0,64,0,0" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="White">
+            <StackPanel>
+
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />
+                <TextBox Text="Test" Foreground="Black" BorderThickness="0,0,0,1" BorderBrush="#1E000000" Margin="16" IsTabStop="False" FontSize="16" Padding="0" TextAlignment="Justify" ClipToBounds="False" Height="48" Background="White" VerticalAlignment="Top" VerticalContentAlignment="Center" OverridesDefaultStyle="False" />                
+
+            </StackPanel>
+        </ScrollViewer>
 
     </Grid>
 

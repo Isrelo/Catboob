@@ -55,17 +55,17 @@
             </Grid.RowDefinitions>
 
             <!-- Menu Button -->
-            <Button Name="Menu_btn" Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Margin="0" Padding="16,0,0,0">
+            <Button Name="Menu_btn" Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Margin="0" Padding="16,0,0,0" Visibility="Collapsed">
                 <Image Width="24" Height="24" Source="img/MenuWhite.png"/>
             </Button>
 
             <!-- Back Button -->
-            <Button Name="Back_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Visibility="Collapsed" Padding="16,0,0,0">
+            <Button Name="Back_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Visibility="Collapsed">
                 <Image Width="24" Height="24" Source="img/ArrowBackWhite.png"/>
             </Button>
 
             <!-- Cancel Button -->
-            <Button Name="Cancel_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Visibility="Collapsed" Padding="16,0,0,0">
+            <Button Name="Cancel_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Visibility="Collapsed">
                 <Image Width="24" Height="24" Source="img/CloseWhite.png"/>
             </Button>
 
@@ -74,20 +74,24 @@
         </Grid>
         
         <Grid Name="main_container" Grid.Row="1">
-            <ListView Name="overlay_lv" ItemsSource="{Binding OverlayItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListView Name="overlay_lv" ItemsSource="{Binding OverlayItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
 
+                            <!-- Overlay Item Image -->
                             <Ellipse Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="16">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="{Binding ImagePath}" />
                                 </Ellipse.Fill>
                             </Ellipse>
 
+                            <!-- Hotkey Description -->
                             <TextBlock Text="{Binding HotKey}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="72,0,0,0" Padding="0" />
 
+                            <!-- Item Seperator -->
                             <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0"/>
+                            
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

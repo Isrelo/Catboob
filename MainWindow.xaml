@@ -6,10 +6,10 @@
         Width="340" 
         Background="#FFFAFAFA" 
         FontFamily="Calibri" MinWidth="340" WindowStyle="ToolWindow">
-    
+
     <!-- Static Resouces -->
     <Window.Resources>
-        
+
         <!-- Action Image Button Style -->
         <Style x:Key="ActionBtn_style" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -19,7 +19,7 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -30,8 +30,8 @@
                 </Trigger>
                 <Trigger Property="Button.IsPressed" Value="True">
                     <Setter Property="Background" Value="#FF006960" />
-                </Trigger>                
-            </Style.Triggers>            
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Action Flat Button -->
@@ -54,6 +54,54 @@
                 </Trigger>
                 <Trigger Property="Button.IsPressed" Value="True">
                     <Setter Property="Background" Value="#FF006960" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Regular Button -->
+        <Style x:Key="RegularBtn_style" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#33999999" />
+                </Trigger>
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Setter Property="Background" Value="#66999999" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Action Flat Button -->
+        <Style x:Key="RegularFlatBtn_style" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" Padding="16" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#33999999" />
+                </Trigger>
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Setter Property="Background" Value="#66999999" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -94,16 +142,16 @@
             <Button Name="Cancel_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Visibility="Collapsed" Click="CancelButton_Click">
                 <Image Width="24" Height="24" Source="img/CloseWhite.png"/>
             </Button>
-                
+
             <!-- App Title -->
-            <TextBlock Name="AppTitle_txt" Grid.Row="0" Grid.Column="1" Foreground="White" FontSize="20" FontWeight="Medium" Padding="16,0,0,0" UseLayoutRounding="True" Margin="0" VerticalAlignment="Center" >Catboob</TextBlock>
+            <TextBlock Name="AppTitle_txt" Grid.Row="0" Grid.Column="1" ClipToBounds="True" TextTrimming="CharacterEllipsis" Foreground="White" FontSize="20" FontWeight="Medium" Padding="16,0,0,0" UseLayoutRounding="True" Margin="0" VerticalAlignment="Center" >Catboob</TextBlock>
 
             <!-- Save Button -->
             <Button Name="Save_btn" Grid.Row="0" Grid.Column="2" Style="{StaticResource ActionFlatBtn_style}" OverridesDefaultStyle="True" Margin="0" Padding="16" BorderThickness="0" FontSize="16" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="SAVE" Foreground="White" Click="SaveButton_Click" Visibility="Collapsed"/>
-    
+
         </Grid>
 
-        <Grid Name="main_container" Grid.Row="1" Visibility="Visible">
+        <Grid Name="main_container" Grid.Row="1">
             <ListView Name="overlay_lv" ItemsSource="{Binding OverlayItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -142,9 +190,77 @@
 
         </Grid>
 
+        <!-- Add Item Container -->
         <Grid Name="add_overlay_item_container" Grid.Row="1" Visibility="Collapsed">
 
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ClipToBounds="True">
+                
+                <StackPanel>
+                    
+                    <!-- Image Path -->
+                    <Grid Margin="0,16,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="48" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" Text="Image Path" VerticalAlignment="Center" />
+
+                        <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ImagePath_Click">
+                            <Image Width="24" Height="24" Source="img/AttachmentGrey.png"/>
+                        </Button>
+                        
+                    </Grid>
+                    <!-- Item Seperator -->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
+
+                    <TextBlock Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                    <!-- Hotkey -->
+                    <Grid Margin="0,16,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="48" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Hotkey" />
+
+                        <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="HotKey_Click" >
+                            <Image Width="24" Height="24" Source="img/KeyboardGrey.png"/>
+                        </Button>
+
+                    </Grid>
+                    <!-- Item Seperator -->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
+
+                    <TextBlock Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                </StackPanel>
+                
+            </ScrollViewer>
+
         </Grid>
-        
+
+        <!-- Hotkey Dialog Overlay -->
+        <Grid Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
+            <Grid Background="#FFFAFAFA" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="48" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" ClipToBounds="True" TextWrapping="Wrap" FontSize="20" FontWeight="Medium" Foreground="#FF212121" Margin="24,24,24,0" Text="Press any key to pick a hotkey for your overlay." />
+
+                <TextBlock Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" KeyUp="Hotkey_KeyUp" KeyDown="Hotkey_Down" PreviewKeyDown="Hotkey_PreviewKeyDown"/>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" Click="HotkeyDiscard_Click" FontSize="14" FontWeight="Medium"/>
+                    <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" Click="HotkeySave_Click" FontSize="14" FontWeight="Medium"/>                    
+                </StackPanel>
+                
+            </Grid>
+        </Grid>
+
     </Grid>
 </Window>

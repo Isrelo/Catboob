@@ -10,5 +10,6 @@ namespace CatboobGGStream
     {
         public String ImagePath { get; set; }
         public String HotKey { get; set; }
+        public String SoundPath { get; set; }
     }
 }

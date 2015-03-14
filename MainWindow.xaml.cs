@@ -25,7 +25,6 @@ namespace CatboobGGStream
     /// </summary>
     public partial class MainWindow : Window
     {
-        private String pressed_hotkey;
         private String working_dir;
         private HotkeyManager hotkey_manager;
         private BindingList<OverlayItem> overlay_items;
@@ -57,12 +56,14 @@ namespace CatboobGGStream
             temp_item = new OverlayItem();
             temp_item.HotKey = "GGButton";
             temp_item.ImagePath = working_dir + "\\Images\\GGButton.png";
+            temp_item.SoundPath = working_dir + "\\Sounds\\gg.mp3";
             OverlayItems.Add(temp_item);
 
             // Add EasyButton
             temp_item = new OverlayItem();
             temp_item.HotKey = "EasyButton";
             temp_item.ImagePath = working_dir + "\\Images\\EasyButton.jpg";
+            temp_item.SoundPath = working_dir + "\\Sounds\\that_was_easy.mp3";
             OverlayItems.Add(temp_item);
         }
 
@@ -123,24 +124,34 @@ namespace CatboobGGStream
 
         private void ResetAddItemForm()
         {
-            // Reset add item form.
+            // Reset Hotkey
             hotkey_tb.Text = "";
+
+            // Reset Image Path
             image_path_tb.Text = "";
+
+            // Reset Sound Path
+            sound_path_tb.Text = "";
         }
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
+            // Show the add item screen.
             DisplayAddItemScreen();
+
+            // Reset the add item form.
             ResetAddItemForm();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            // Show the home screen.
             DisplayStartingScreen();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            // Show the home screen.
             DisplayStartingScreen();
         }
 
@@ -156,16 +167,31 @@ namespace CatboobGGStream
             if(!String.IsNullOrEmpty(image_path_tb.Text))
                 temp_item.ImagePath = image_path_tb.Text;
 
+            // Add user overlay item.
             OverlayItems.Add(temp_item);
 
+            // Show the home screen.
             DisplayStartingScreen();
         }
 
         private void ImagePath_Click(object sender, RoutedEventArgs e)
         {
+            // Get the users chosen image.
             OpenFileDialog open_file_dialog = new OpenFileDialog();
+            open_file_dialog.Title = "Choose Image";
+            open_file_dialog.Filter = "Image Files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png, *.gif) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png; *.gif;|All Files (*.*)|*.*"; 
             if (open_file_dialog.ShowDialog() == true)
                 image_path_tb.Text = open_file_dialog.FileName;
+        }
+
+        private void SoundPath_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the users chosen sound.
+            OpenFileDialog open_file_dialog = new OpenFileDialog();
+            open_file_dialog.Title = "Choose Sound";
+            open_file_dialog.Filter = "Sound Files  (*.mp3, *.wav)|*.mp3; *.wav;|All Files (*.*)|*.*";
+            if (open_file_dialog.ShowDialog() == true)
+                sound_path_tb.Text = open_file_dialog.FileName;
         }
 
         private void HotKey_Click(object sender, RoutedEventArgs e)

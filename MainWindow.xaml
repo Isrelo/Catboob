@@ -5,7 +5,10 @@
         Height="400" 
         Width="340" 
         Background="#FFFAFAFA" 
-        FontFamily="Calibri" MinWidth="340" WindowStyle="ToolWindow">
+        FontFamily="Calibri" 
+        MinWidth="340" 
+        WindowStyle="ToolWindow"
+        Icon="Catboob.ico">
 
     <!-- Static Resouces -->
     <Window.Resources>
@@ -234,6 +237,25 @@
                     <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
 
                     <TextBlock Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                    <!-- Sound Path -->
+                    <Grid Margin="0,16,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="48" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Sound Path" />
+
+                        <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="SoundPath_Click">
+                            <Image Width="24" Height="24" Source="img/MusicNodeGrey.png"/>
+                        </Button>
+
+                    </Grid>
+                    <!-- Item Seperator -->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
+
+                    <TextBlock Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
 
                 </StackPanel>
                 

@@ -4,12 +4,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Windows;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace CatboobGGStream
 {
-    public class OverlayItem
+    public class OverlayItem : INotifyPropertyChanged
     {
-        public String ImagePath { get; set; }
-        public String HotKey { get; set; }
-        public String SoundPath { get; set; }
+        private String image_path;
+        private String hot_key;
+        private String sound_path;
+        private Visibility play_visible;
+        private Visibility stop_visible;
+
+        public String ImagePath 
+        { 
+            get{ return image_path; }
+            set
+            {
+                image_path = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            } 
+        }
+
+        public String HotKey 
+        { 
+            get{ return hot_key; }
+            set
+            {
+                hot_key = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            } 
+        }
+
+        public String SoundPath 
+        { 
+            get{ return sound_path; }
+            set
+            {
+                sound_path = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            } 
+        }
+
+        public Visibility PlayVisible 
+        { 
+            get{ return play_visible; }
+            set
+            {
+                play_visible = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            } 
+        }
+
+        public Visibility StopVisible 
+        { 
+            get{ return stop_visible; }
+            set
+            {
+                stop_visible = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            } 
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This method is called by the Set accessor of each property. 
+        // The CallerMemberName attribute that is applied to the optional propertyName 
+        // parameter causes the property name of the caller to be substituted as an argument. 
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
     }
 }

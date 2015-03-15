@@ -183,12 +183,12 @@
                             <TextBlock Grid.Column="1" Text="{Binding HotKey}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="0" Padding="0" />
 
                             <!-- Play Sound -->
-                            <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="PlaySound_Click">
+                            <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Visibility="{Binding PlayVisible}" Click="PlaySound_Click">
                                 <Image Width="24" Height="24" Source="img/PlayArrowGrey.png"/>
                             </Button>
 
                             <!-- Stop Sound -->
-                            <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="StopSound_Click" Visibility="Collapsed">
+                            <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Visibility="{Binding StopVisible}" Click="StopSound_Click">
                                 <Image Width="24" Height="24" Source="img/StopGrey.png"/>
                             </Button>
                             

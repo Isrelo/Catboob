@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Windows;
 using System.Windows.Media;
 using System.IO;
 
@@ -11,25 +12,32 @@ namespace CatboobGGStream
 {
     public class SoundManager
     {
-        private MediaPlayer sound_media_player;
+        public MediaPlayer SoundMediaPlayer;
 
         public SoundManager()
         {
-            sound_media_player = new MediaPlayer();
+            SoundMediaPlayer = new MediaPlayer();
+        }
+
+        public void SetVolume(double volume_level)
+        {
+            if (volume_level > 0.0 && volume_level < 1.0)
+                SoundMediaPlayer.Volume = volume_level;
         }
 
         public void PlaySound(String sound_path)
         {
             if (File.Exists(sound_path))
-            {
-                sound_media_player.Open(new Uri(sound_path));
-                sound_media_player.Play();
+            {                
+                SoundMediaPlayer.Open(new Uri(sound_path));
+                SoundMediaPlayer.Play();
             }
         }
 
         public void StopSound()
         {
-            sound_media_player.Stop();
+            SoundMediaPlayer.Stop();
+            SoundMediaPlayer.Close();
         }
     }
 }

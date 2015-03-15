@@ -64,26 +64,18 @@ namespace CatboobGGStream
 
             // Setup sound manager;
             sound_manager = new SoundManager();
+            sound_manager.SoundMediaPlayer.MediaEnded += StopAllSounds_MediaEnded;
 
             // Setup the system tray icon.
             SetupSystemTray();
 
             //TODO: Replace with config file.
-            OverlayItem temp_item;
 
             // Add GGButton
-            temp_item = new OverlayItem();
-            temp_item.HotKey = "GGButton";
-            temp_item.ImagePath = working_dir + "\\Images\\GGButton.png";
-            temp_item.SoundPath = working_dir + "\\Sounds\\gg.mp3";
-            OverlayItems.Add(temp_item);
+            AddOverlayItem("GGButton", working_dir + "\\Images\\GGButton.png", working_dir + "\\Sounds\\gg.mp3");
 
             // Add EasyButton
-            temp_item = new OverlayItem();
-            temp_item.HotKey = "EasyButton";
-            temp_item.ImagePath = working_dir + "\\Images\\EasyButton.jpg";
-            temp_item.SoundPath = working_dir + "\\Sounds\\that_was_easy.mp3";
-            OverlayItems.Add(temp_item);
+            AddOverlayItem("EasyButton", working_dir + "\\Images\\EasyButton.jpg", working_dir + "\\Sounds\\that_was_easy.mp3");
         }
 
         private void SetupSystemTray()
@@ -164,6 +156,24 @@ namespace CatboobGGStream
             pressed_key_tb.Focus();
         }
 
+        private void DisplayPlay(OverlayItem overlay_item)
+        {
+            // Show the play button.
+            overlay_item.PlayVisible = Visibility.Visible;
+
+            // Hide the stop button.
+            overlay_item.StopVisible = Visibility.Collapsed;
+        }
+
+        private void DisplayStop(OverlayItem overlay_item)
+        {
+            // Hide the play button.
+            overlay_item.PlayVisible = Visibility.Collapsed;
+
+            // Show the stop button.
+            overlay_item.StopVisible = Visibility.Visible;
+        }
+
         private bool IsHotKeyDialogVisible()
         {
             if (add_overlay_item_container.Visibility == System.Windows.Visibility.Visible)
@@ -207,21 +217,39 @@ namespace CatboobGGStream
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            OverlayItem temp_item = new OverlayItem();
+            // Get the OverlayItem values.
+            String hot_key = hotkey_tb.Text;
+            String image_path = image_path_tb.Text;
+            String sound_path = sound_path_tb.Text;
 
-            // Get the hotkey to assign.
-            if (!String.IsNullOrEmpty(hotkey_tb.Text))
-                temp_item.HotKey = hotkey_tb.Text;
-            
-            // Get the selected image path.
-            if(!String.IsNullOrEmpty(image_path_tb.Text))
-                temp_item.ImagePath = image_path_tb.Text;
-
-            // Add user overlay item.
-            OverlayItems.Add(temp_item);
+            // Add the new OverlayItem.
+            AddOverlayItem(hot_key, image_path, sound_path);
 
             // Show the home screen.
             DisplayStartingScreen();
+        }
+
+        private void AddOverlayItem(String hot_key, String image_path, String sound_path)
+        {
+            OverlayItem temp_item = new OverlayItem();
+
+            // Check the hotkey to assign.
+            if(!String.IsNullOrEmpty(hot_key))
+                temp_item.HotKey = hot_key;
+
+            // Check the selected image path.
+            if (!String.IsNullOrEmpty(image_path))
+                temp_item.ImagePath = image_path;
+
+            // Check the selected sound path.
+            if (!String.IsNullOrEmpty(sound_path))
+                temp_item.SoundPath = sound_path;
+
+            // Add the OverlayItem to the list of displayed items.
+            OverlayItems.Add(temp_item);
+
+            // Show Play Button
+            DisplayPlay(temp_item);
         }
 
         private void ImagePath_Click(object sender, RoutedEventArgs e)
@@ -290,13 +318,34 @@ namespace CatboobGGStream
             Button tempButton = (Button)sender;
             OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
 
+            // Start Paying the selected sound.
             sound_manager.PlaySound(tempOverlayItem.SoundPath);
+
+            // Show stop button.
+            DisplayStop(tempOverlayItem);
         }
 
         private void StopSound_Click(object sender, RoutedEventArgs e)
         {
             Button tempButton = (Button)sender;
-            OverlayItem tempResult = (OverlayItem)tempButton.DataContext;
+            OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
+
+            // Stop Playing the selected sound.
+            sound_manager.StopSound();
+
+            // Show play button.
+            DisplayPlay(tempOverlayItem);
+        }
+
+        private void StopAllSounds_MediaEnded(object sender, EventArgs e)
+        {
+            // Stop Playing the selected sound.
+            sound_manager.StopSound();
+
+            for (int count = 0; count < OverlayItems.Count; count++)
+            {
+                DisplayPlay(OverlayItems[count]);
+            }
         }
 
         private void Minimize_Applicatoin()
@@ -332,11 +381,11 @@ namespace CatboobGGStream
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             //TODO: Uncomment after debugging.
-            //if (!is_app_exiting)
-            //    e.Cancel = true;
-            
-            //// Hide the application don't close it.
-            //this.WindowState = System.Windows.WindowState.Minimized;
+            if (!is_app_exiting)
+                e.Cancel = true;
+
+            // Hide the application don't close it.
+            this.WindowState = System.Windows.WindowState.Minimized;
         }
     }
 }

@@ -161,19 +161,39 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="56" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="56" />
+                            </Grid.RowDefinitions>
 
                             <!-- Overlay Item Image -->
-                            <Ellipse Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="16">
+                            <Ellipse Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="{Binding ImagePath}" />
                                 </Ellipse.Fill>
                             </Ellipse>
 
                             <!-- Hotkey Description -->
-                            <TextBlock Text="{Binding HotKey}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="72,0,0,0" Padding="0" />
+                            <TextBlock Grid.Column="1" Text="{Binding HotKey}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="0" Padding="0" />
 
+                            <!-- Play Sound -->
+                            <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="PlaySound_Click">
+                                <Image Width="24" Height="24" Source="img/PlayArrowGrey.png"/>
+                            </Button>
+
+                            <!-- Stop Sound -->
+                            <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="StopSound_Click" Visibility="Collapsed">
+                                <Image Width="24" Height="24" Source="img/StopGrey.png"/>
+                            </Button>
+                            
                             <!-- Item Seperator -->
-                            <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0" Padding="0,0,0,16"/>
+                            <Border Grid.Column="0" BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0" Padding="0,0,0,16" Grid.ColumnSpan="3"/>
 
                         </Grid>
                     </DataTemplate>

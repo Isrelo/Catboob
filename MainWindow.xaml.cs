@@ -27,6 +27,7 @@ namespace CatboobGGStream
     {
         private bool is_app_exiting;
         private String working_dir;
+        private SoundManager sound_manager;
         private HotkeyManager hotkey_manager;
         private BindingList<OverlayItem> overlay_items;
         private KeyboardListener global_keyboard_listner;
@@ -60,6 +61,9 @@ namespace CatboobGGStream
 
             // Setup the user selected hotkey.
             hotkey_manager = new HotkeyManager();
+
+            // Setup sound manager;
+            sound_manager = new SoundManager();
 
             // Setup the system tray icon.
             SetupSystemTray();
@@ -281,10 +285,25 @@ namespace CatboobGGStream
             }
         }
 
+        private void PlaySound_Click(object sender, RoutedEventArgs e)
+        {
+            Button tempButton = (Button)sender;
+            OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
+
+            sound_manager.PlaySound(tempOverlayItem.SoundPath);
+        }
+
+        private void StopSound_Click(object sender, RoutedEventArgs e)
+        {
+            Button tempButton = (Button)sender;
+            OverlayItem tempResult = (OverlayItem)tempButton.DataContext;
+        }
+
         private void Minimize_Applicatoin()
         {
             this.Show();
             this.Activate();
+            this.BringIntoView();
             this.WindowState = WindowState.Normal;
         }
 

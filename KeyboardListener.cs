@@ -6,10 +6,12 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Collections.Generic;
 
-namespace Ownskit.Utils
+namespace CatboobGGStream
 {
     /// <summary>
     /// Listens keyboard globally.
+    /// 
+    /// Orignial Code by Ciantic (https://gist.github.com/Ciantic/471698#file-keyboardlistener-cs)
     /// 
     /// <remarks>Uses WH_KEYBOARD_LL.</remarks>
     /// </summary>

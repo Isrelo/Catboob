@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Diagnostics;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -25,6 +26,7 @@ namespace CatboobGGStream
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool has_hotkey_been_pressed;
         private bool is_app_exiting;
         private String working_dir;
         private SoundManager sound_manager;
@@ -53,6 +55,9 @@ namespace CatboobGGStream
 
             // Keep Applicaion Open
             is_app_exiting = false;
+
+            // Make sure no hot keys have been pressed yet.
+            has_hotkey_been_pressed = false;
 
             // Setup the global keyboard listner.
             global_keyboard_listner = new KeyboardListener();
@@ -194,6 +199,54 @@ namespace CatboobGGStream
             sound_path_tb.Text = "";
         }
 
+        private void AddOverlayItem(String hot_key, String image_path, String sound_path)
+        {
+            OverlayItem temp_item = new OverlayItem();
+
+            // Check the hotkey to assign.
+            if (!String.IsNullOrEmpty(hot_key))
+                temp_item.HotKey = hot_key;
+
+            // Check the selected image path.
+            if (!String.IsNullOrEmpty(image_path))
+                temp_item.ImagePath = image_path;
+
+            // Check the selected sound path.
+            if (!String.IsNullOrEmpty(sound_path))
+                temp_item.SoundPath = sound_path;
+
+            // Add the OverlayItem to the list of displayed items.
+            OverlayItems.Add(temp_item);
+
+            // Show Play Button
+            DisplayPlay(temp_item);
+        }
+
+        private void ExecuteOverlayItem()
+        {
+            for (int count = 0; count < OverlayItems.Count; count++)
+            {
+                // Check to see if the user pressed a hotkey.
+                OverlayItem temp_overlay_item = OverlayItems[count];
+                if (hotkey_manager.CheckForPressedHotkey(temp_overlay_item.HotKey) && !has_hotkey_been_pressed)
+                {
+                    // Play Overlay Sound
+                    sound_manager.PlaySound(temp_overlay_item.SoundPath);
+                    
+                    // Show stop button.
+                    DisplayStop(temp_overlay_item);
+
+                    // Prevent the hotkey from being detected on heald keys.
+                    has_hotkey_been_pressed = true;
+
+                    //TODO: Remove latter - debugging if a hotkey was pressed or not.
+                    Debug.WriteLine(String.Format("Andy - Hotkey: {0}", temp_overlay_item.HotKey));
+
+                    return;
+                }
+            }
+        }
+
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
             // Show the add item screen.
@@ -227,29 +280,6 @@ namespace CatboobGGStream
 
             // Show the home screen.
             DisplayStartingScreen();
-        }
-
-        private void AddOverlayItem(String hot_key, String image_path, String sound_path)
-        {
-            OverlayItem temp_item = new OverlayItem();
-
-            // Check the hotkey to assign.
-            if(!String.IsNullOrEmpty(hot_key))
-                temp_item.HotKey = hot_key;
-
-            // Check the selected image path.
-            if (!String.IsNullOrEmpty(image_path))
-                temp_item.ImagePath = image_path;
-
-            // Check the selected sound path.
-            if (!String.IsNullOrEmpty(sound_path))
-                temp_item.SoundPath = sound_path;
-
-            // Add the OverlayItem to the list of displayed items.
-            OverlayItems.Add(temp_item);
-
-            // Show Play Button
-            DisplayPlay(temp_item);
         }
 
         private void ImagePath_Click(object sender, RoutedEventArgs e)
@@ -294,23 +324,27 @@ namespace CatboobGGStream
 
         private void Global_Keyboard_KeyDown(object sender, RawKeyEventArgs raw_key_event_args)
         {
+            // Add pressed keys to the hotkey manager.
+            hotkey_manager.AddPressedKey(raw_key_event_args.Key.ToString());
+
             if (IsHotKeyDialogVisible())
             {
-                // Add pressed keys to the hotkey manager.
-                hotkey_manager.AddPressedKey(raw_key_event_args.Key.ToString());
-
                 // Display the list of key in a hotkey.
                 pressed_key_tb.Text = hotkey_manager.GetPressedKeysString();
+                return;
             }
+
+            // Execute overlay Aations if user pressed hotkey.
+            ExecuteOverlayItem();
         }
 
         private void Global_Keyboard_KeyUp(object sender, RawKeyEventArgs raw_key_event_args)
         {
-            if (IsHotKeyDialogVisible())
-            {
-                // Remove key from hotkey manager.
-                hotkey_manager.RemovePressedKey(raw_key_event_args.Key.ToString());
-            }
+            // Remove key from hotkey manager.
+            hotkey_manager.RemovePressedKey(raw_key_event_args.Key.ToString());
+
+            // Hotkey has no longer been pressed.
+            has_hotkey_been_pressed = false;
         }
 
         private void PlaySound_Click(object sender, RoutedEventArgs e)
@@ -348,7 +382,7 @@ namespace CatboobGGStream
             }
         }
 
-        private void Minimize_Applicatoin()
+        private void Maximize_Applicatoin()
         {
             this.Show();
             this.Activate();
@@ -358,12 +392,12 @@ namespace CatboobGGStream
 
         private void SystemTrayIcon_Settings_Click(object sender, EventArgs args)
         {
-            Minimize_Applicatoin();
+            Maximize_Applicatoin();
         }
 
         private void SystemTrayIcon_Double_Click(object sender, EventArgs args)
         {
-            Minimize_Applicatoin();
+            Maximize_Applicatoin();
         }
 
         // Application Exit Point
@@ -385,7 +419,7 @@ namespace CatboobGGStream
                 e.Cancel = true;
 
             // Hide the application don't close it.
-            this.WindowState = System.Windows.WindowState.Minimized;
+            this.Hide();
         }
     }
 }

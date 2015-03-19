@@ -58,5 +58,13 @@ namespace CatboobGGStream
 
             return false;
         }
+
+        public bool CheckForPressedHotkey(String  hot_key_to_check)
+        {
+            if (hot_key_to_check == GetPressedKeysString())
+                return true;
+
+            return false;
+        }
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OverlayItems>
+  <!-- GG Button -->
+  <OverlayItem>
+    <ImagePath>/Images/GGButton.png</ImagePath>
+    <SoundPath>/Sounds/gg.mp3</SoundPath>
+    <HotKey>LeftCtrl + G</HotKey>
+  </OverlayItem>
+  <!-- Easy Button -->
+  <OverlayItem>
+    <ImagePath>/Images/EasyButton.jpg</ImagePath>
+    <SoundPath>/Sounds/that_was_easy.mp3</SoundPath>
+    <HotKey>LeftCtrl + G</HotKey>
+  </OverlayItem>  
+</OverlayItems>

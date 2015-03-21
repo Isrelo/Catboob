@@ -77,10 +77,10 @@ namespace CatboobGGStream
             //TODO: Replace with config file.
 
             // Add GGButton
-            AddOverlayItem("GGButton", working_dir + "\\Images\\GGButton.png", working_dir + "\\Sounds\\gg.mp3");
+            AddOverlayItem("LeftCtrl + G", working_dir + "\\Images\\GGButton.png", working_dir + "\\Sounds\\gg.mp3");
 
             // Add EasyButton
-            AddOverlayItem("EasyButton", working_dir + "\\Images\\EasyButton.jpg", working_dir + "\\Sounds\\that_was_easy.mp3");
+            AddOverlayItem("LeftCtrl + E", working_dir + "\\Images\\EasyButton.jpg", working_dir + "\\Sounds\\that_was_easy.mp3");
         }
 
         private void SetupSystemTray()

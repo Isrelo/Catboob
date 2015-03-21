@@ -149,6 +149,11 @@
   <ItemGroup>
     <Resource Include="Catboob.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="OverlayItems.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D

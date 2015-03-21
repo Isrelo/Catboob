@@ -201,7 +201,24 @@
             </ListView>
 
             <!-- Floating Action Button -->
-            <Button Name="floating_action_btn" Width="64" Height="64" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" BorderThickness="0" Click="AddItem_Click">
+            <Button Name="floating_action_btn" Width="64" Height="64" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" BorderThickness="0" Click="AddItem_Click" ClipToBounds="True">
+                
+                <!-- Add Button Hover Dropshadow -->
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter Property="Button.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" Direction="270" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>  
+                
+                <!-- Add Button Image -->
                 <Button.Template>
                     <ControlTemplate>
                         <Ellipse>

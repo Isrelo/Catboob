@@ -30,9 +30,11 @@ namespace CatboobGGStream
         private bool is_app_exiting;
         private String working_dir;
         private SoundManager sound_manager;
-        private HotkeyManager hotkey_manager;
-        private BindingList<OverlayItem> overlay_items;
+        private HotkeyManager hotkey_manager;        
         private KeyboardListener global_keyboard_listner;
+        private SettingsManager settings_manager;
+        private OverlayItem item_to_edit;
+        private BindingList<OverlayItem> overlay_items;
 
         public BindingList<OverlayItem> OverlayItems 
         { 
@@ -74,13 +76,13 @@ namespace CatboobGGStream
             // Setup the system tray icon.
             SetupSystemTray();
 
-            //TODO: Replace with config file.
-
-            // Add GGButton
-            AddOverlayItem("LeftCtrl + G", working_dir + "\\Images\\GGButton.png", working_dir + "\\Sounds\\gg.mp3");
-
-            // Add EasyButton
-            AddOverlayItem("LeftCtrl + E", working_dir + "\\Images\\EasyButton.jpg", working_dir + "\\Sounds\\that_was_easy.mp3");
+            // Load saved overlay items.
+            settings_manager = new SettingsManager(working_dir);
+            settings_manager.LoadOverlayItems();
+            for (int count = 0; count < settings_manager.OverlayItems.Count; count++)
+            {
+                AddOverlayItem(settings_manager.OverlayItems[count]);                
+            }
         }
 
         private void SetupSystemTray()
@@ -130,10 +132,10 @@ namespace CatboobGGStream
                 Save_btn.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void DisplayAddItemScreen()
+        private void DisplayItemScreen(String item_title)
         {
             // Change the title.
-            AppTitle_txt.Text = "Add Item";
+            AppTitle_txt.Text = item_title;
 
             // Hide the starting screen.
             main_container.Visibility = System.Windows.Visibility.Collapsed;
@@ -149,6 +151,9 @@ namespace CatboobGGStream
 
             // Hide the hotkey diallog.
             hotkey_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Hide the edit and delete buttons.
+            RightAction_sp.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void DisplayHotkeyDialog()
@@ -187,6 +192,21 @@ namespace CatboobGGStream
             return false;
         }
 
+        private void SetEditItemForm(OverlayItem overlay_item)
+        {
+            // Edit Item
+            item_to_edit = overlay_item;
+
+            // Reset Hotkey
+            hotkey_tb.Text = overlay_item.HotKey;
+
+            // Reset Image Path
+            image_path_tb.Text = overlay_item.ImagePath;
+
+            // Reset Sound Path
+            sound_path_tb.Text = overlay_item.SoundPath;            
+        }
+
         private void ResetAddItemForm()
         {
             // Reset Hotkey
@@ -199,27 +219,13 @@ namespace CatboobGGStream
             sound_path_tb.Text = "";
         }
 
-        private void AddOverlayItem(String hot_key, String image_path, String sound_path)
+        private void AddOverlayItem(OverlayItem overlay_item)
         {
-            OverlayItem temp_item = new OverlayItem();
-
-            // Check the hotkey to assign.
-            if (!String.IsNullOrEmpty(hot_key))
-                temp_item.HotKey = hot_key;
-
-            // Check the selected image path.
-            if (!String.IsNullOrEmpty(image_path))
-                temp_item.ImagePath = image_path;
-
-            // Check the selected sound path.
-            if (!String.IsNullOrEmpty(sound_path))
-                temp_item.SoundPath = sound_path;
-
             // Add the OverlayItem to the list of displayed items.
-            OverlayItems.Add(temp_item);
+            OverlayItems.Add(overlay_item);
 
             // Show Play Button
-            DisplayPlay(temp_item);
+            DisplayPlay(overlay_item);
         }
 
         private void ExecuteOverlayItem()
@@ -247,10 +253,42 @@ namespace CatboobGGStream
             }
         }
 
+        private void SaveOverlayItem(OverlayItem overlay_item)
+        {
+            bool editing_item = false;
+
+            if (overlay_item == null)
+                overlay_item = new OverlayItem();
+            else
+                editing_item = true;
+
+            // Get the OverlayItem values.
+            overlay_item.HotKey = hotkey_tb.Text;
+            overlay_item.ImagePath = image_path_tb.Text;
+            overlay_item.SoundPath = sound_path_tb.Text;
+            
+            if (!editing_item)
+            {
+                // Save the overlay item to the xml file.
+                settings_manager.SaveOverlayItem(overlay_item);
+
+                // Add the new OverlayItem.
+                AddOverlayItem(overlay_item);
+            }
+            else
+            {
+                // Resave the overlay list.
+                settings_manager.SaveOverlayItems(OverlayItems);
+            }
+
+            // Show the home screen.
+            DisplayStartingScreen();
+        }
+
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
             // Show the add item screen.
-            DisplayAddItemScreen();
+            DisplayItemScreen("Add Item");
 
             // Reset the add item form.
             ResetAddItemForm();
@@ -270,18 +308,36 @@ namespace CatboobGGStream
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the OverlayItem values.
-            String hot_key = hotkey_tb.Text;
-            String image_path = image_path_tb.Text;
-            String sound_path = sound_path_tb.Text;
-
-            // Add the new OverlayItem.
-            AddOverlayItem(hot_key, image_path, sound_path);
-
-            // Show the home screen.
-            DisplayStartingScreen();
+            if (AppTitle_txt.Text == "Edit Item")
+                SaveOverlayItem(item_to_edit);
+            else
+                SaveOverlayItem(null);
         }
 
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the selected OverlayItem.
+            OverlayItem temp_overlay_item = (OverlayItem)overlay_lv.SelectedItem;
+
+            // Remove OverlayItem
+            OverlayItems.Remove(temp_overlay_item);
+
+            // Resave the overlay list.
+            settings_manager.SaveOverlayItems(OverlayItems);
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the selected OverlayItem.
+            OverlayItem temp_overlay_item = (OverlayItem)overlay_lv.SelectedItem;
+
+            // Show the add item screen.
+            DisplayItemScreen("Edit Item");
+
+            // Populate edit form.
+            SetEditItemForm(temp_overlay_item);
+        }
+        
         private void ImagePath_Click(object sender, RoutedEventArgs e)
         {
             // Get the users chosen image.
@@ -309,12 +365,18 @@ namespace CatboobGGStream
 
         private void HotkeyDiscard_Click(object sender, RoutedEventArgs e)
         {
-            DisplayAddItemScreen();
+            if (AppTitle_txt.Text == "Add Item")
+                DisplayItemScreen("Add Item");
+            else
+                DisplayItemScreen("Edit Item");
         }
 
         private void HotkeySave_Click(object sender, RoutedEventArgs e)
         {
-            DisplayAddItemScreen();
+            if (AppTitle_txt.Text == "Add Item")
+                DisplayItemScreen("Add Item");
+            else
+                DisplayItemScreen("Edit Item");
 
             // Save the enterted hotkey.
             String tempHotkey = pressed_key_tb.Text;
@@ -420,6 +482,22 @@ namespace CatboobGGStream
 
             // Hide the application don't close it.
             this.Hide();
+        }
+
+        private void OverlayItems_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Point mouse_pt = e.GetPosition(this);
+
+            if (overlay_lv.SelectedItems.Count > 0)
+                RightAction_sp.Visibility = System.Windows.Visibility.Visible;
+            else
+                RightAction_sp.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void OverlayItems_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Clear all the selected items (Used to detect empty list click).
+            overlay_lv.UnselectAll();
         }
     }
 }

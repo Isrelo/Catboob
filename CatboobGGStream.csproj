@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SettingsManager.cs" />
     <Compile Include="SoundManager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -154,9 +155,14 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\DeleteWhite.png" />
+    <Resource Include="img\EditWhite.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D
+XCOPY "$(ProjectDir)OverlayItems.xml" "$(TargetDir)" /Y /D
 MKDIR $(TargetDir)Images
 XCOPY "$(ProjectDir)Images" "$(TargetDir)Images" /Y /S
 MKDIR $(TargetDir)Sounds

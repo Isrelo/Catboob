@@ -103,7 +103,7 @@
 
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="App_Container">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="56" />

@@ -56,7 +56,7 @@ namespace CatboobGGStream
             working_dir = Directory.GetCurrentDirectory();
 
             // Set navigation drawer open width.
-            AppNavDrawer.SetDarwerWidth(this.Width - 95);
+            AppNavDrawer.SetDarwerWidth(this.Width - System.Convert.ToDouble(App_Container.RowDefinitions[0].Height.ToString()));
 
             // Keep Applicaion Open
             is_app_exiting = false;

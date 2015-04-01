@@ -55,6 +55,9 @@ namespace CatboobGGStream
             // Get Applicaion Directory
             working_dir = Directory.GetCurrentDirectory();
 
+            // Set navigation drawer open width.
+            AppNavDrawer.SetDarwerWidth(this.Width - 95);
+
             // Keep Applicaion Open
             is_app_exiting = false;
 
@@ -119,9 +122,8 @@ namespace CatboobGGStream
             // Hide the add item container.
             add_overlay_item_container.Visibility = System.Windows.Visibility.Collapsed;
 
-            // Hide the back navigation button.
-            if (Back_btn.Visibility == System.Windows.Visibility.Visible)
-                Back_btn.Visibility = System.Windows.Visibility.Collapsed;
+            // Show the menu button.
+            Menu_btn.Visibility = System.Windows.Visibility.Visible;
 
             // Hide the cancel button.
             if (Cancel_btn.Visibility == System.Windows.Visibility.Visible)
@@ -154,6 +156,9 @@ namespace CatboobGGStream
 
             // Hide the edit and delete buttons.
             RightAction_sp.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Hide the menu button.
+            Menu_btn.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void DisplayHotkeyDialog()
@@ -292,12 +297,6 @@ namespace CatboobGGStream
 
             // Reset the add item form.
             ResetAddItemForm();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Show the home screen.
-            DisplayStartingScreen();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -498,6 +497,11 @@ namespace CatboobGGStream
         {
             // Clear all the selected items (Used to detect empty list click).
             overlay_lv.UnselectAll();
+        }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppNavDrawer.OpenDrawer();
         }
     }
 }

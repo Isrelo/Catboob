@@ -1,6 +1,8 @@
-﻿<Window x:Class="CatboobGGStream.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CatboobGGStream"
+        x:Class="CatboobGGStream.MainWindow"
         Title="Catboob (GGStream)" 
         Height="400" 
         Width="340" 
@@ -19,13 +21,10 @@
         <Style x:Key="ActionBtn_style" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Border BorderThickness="0" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -33,7 +32,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF00786D" />
                 </Trigger>
-                <Trigger Property="Button.IsPressed" Value="True">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#FF006960" />
                 </Trigger>
             </Style.Triggers>
@@ -43,13 +42,10 @@
         <Style x:Key="ActionFlatBtn_style" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Border BorderThickness="0" Padding="16" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -57,7 +53,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF00786D" />
                 </Trigger>
-                <Trigger Property="Button.IsPressed" Value="True">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#FF006960" />
                 </Trigger>
             </Style.Triggers>
@@ -67,13 +63,10 @@
         <Style x:Key="RegularBtn_style" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Border BorderThickness="0" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -81,7 +74,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#33999999" />
                 </Trigger>
-                <Trigger Property="Button.IsPressed" Value="True">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#66999999" />
                 </Trigger>
             </Style.Triggers>
@@ -91,13 +84,10 @@
         <Style x:Key="RegularFlatBtn_style" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Border BorderThickness="0" Padding="16" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -105,7 +95,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#33999999" />
                 </Trigger>
-                <Trigger Property="Button.IsPressed" Value="True">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#66999999" />
                 </Trigger>
             </Style.Triggers>
@@ -121,7 +111,7 @@
         </Grid.RowDefinitions>
 
         <!-- App Toolbar -->
-        <Grid Name="app_toolbar" Grid.Row="0" Background="#FF009688">
+        <Grid x:Name="app_toolbar" Grid.Row="0" Background="#FF009688">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="56" />
@@ -134,52 +124,47 @@
             </Grid.RowDefinitions>
 
             <!-- Menu Button -->
-            <Button Name="Menu_btn" Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Margin="0" Padding="16,0,0,0" Visibility="Collapsed">
+            <Button x:Name="Menu_btn" Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Margin="0" Padding="16,0,0,0" Click="MenuButton_Click">
                 <Image Width="24" Height="24" Source="img/MenuWhite.png"/>
             </Button>
 
-            <!-- Back Button -->
-            <Button Name="Back_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Visibility="Collapsed" Click="BackButton_Click">
-                <Image Width="24" Height="24" Source="img/ArrowBackWhite.png"/>
-            </Button>
-
             <!-- Cancel Button -->
-            <Button Name="Cancel_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Visibility="Collapsed" Click="CancelButton_Click">
+            <Button x:Name="Cancel_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Visibility="Collapsed" Click="CancelButton_Click">
                 <Image Width="24" Height="24" Source="img/CloseWhite.png"/>
             </Button>
 
             <!-- App Title -->
-            <TextBlock Name="AppTitle_txt" Grid.Row="0" Grid.Column="1" ClipToBounds="True" TextTrimming="CharacterEllipsis" Foreground="White" FontSize="20" FontWeight="Medium" Padding="16,0,0,0" UseLayoutRounding="True" Margin="0" VerticalAlignment="Center" >Catboob</TextBlock>
+            <TextBlock x:Name="AppTitle_txt" Grid.Row="0" Grid.Column="1" ClipToBounds="True" TextTrimming="CharacterEllipsis" Foreground="White" FontSize="20" FontWeight="Medium" Padding="16,0,0,0" UseLayoutRounding="True" Margin="0" VerticalAlignment="Center" ><Run Text="Catboob"/></TextBlock>
 
             <!-- Save Button -->
-            <Button Name="Save_btn" Grid.Row="0" Grid.Column="2" Style="{StaticResource ActionFlatBtn_style}" OverridesDefaultStyle="True" Margin="0" Padding="16" BorderThickness="0" FontSize="16" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="SAVE" Foreground="White" Click="SaveButton_Click" Visibility="Collapsed"/>
+            <Button x:Name="Save_btn" Grid.Row="0" Grid.Column="2" Style="{StaticResource ActionFlatBtn_style}" OverridesDefaultStyle="True" Margin="0" Padding="16" BorderThickness="0" FontSize="16" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="SAVE" Foreground="White" Click="SaveButton_Click" Visibility="Collapsed"/>
 
-            <StackPanel Name="RightAction_sp" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Visibility="Collapsed">
+            <StackPanel x:Name="RightAction_sp" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Visibility="Collapsed">
                 <!-- Delete Button -->
-                <Button Name="Delete_btn" Width="56" Height="56" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="DeleteButton_Click">
+                <Button x:Name="Delete_btn" Width="56" Height="56" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="DeleteButton_Click">
                     <Image Width="24" Height="24" Source="img/DeleteWhite.png"/>
                 </Button>
-            
+
                 <!-- Edit Button -->
-                <Button Name="Edit_btn" Width="56" Height="56" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="EditButton_Click">
+                <Button x:Name="Edit_btn" Width="56" Height="56" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="EditButton_Click">
                     <Image Width="24" Height="24" Source="img/EditWhite.png"/>
                 </Button>
             </StackPanel>
 
         </Grid>
 
-        <Grid Name="main_container" Grid.Row="1">
-            <ListBox Name="overlay_lv" ItemsSource="{Binding OverlayItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0" SelectionMode="Single" PreviewMouseUp="OverlayItems_PreviewMouseUp" PreviewMouseDown="OverlayItems_PreviewMouseDown">
+        <Grid x:Name="main_container" Grid.Row="1">
+            <ListBox x:Name="overlay_lv" ItemsSource="{Binding OverlayItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0" SelectionMode="Single" PreviewMouseUp="OverlayItems_PreviewMouseUp" PreviewMouseDown="OverlayItems_PreviewMouseDown">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="56" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="56" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="56" />
                             </Grid.RowDefinitions>
@@ -203,7 +188,7 @@
                             <Button Grid.Column="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Visibility="{Binding StopVisible}" Click="StopSound_Click">
                                 <Image Width="24" Height="24" Source="img/StopGrey.png"/>
                             </Button>
-                            
+
                             <!-- Item Seperator -->
                             <Border Grid.Column="0" BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0" Padding="0,0,0,16" Grid.ColumnSpan="3"/>
 
@@ -213,14 +198,14 @@
             </ListBox>
 
             <!-- Floating Action Button -->
-            <Button Name="floating_action_btn" Width="64" Height="64" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" BorderThickness="0" Click="AddItem_Click" ClipToBounds="True">
-                
+            <Button x:Name="floating_action_btn" Width="64" Height="64" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" BorderThickness="0" Click="AddItem_Click" ClipToBounds="True">
+
                 <!-- Add Button Hover Dropshadow -->
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Style.Triggers>
-                            <Trigger Property="Button.IsMouseOver" Value="True">
-                                <Setter Property="Button.Effect">
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect Color="Black" Direction="270" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
                                     </Setter.Value>
@@ -228,8 +213,8 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                </Button.Resources>  
-                
+                </Button.Resources>
+
                 <!-- Add Button Image -->
                 <Button.Template>
                     <ControlTemplate>
@@ -245,12 +230,12 @@
         </Grid>
 
         <!-- Add Item Container -->
-        <Grid Name="add_overlay_item_container" Grid.Row="1" Visibility="Collapsed">
+        <Grid x:Name="add_overlay_item_container" Grid.Row="1" Visibility="Collapsed">
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ClipToBounds="True">
-                
+
                 <StackPanel>
-                    
+
                     <!-- Image Path -->
                     <Grid Margin="0,16,0,0">
                         <Grid.ColumnDefinitions>
@@ -263,12 +248,12 @@
                         <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ImagePath_Click">
                             <Image Width="24" Height="24" Source="img/AttachmentGrey.png"/>
                         </Button>
-                        
+
                     </Grid>
                     <!-- Item Seperator -->
                     <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
 
-                    <TextBlock Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+                    <TextBlock x:Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
 
                     <!-- Hotkey -->
                     <Grid Margin="0,16,0,0">
@@ -287,7 +272,7 @@
                     <!-- Item Seperator -->
                     <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
 
-                    <TextBlock Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+                    <TextBlock x:Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
 
                     <!-- Sound Path -->
                     <Grid Margin="0,16,0,0">
@@ -306,16 +291,19 @@
                     <!-- Item Seperator -->
                     <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
 
-                    <TextBlock Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+                    <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
 
                 </StackPanel>
-                
+
             </ScrollViewer>
 
         </Grid>
 
+        <!-- Navigation Drawer -->
+        <local:NavigationDrawer x:Name="AppNavDrawer" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Grid.RowSpan="2" Visibility="Collapsed" />
+        
         <!-- Hotkey Dialog Overlay -->
-        <Grid Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
+        <Grid x:Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
             <Grid Background="#FFFAFAFA" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -325,13 +313,13 @@
 
                 <TextBlock Grid.Row="0" ClipToBounds="True" TextWrapping="Wrap" FontSize="20" FontWeight="Medium" Foreground="#FF212121" Margin="24,24,24,0" Text="Press any key to pick a hotkey for your overlay." />
 
-                <TextBlock Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" />
+                <TextBlock x:Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" />
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" Click="HotkeyDiscard_Click" FontSize="14" FontWeight="Medium"/>
-                    <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" Click="HotkeySave_Click" FontSize="14" FontWeight="Medium"/>                    
+                    <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" Click="HotkeySave_Click" FontSize="14" FontWeight="Medium"/>
                 </StackPanel>
-                
+
             </Grid>
         </Grid>
 

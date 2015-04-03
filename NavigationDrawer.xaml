@@ -77,7 +77,8 @@
         <!-- Overlay Rectangle -->
         <Rectangle x:Name="Navigation_Overlay" Margin="0" Fill="#7F000000" MouseDown="NavigationOverlay_MouseDown" />
 
-        <Grid x:Name="NavigationDrawer_Container" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
+        <!-- Navigation Drawer Content -->
+        <Grid x:Name="NavigationDrawer_Container" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" MaxWidth="320">
         	<Grid.RenderTransform>
         		<TransformGroup>
         			<ScaleTransform/>
@@ -110,7 +111,10 @@
         			<Image Width="24" Height="24" Source="img/ArrowBackWhite.png"/>
         		</Button>
 
-        	</Grid>
+                <!-- App Title -->
+                <TextBlock x:Name="DrawerTitle_txt" Grid.Row="0" Grid.Column="1" ClipToBounds="True" TextTrimming="CharacterEllipsis" Foreground="White" FontSize="20" FontWeight="Medium" Padding="16,0,0,0" UseLayoutRounding="True" Margin="0" VerticalAlignment="Center" ><Run Text="Advanced Settings"/></TextBlock>
+
+            </Grid>
 
             <Grid x:Name="NavigationDrawer_Content" Background="#FFFAFAFA" RenderTransformOrigin="0.5,0.5" Margin="0" Grid.Row="1">
                 

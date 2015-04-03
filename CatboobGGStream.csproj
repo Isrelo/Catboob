@@ -166,6 +166,9 @@
     <Resource Include="img\DeleteWhite.png" />
     <Resource Include="img\EditWhite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\VolumeUpGrey.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D

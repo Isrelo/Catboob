@@ -48,7 +48,6 @@ namespace CatboobGGStream
         public void SetDarwerWidth(double width_to_set)
         {
             NavigationDrawer_Container.Width = width_to_set;
-            NavigationDrawer_Container.MaxWidth = width_to_set;
         }
 
         private void NavigationOverlay_MouseDown(object sender, MouseButtonEventArgs e)

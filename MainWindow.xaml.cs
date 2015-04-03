@@ -250,9 +250,6 @@ namespace CatboobGGStream
                     // Prevent the hotkey from being detected on heald keys.
                     has_hotkey_been_pressed = true;
 
-                    //TODO: Remove latter - debugging if a hotkey was pressed or not.
-                    Debug.WriteLine(String.Format("Andy - Hotkey: {0}", temp_overlay_item.HotKey));
-
                     return;
                 }
             }
@@ -502,6 +499,12 @@ namespace CatboobGGStream
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             AppNavDrawer.OpenDrawer();
+        }
+
+        private void Applicatoin_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // Set navigation drawer open width.
+            AppNavDrawer.SetDarwerWidth(this.Width - System.Convert.ToDouble(App_Container.RowDefinitions[0].Height.ToString()));
         }
     }
 }

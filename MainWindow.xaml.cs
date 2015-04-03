@@ -58,6 +58,8 @@ namespace CatboobGGStream
             // Set navigation drawer open width.
             AppNavDrawer.SetDarwerWidth(this.Width - System.Convert.ToDouble(App_Container.RowDefinitions[0].Height.ToString()));
 
+            add_overlay_item_container.showHotkeyDialog = DisplayHotkeyDialog;
+
             // Keep Applicaion Open
             is_app_exiting = false;
 
@@ -203,25 +205,13 @@ namespace CatboobGGStream
             item_to_edit = overlay_item;
 
             // Reset Hotkey
-            hotkey_tb.Text = overlay_item.HotKey;
+            add_overlay_item_container.Hotkey = overlay_item.HotKey;
 
             // Reset Image Path
-            image_path_tb.Text = overlay_item.ImagePath;
+            add_overlay_item_container.ImagePath = overlay_item.ImagePath;
 
             // Reset Sound Path
-            sound_path_tb.Text = overlay_item.SoundPath;            
-        }
-
-        private void ResetAddItemForm()
-        {
-            // Reset Hotkey
-            hotkey_tb.Text = "";
-
-            // Reset Image Path
-            image_path_tb.Text = "";
-
-            // Reset Sound Path
-            sound_path_tb.Text = "";
+            add_overlay_item_container.SoundPath = overlay_item.SoundPath;            
         }
 
         private void AddOverlayItem(OverlayItem overlay_item)
@@ -265,9 +255,9 @@ namespace CatboobGGStream
                 editing_item = true;
 
             // Get the OverlayItem values.
-            overlay_item.HotKey = hotkey_tb.Text;
-            overlay_item.ImagePath = image_path_tb.Text;
-            overlay_item.SoundPath = sound_path_tb.Text;
+            overlay_item.HotKey = add_overlay_item_container.Hotkey;
+            overlay_item.ImagePath = add_overlay_item_container.ImagePath;
+            overlay_item.SoundPath = add_overlay_item_container.SoundPath;
             
             if (!editing_item)
             {
@@ -293,7 +283,7 @@ namespace CatboobGGStream
             DisplayItemScreen("Add Item");
 
             // Reset the add item form.
-            ResetAddItemForm();
+            add_overlay_item_container.ResetAddItemForm();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -334,31 +324,6 @@ namespace CatboobGGStream
             SetEditItemForm(temp_overlay_item);
         }
         
-        private void ImagePath_Click(object sender, RoutedEventArgs e)
-        {
-            // Get the users chosen image.
-            OpenFileDialog open_file_dialog = new OpenFileDialog();
-            open_file_dialog.Title = "Choose Image";
-            open_file_dialog.Filter = "Image Files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png, *.gif) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png; *.gif;|All Files (*.*)|*.*"; 
-            if (open_file_dialog.ShowDialog() == true)
-                image_path_tb.Text = open_file_dialog.FileName;
-        }
-
-        private void SoundPath_Click(object sender, RoutedEventArgs e)
-        {
-            // Get the users chosen sound.
-            OpenFileDialog open_file_dialog = new OpenFileDialog();
-            open_file_dialog.Title = "Choose Sound";
-            open_file_dialog.Filter = "Sound Files  (*.mp3, *.wav)|*.mp3; *.wav;|All Files (*.*)|*.*";
-            if (open_file_dialog.ShowDialog() == true)
-                sound_path_tb.Text = open_file_dialog.FileName;
-        }
-
-        private void HotKey_Click(object sender, RoutedEventArgs e)
-        {
-            DisplayHotkeyDialog();
-        }
-
         private void HotkeyDiscard_Click(object sender, RoutedEventArgs e)
         {
             if (AppTitle_txt.Text == "Add Item")
@@ -376,8 +341,8 @@ namespace CatboobGGStream
 
             // Save the enterted hotkey.
             String tempHotkey = pressed_key_tb.Text;
-            if(!String.IsNullOrEmpty(tempHotkey))
-                hotkey_tb.Text = tempHotkey;
+            if (!String.IsNullOrEmpty(tempHotkey))
+                add_overlay_item_container.Hotkey = tempHotkey;
         }
 
         private void Global_Keyboard_KeyDown(object sender, RawKeyEventArgs raw_key_event_args)
@@ -505,6 +470,11 @@ namespace CatboobGGStream
         {
             // Set navigation drawer open width.
             AppNavDrawer.SetDarwerWidth(this.Width - System.Convert.ToDouble(App_Container.RowDefinitions[0].Height.ToString()));
+        }
+
+        private void HotKey_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayHotkeyDialog();
         }
     }
 }

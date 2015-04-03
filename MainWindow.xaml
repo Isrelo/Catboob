@@ -230,74 +230,7 @@
         </Grid>
 
         <!-- Add Item Container -->
-        <Grid x:Name="add_overlay_item_container" Grid.Row="1" Visibility="Collapsed">
-
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ClipToBounds="True">
-
-                <StackPanel>
-
-                    <!-- Image Path -->
-                    <Grid Margin="0,16,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="48" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" Text="Image Path" VerticalAlignment="Center" />
-
-                        <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ImagePath_Click">
-                            <Image Width="24" Height="24" Source="img/AttachmentGrey.png"/>
-                        </Button>
-
-                    </Grid>
-                    <!-- Item Seperator -->
-                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
-
-                    <TextBlock x:Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
-
-                    <!-- Hotkey -->
-                    <Grid Margin="0,16,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="48" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Hotkey" />
-
-                        <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="HotKey_Click" >
-                            <Image Width="24" Height="24" Source="img/KeyboardGrey.png"/>
-                        </Button>
-
-                    </Grid>
-                    <!-- Item Seperator -->
-                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
-
-                    <TextBlock x:Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
-
-                    <!-- Sound Path -->
-                    <Grid Margin="0,16,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="48" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Sound Path" />
-
-                        <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="SoundPath_Click">
-                            <Image Width="24" Height="24" Source="img/MusicNodeGrey.png"/>
-                        </Button>
-
-                    </Grid>
-                    <!-- Item Seperator -->
-                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
-
-                    <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
-
-                </StackPanel>
-
-            </ScrollViewer>
-
-        </Grid>
+        <local:AddOverlayItem x:Name="add_overlay_item_container" Grid.Row="1" Visibility="Collapsed"/>
 
         <!-- Navigation Drawer -->
         <local:NavigationDrawer x:Name="AppNavDrawer" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Grid.RowSpan="2" Visibility="Collapsed" />

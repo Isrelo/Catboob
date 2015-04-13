@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <OverlayItems>
-  <!-- GG Button -->
   <OverlayItem>
-    <ImagePath>C:\Andy\Catboob\bin\x64\Debug\Images\GGButton.png</ImagePath>
-    <SoundPath>C:\Andy\Catboob\bin\x64\Debug\Sounds\gg.mp3</SoundPath>
+    <ImagePath>C:\Andy\Catboob\Images\GGButton.png</ImagePath>
+    <SoundPath>C:\Andy\Catboob\Sounds\gg.mp3</SoundPath>
     <HotKey>LeftCtrl + G</HotKey>
   </OverlayItem>
-  <!-- Easy Button -->
   <OverlayItem>
-    <ImagePath>C:\Andy\Catboob\bin\x64\Debug\Images\EasyButton.jpg</ImagePath>
-    <SoundPath>C:\Andy\Catboob\bin\x64\Debug\Sounds\that_was_easy.mp3</SoundPath>
+    <ImagePath>C:\Andy\Catboob\Images\EasyButton.jpg</ImagePath>
+    <SoundPath>C:\Andy\Catboob\Sounds\that_was_easy.mp3</SoundPath>
     <HotKey>LeftCtrl + E</HotKey>
   </OverlayItem>
 </OverlayItems>

@@ -21,7 +21,7 @@ namespace CatboobGGStream
 
         public void SetVolume(double volume_level)
         {
-            if (volume_level > 0.0 && volume_level < 1.0)
+            if (volume_level >= 0.0 && volume_level <= 1.0)
                 SoundMediaPlayer.Volume = volume_level;
         }
 

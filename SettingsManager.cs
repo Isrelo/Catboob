@@ -74,30 +74,58 @@ namespace CatboobGGStream
                 FileStream overlay_items_file = new FileStream(saved_overlay_items_path, FileMode.Open, FileAccess.Read);
                 XmlReader overlay_items_xml = XmlReader.Create(overlay_items_file);
 
+                bool overlay_item_parent_found = false;
+                String temp_value = "";
+                OverlayItem temp_overlay_item = null;
+
                 while (overlay_items_xml.Read())
                 {
                     if (overlay_items_xml.IsStartElement() && overlay_items_xml.Name == "OverlayItem")
                     {
-                        String temp_value = "";
-                        OverlayItem temp_overlay_item = new OverlayItem();
+                        // Signal that a parent OverlayItem was found.
+                        overlay_item_parent_found = true;
 
-                        // Read in the overlay image path.
-                        overlay_items_xml.ReadToFollowing("ImagePath");
-                        temp_value = overlay_items_xml.ReadElementContentAsString();
-                        temp_overlay_item.ImagePath = temp_value;
+                        // Reset for the next OverlayItem.
+                        temp_overlay_item = new OverlayItem();
+                    }
 
-                        // Read in the overlay sound path.
-                        overlay_items_xml.ReadToFollowing("SoundPath");
-                        temp_value = overlay_items_xml.ReadElementContentAsString();
-                        temp_overlay_item.SoundPath = temp_value;
+                    if (overlay_item_parent_found && overlay_items_xml.IsStartElement())
+                    {
+                        if (overlay_items_xml.Name == "ImagePath")
+                        {
+                            // Read in the overlay image path.
+                            temp_value = overlay_items_xml.ReadElementContentAsString();
+                            temp_overlay_item.ImagePath = temp_value;
+                        }
+                        else if (overlay_items_xml.Name == "SoundPath")
+                        {
+                            // Read in the overlay sound path.
+                            temp_value = overlay_items_xml.ReadElementContentAsString();
+                            temp_overlay_item.SoundPath = temp_value;
+                        }
+                        else if (overlay_items_xml.Name == "HotKey")
+                        {
+                            // Read in the overlay image path.
+                            temp_value = overlay_items_xml.ReadElementContentAsString();
+                            temp_overlay_item.HotKey = temp_value;
+                        }
+                        else if (overlay_items_xml.Name == "SoundVolume")
+                        {
+                            // Read in the overlay sound volume.
+                            temp_value = overlay_items_xml.ReadElementContentAsString();
+                            double temp_volume = 0;
+                            double.TryParse(temp_value, out temp_volume);
+                            temp_overlay_item.SoundVolume = temp_volume;
+                        }
+                    }
 
-                        // Read in the overlay image path.
-                        overlay_items_xml.ReadToFollowing("HotKey");
-                        temp_value = overlay_items_xml.ReadElementContentAsString();
-                        temp_overlay_item.HotKey = temp_value;
+                    if (overlay_items_xml.NodeType == XmlNodeType.EndElement && overlay_items_xml.Name == "OverlayItem")
+                    {
+                        // Signal the end of a overlay item.
+                        overlay_item_parent_found = false;
 
                         // Add the loaded OverlayItem to the list.
-                        overlay_items.Add(temp_overlay_item);                        
+                        overlay_items.Add(temp_overlay_item);
                     }
                 }
 
@@ -127,6 +155,11 @@ namespace CatboobGGStream
             XmlElement hotkey = xml_doc.CreateElement("HotKey");
             hotkey.InnerText = overlay_item.HotKey;
             overlay_item_root_element.AppendChild(hotkey);
+
+            //   <SoundVolume>
+            XmlElement sound_volume = xml_doc.CreateElement("SoundVolume");
+            sound_volume.InnerText = overlay_item.SoundVolume.ToString();
+            overlay_item_root_element.AppendChild(sound_volume);
 
             // Add the new overlay item xml to the end of the document.
             document_root.AppendChild(overlay_item_root_element);

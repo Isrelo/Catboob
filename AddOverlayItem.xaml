@@ -1,14 +1,15 @@
-﻿<UserControl x:Class="CatboobGGStream.AddOverlayItem"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatboobGGStream" x:Class="CatboobGGStream.AddOverlayItem" 
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="300" 
              Background="#FFFAFAFA">
     <UserControl.Resources>
-        
+
         <!-- Regular Button -->
         <Style x:Key="RegularBtn_style" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -28,15 +29,21 @@
                     <Setter Property="Background" Value="#66999999" />
                 </Trigger>
             </Style.Triggers>
-        </Style>        
+        </Style>
     </UserControl.Resources>
-    
+
     <Grid Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}">
 
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ClipToBounds="True">
 
             <StackPanel>
+                
+                <!-- Volume Control -->
+                <local:VolumeSlider x:Name="Volume_ctrl" Margin="0,8,0,0" />
 
+                <!-- Item Seperator -->
+                <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
+                
                 <!-- Image Path -->
                 <Grid Margin="0,16,0,0">
                     <Grid.ColumnDefinitions>
@@ -44,17 +51,18 @@
                         <ColumnDefinition Width="48" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" Text="Image Path" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Foreground="#FF212121" Text="Image Path" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ImagePath_Click">
                         <Image Width="24" Height="24" Source="img/AttachmentGrey.png"/>
                     </Button>
 
                 </Grid>
-                <!-- Item Seperator -->
-                <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
-
+                
                 <TextBlock x:Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                <!-- Item Seperator -->
+                <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8,0,0" />
 
                 <!-- Hotkey -->
                 <Grid Margin="0,16,0,0">
@@ -63,17 +71,18 @@
                         <ColumnDefinition Width="48" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Hotkey" />
+                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Hotkey" Foreground="#FF212121" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="HotKey_Click" >
                         <Image Width="24" Height="24" Source="img/KeyboardGrey.png"/>
                     </Button>
 
                 </Grid>
-                <!-- Item Seperator -->
-                <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
 
                 <TextBlock x:Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                <!-- Item Seperator -->
+                <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
 
                 <!-- Sound Path -->
                 <Grid Margin="0,16,0,0">
@@ -82,17 +91,18 @@
                         <ColumnDefinition Width="48" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Sound Path" />
+                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Sound Path" Foreground="#FF212121" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="SoundPath_Click">
                         <Image Width="24" Height="24" Source="img/MusicNodeGrey.png"/>
                     </Button>
 
                 </Grid>
+                
+                <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
                 <!-- Item Seperator -->
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
-
-                <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
 
             </StackPanel>
 

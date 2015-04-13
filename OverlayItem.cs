@@ -12,11 +12,24 @@ namespace CatboobGGStream
 {
     public class OverlayItem : INotifyPropertyChanged
     {
+        private double sound_volume;
         private String image_path;
         private String hot_key;
         private String sound_path;
         private Visibility play_visible;
         private Visibility stop_visible;
+
+        public double SoundVolume
+        {
+            get { return sound_volume; }
+            set
+            {
+                sound_volume = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            }
+        }
 
         public String ImagePath 
         { 
@@ -79,6 +92,12 @@ namespace CatboobGGStream
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public OverlayItem()
+        {
+            // Default Volume Level
+            sound_volume = 0.5;
+        }
 
         // This method is called by the Set accessor of each property. 
         // The CallerMemberName attribute that is applied to the optional propertyName 

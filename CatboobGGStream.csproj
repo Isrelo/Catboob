@@ -86,6 +86,9 @@
     </Compile>
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SoundManager.cs" />
+    <Compile Include="VolumeSlider.xaml.cs">
+      <DependentUpon>VolumeSlider.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddOverlayItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +110,10 @@
     <Page Include="NavigationDrawer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VolumeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

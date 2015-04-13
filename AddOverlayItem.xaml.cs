@@ -28,6 +28,20 @@ namespace CatboobGGStream
 
         public delegate void ShowHotkeyDialog();
         public ShowHotkeyDialog showHotkeyDialog;
+
+        public double SoundVolume
+        {
+            get 
+            {
+                return Volume_ctrl.VolumeLevel;
+            }
+
+            set
+            {
+                Volume_ctrl.VolumeLevel = value;
+            }
+        }
+
         public String ImagePath 
         {
             get
@@ -85,6 +99,9 @@ namespace CatboobGGStream
 
             // Reset Sound Path
             sound_path_tb.Text = "";
+
+            // Reset Sound Volume
+            Volume_ctrl.VolumeLevel = 0.5;
         }
 
         private void ImagePath_Click(object sender, RoutedEventArgs e)

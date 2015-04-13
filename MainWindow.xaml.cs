@@ -204,14 +204,17 @@ namespace CatboobGGStream
             // Edit Item
             item_to_edit = overlay_item;
 
-            // Reset Hotkey
+            // Edit Hotkey
             add_overlay_item_container.Hotkey = overlay_item.HotKey;
 
-            // Reset Image Path
+            // Edit Image Path
             add_overlay_item_container.ImagePath = overlay_item.ImagePath;
 
-            // Reset Sound Path
-            add_overlay_item_container.SoundPath = overlay_item.SoundPath;            
+            // Edit Sound Path
+            add_overlay_item_container.SoundPath = overlay_item.SoundPath;     
+       
+            // Edit Sound Volume
+            add_overlay_item_container.SoundVolume = overlay_item.SoundVolume;
         }
 
         private void AddOverlayItem(OverlayItem overlay_item)
@@ -231,6 +234,11 @@ namespace CatboobGGStream
                 OverlayItem temp_overlay_item = OverlayItems[count];
                 if (hotkey_manager.CheckForPressedHotkey(temp_overlay_item.HotKey) && !has_hotkey_been_pressed)
                 {
+                    Debug.WriteLine("Catboob - SoundVolume: " + temp_overlay_item.SoundVolume);
+
+                    // Set the soud's volume level.
+                    sound_manager.SetVolume(temp_overlay_item.SoundVolume);
+
                     // Play Overlay Sound
                     sound_manager.PlaySound(temp_overlay_item.SoundPath);
                     
@@ -258,6 +266,7 @@ namespace CatboobGGStream
             overlay_item.HotKey = add_overlay_item_container.Hotkey;
             overlay_item.ImagePath = add_overlay_item_container.ImagePath;
             overlay_item.SoundPath = add_overlay_item_container.SoundPath;
+            overlay_item.SoundVolume = add_overlay_item_container.SoundVolume;
             
             if (!editing_item)
             {
@@ -279,11 +288,19 @@ namespace CatboobGGStream
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
+            // Reset the add item form.
+            ResetAddItemForm();
+
             // Show the add item screen.
             DisplayItemScreen("Add Item");
+        }
 
-            // Reset the add item form.
-            add_overlay_item_container.ResetAddItemForm();
+        private void ResetAddItemForm()
+        {
+            add_overlay_item_container.Hotkey = "";
+            add_overlay_item_container.ImagePath = "";
+            add_overlay_item_container.SoundPath = "";
+            add_overlay_item_container.SoundVolume = 0.5;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -374,6 +391,9 @@ namespace CatboobGGStream
         {
             Button tempButton = (Button)sender;
             OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
+
+            // Set sound volume.
+            sound_manager.SetVolume(tempOverlayItem.SoundVolume);
 
             // Start Paying the selected sound.
             sound_manager.PlaySound(tempOverlayItem.SoundPath);

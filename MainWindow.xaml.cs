@@ -33,7 +33,6 @@ namespace CatboobGGStream
         private HotkeyManager hotkey_manager;        
         private KeyboardListener global_keyboard_listner;
         private SettingsManager settings_manager;
-        private OverlayItem item_to_edit;
         private BindingList<OverlayItem> overlay_items;
 
         public BindingList<OverlayItem> OverlayItems 
@@ -199,24 +198,6 @@ namespace CatboobGGStream
             return false;
         }
 
-        private void SetEditItemForm(OverlayItem overlay_item)
-        {
-            // Edit Item
-            item_to_edit = overlay_item;
-
-            // Edit Hotkey
-            add_overlay_item_container.Hotkey = overlay_item.HotKey;
-
-            // Edit Image Path
-            add_overlay_item_container.ImagePath = overlay_item.ImagePath;
-
-            // Edit Sound Path
-            add_overlay_item_container.SoundPath = overlay_item.SoundPath;     
-       
-            // Edit Sound Volume
-            add_overlay_item_container.SoundVolume = overlay_item.SoundVolume;
-        }
-
         private void AddOverlayItem(OverlayItem overlay_item)
         {
             // Add the OverlayItem to the list of displayed items.
@@ -262,16 +243,10 @@ namespace CatboobGGStream
             else
                 editing_item = true;
 
-            // Get the OverlayItem values.
-            overlay_item.HotKey = add_overlay_item_container.Hotkey;
-            overlay_item.ImagePath = add_overlay_item_container.ImagePath;
-            overlay_item.SoundPath = add_overlay_item_container.SoundPath;
-            overlay_item.SoundVolume = add_overlay_item_container.SoundVolume;
-            
             if (!editing_item)
             {
                 // Save the overlay item to the xml file.
-                settings_manager.SaveOverlayItem(overlay_item);
+                settings_manager.SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext);
 
                 // Add the new OverlayItem.
                 AddOverlayItem(overlay_item);
@@ -297,10 +272,7 @@ namespace CatboobGGStream
 
         private void ResetAddItemForm()
         {
-            add_overlay_item_container.Hotkey = "";
-            add_overlay_item_container.ImagePath = "";
-            add_overlay_item_container.SoundPath = "";
-            add_overlay_item_container.SoundVolume = 0.5;
+            add_overlay_item_container.ResetAddItemForm();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -312,13 +284,17 @@ namespace CatboobGGStream
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (AppTitle_txt.Text == "Edit Item")
-                SaveOverlayItem(item_to_edit);
+            {
+                SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext);
+            }
             else
+            {
                 SaveOverlayItem(null);
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             // Get the selected OverlayItem.
             OverlayItem temp_overlay_item = (OverlayItem)overlay_lv.SelectedItem;
 
@@ -334,11 +310,10 @@ namespace CatboobGGStream
             // Get the selected OverlayItem.
             OverlayItem temp_overlay_item = (OverlayItem)overlay_lv.SelectedItem;
 
+            add_overlay_item_container.DataContext = overlay_lv.SelectedItem;
+
             // Show the add item screen.
             DisplayItemScreen("Edit Item");
-
-            // Populate edit form.
-            SetEditItemForm(temp_overlay_item);
         }
         
         private void HotkeyDiscard_Click(object sender, RoutedEventArgs e)
@@ -359,7 +334,10 @@ namespace CatboobGGStream
             // Save the enterted hotkey.
             String tempHotkey = pressed_key_tb.Text;
             if (!String.IsNullOrEmpty(tempHotkey))
-                add_overlay_item_container.Hotkey = tempHotkey;
+            {
+                OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
+                temp_item.HotKey = tempHotkey;
+            }
         }
 
         private void Global_Keyboard_KeyDown(object sender, RawKeyEventArgs raw_key_event_args)
@@ -431,6 +409,7 @@ namespace CatboobGGStream
             this.Activate();
             this.BringIntoView();
             this.WindowState = WindowState.Normal;
+            this.ShowInTaskbar = true;
         }
 
         private void SystemTrayIcon_Settings_Click(object sender, EventArgs args)

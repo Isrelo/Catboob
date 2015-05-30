@@ -39,7 +39,28 @@
             <StackPanel>
                 
                 <!-- Volume Control -->
-                <local:VolumeSlider x:Name="Volume_ctrl" Margin="0,8,0,0" />
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="56" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Volume"/>
+
+                    <!-- Volume Icon -->
+                    <Image x:Name="VolumeMute_img" Grid.Column="0" Grid.Row="1" Width="24" Height="24" Source="img/VolumeMuteGrey.png" Visibility="Visible" />
+                    <Image x:Name="VolumeDown_img" Grid.Column="0" Grid.Row="1" Width="24" Height="24" Source="img/VolumeDownGrey.png" Visibility="Collapsed" />
+                    <Image x:Name="VolumeUp_img" Grid.Column="0" Grid.Row="1" Width="24" Height="24" Source="img/VolumeUpGrey.png" Visibility="Collapsed" />
+
+                    <Slider x:Name="Volume_slider" Grid.Column="1" Grid.Row="1" Margin="0,0,16,0" Padding="0" Maximum="1" LargeChange="0.1" SmallChange="0.01" ValueChanged="VolumeSlider_ValueChanged" Value="{Binding Path=SoundVolume, Mode=TwoWay}"/>
+
+                </Grid>
 
                 <!-- Item Seperator -->
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
@@ -58,8 +79,8 @@
                     </Button>
 
                 </Grid>
-                
-                <TextBlock x:Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                <TextBlock x:Name="image_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" Text="{Binding Path=ImagePath, Mode=TwoWay}" />
 
                 <!-- Item Seperator -->
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8,0,0" />
@@ -79,7 +100,7 @@
 
                 </Grid>
 
-                <TextBlock x:Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+                <TextBlock x:Name="hotkey_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" Text="{Binding Path=HotKey, Mode=TwoWay}" />
 
                 <!-- Item Seperator -->
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
@@ -98,8 +119,8 @@
                     </Button>
 
                 </Grid>
-                
-                <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" />
+
+                <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" Text="{Binding Path=SoundPath, Mode=TwoWay}"/>
 
                 <!-- Item Seperator -->
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />

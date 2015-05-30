@@ -8,11 +8,9 @@
         Width="340" 
         Background="#FFFAFAFA" 
         FontFamily="Calibri" 
-        MinWidth="340" 
-        WindowStyle="ToolWindow"
+        MinWidth="340"
         Icon="Catboob.ico" 
-        Closing="Window_Closing" 
-        ShowInTaskbar="False" SizeChanged="Applicatoin_SizeChanged">
+        Closing="Window_Closing" SizeChanged="Applicatoin_SizeChanged">
 
     <!-- Static Resouces -->
     <Window.Resources>

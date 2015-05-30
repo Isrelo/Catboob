@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.ComponentModel;
 using Microsoft.Win32;
 
 namespace CatboobGGStream
@@ -22,67 +23,8 @@ namespace CatboobGGStream
     /// </summary>
     public partial class AddOverlayItem : UserControl
     {
-        private String imagePath;
-        private String soundPath;
-        private String hotkey;
-
         public delegate void ShowHotkeyDialog();
         public ShowHotkeyDialog showHotkeyDialog;
-
-        public double SoundVolume
-        {
-            get 
-            {
-                return Volume_ctrl.VolumeLevel;
-            }
-
-            set
-            {
-                Volume_ctrl.VolumeLevel = value;
-            }
-        }
-
-        public String ImagePath 
-        {
-            get
-            {
-                return imagePath;
-            }
-
-            set
-            {
-                image_path_tb.Text = value;
-                imagePath = value;
-            }
-        }
-
-        public String SoundPath 
-        {
-            get
-            {
-                return soundPath;
-            }
-
-            set
-            {
-                sound_path_tb.Text = value;
-                soundPath = value;
-            }
-        }
-
-        public String Hotkey
-        {
-            get
-            {
-                return hotkey;
-            }
-
-            set
-            {
-                hotkey_tb.Text = value;
-                hotkey = value;
-            }
-        }
 
         public AddOverlayItem()
         {
@@ -91,46 +33,73 @@ namespace CatboobGGStream
 
         public void ResetAddItemForm()
         {
-            // Reset Hotkey
-            hotkey_tb.Text = "";
-
-            // Reset Image Path
-            image_path_tb.Text = "";
-
-            // Reset Sound Path
-            sound_path_tb.Text = "";
-
-            // Reset Sound Volume
-            Volume_ctrl.VolumeLevel = 0.5;
+            // Reset
+            this.DataContext = new OverlayItem();
         }
 
         private void ImagePath_Click(object sender, RoutedEventArgs e)
         {
+            String image_path = "";
             // Get the users chosen image.
             OpenFileDialog open_file_dialog = new OpenFileDialog();
             open_file_dialog.Title = "Choose Image";
             open_file_dialog.Filter = "Image Files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png, *.gif) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png; *.gif;|All Files (*.*)|*.*";
-            if (open_file_dialog.ShowDialog() == true)
-                ImagePath = open_file_dialog.FileName;
 
-            image_path_tb.Text = ImagePath;
+            if (open_file_dialog.ShowDialog() == true)
+                image_path = open_file_dialog.FileName;
+
+            OverlayItem temp_item = (OverlayItem)this.DataContext;
+            temp_item.ImagePath = image_path;
         }
 
         private void SoundPath_Click(object sender, RoutedEventArgs e)
         {
+            String sound_path = "";
             // Get the users chosen sound.
             OpenFileDialog open_file_dialog = new OpenFileDialog();
             open_file_dialog.Title = "Choose Sound";
             open_file_dialog.Filter = "Sound Files  (*.mp3, *.wav)|*.mp3; *.wav;|All Files (*.*)|*.*";
-            if (open_file_dialog.ShowDialog() == true)
-                SoundPath = open_file_dialog.FileName;
 
-            sound_path_tb.Text = SoundPath;
+            if (open_file_dialog.ShowDialog() == true)
+                sound_path = open_file_dialog.FileName;
+
+            OverlayItem temp_item = (OverlayItem)this.DataContext;
+            temp_item.SoundPath = sound_path;
         }
 
         private void HotKey_Click(object sender, RoutedEventArgs e)
         {
             showHotkeyDialog();
+        }
+
+        private void VolumeImageToDisplay(double slider_value)
+        {
+            if (slider_value <= 0)
+            {
+                VolumeMute_img.Visibility = System.Windows.Visibility.Visible;
+                VolumeDown_img.Visibility = System.Windows.Visibility.Collapsed;
+                VolumeUp_img.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            if (slider_value > 0 && slider_value <= 0.5)
+            {
+                VolumeMute_img.Visibility = System.Windows.Visibility.Collapsed;
+                VolumeDown_img.Visibility = System.Windows.Visibility.Visible;
+                VolumeUp_img.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            if (slider_value > 0.5 && slider_value < 1.0)
+            {
+                VolumeMute_img.Visibility = System.Windows.Visibility.Collapsed;
+                VolumeDown_img.Visibility = System.Windows.Visibility.Collapsed;
+                VolumeUp_img.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider volume_slider = (Slider)sender;
+            VolumeImageToDisplay(volume_slider.Value);
         }
     }
 }

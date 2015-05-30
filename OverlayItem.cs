@@ -97,6 +97,9 @@ namespace CatboobGGStream
         {
             // Default Volume Level
             sound_volume = 0.5;
+            image_path = "";
+            hot_key = "";
+            sound_path = "";
         }
 
         // This method is called by the Set accessor of each property. 

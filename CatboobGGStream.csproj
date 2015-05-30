@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SoundManager.cs" />
-    <Compile Include="VolumeProperty.cs" />
     <Page Include="AddOverlayItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

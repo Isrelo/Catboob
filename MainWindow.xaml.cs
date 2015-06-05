@@ -35,6 +35,8 @@ namespace CatboobGGStream
         private SettingsManager settings_manager;
         private BindingList<OverlayItem> overlay_items;
 
+        private OverlayWindow overlay_window;
+
         public BindingList<OverlayItem> OverlayItems 
         { 
             get{return overlay_items;} 
@@ -87,6 +89,9 @@ namespace CatboobGGStream
             {
                 AddOverlayItem(settings_manager.OverlayItems[count]);                
             }
+
+            overlay_window = new OverlayWindow();
+            overlay_window.Show();
         }
 
         private void SetupSystemTray()
@@ -215,16 +220,29 @@ namespace CatboobGGStream
                 OverlayItem temp_overlay_item = OverlayItems[count];
                 if (hotkey_manager.CheckForPressedHotkey(temp_overlay_item.HotKey) && !has_hotkey_been_pressed)
                 {
-                    Debug.WriteLine("Catboob - SoundVolume: " + temp_overlay_item.SoundVolume);
+                    if (File.Exists(temp_overlay_item.ImagePath))
+                    {
+                        Debug.WriteLine("ImagePath: " + temp_overlay_item.ImagePath);
 
-                    // Set the soud's volume level.
-                    sound_manager.SetVolume(temp_overlay_item.SoundVolume);
+                        // Display the selected image.
+                        overlay_window.overlay_display.Visibility = System.Windows.Visibility.Visible;
+                        overlay_window.overlay_display.Source = new Uri(temp_overlay_item.ImagePath, UriKind.RelativeOrAbsolute);
+                        overlay_window.overlay_display.Play();
+                    }
 
-                    // Play Overlay Sound
-                    sound_manager.PlaySound(temp_overlay_item.SoundPath);
-                    
-                    // Show stop button.
-                    DisplayStop(temp_overlay_item);
+                    if (File.Exists(temp_overlay_item.SoundPath))
+                    {
+                        Debug.WriteLine("SoundVolume: " + temp_overlay_item.SoundVolume);
+
+                        // Set the soud's volume level.
+                        sound_manager.SetVolume(temp_overlay_item.SoundVolume);
+
+                        // Play Overlay Sound
+                        sound_manager.PlaySound(temp_overlay_item.SoundPath);
+
+                        // Show stop button.
+                        DisplayStop(temp_overlay_item);
+                    }
 
                     // Prevent the hotkey from being detected on heald keys.
                     has_hotkey_been_pressed = true;
@@ -234,22 +252,23 @@ namespace CatboobGGStream
             }
         }
 
-        private void SaveOverlayItem(OverlayItem overlay_item)
+        private void SaveOverlayItem(OverlayItem overlay_item, bool editing_item)
         {
-            bool editing_item = false;
-
-            if (overlay_item == null)
-                overlay_item = new OverlayItem();
-            else
-                editing_item = true;
-
             if (!editing_item)
             {
+                OverlayItem temp_item = new OverlayItem();
+                temp_item.HotKey = overlay_item.HotKey;
+                temp_item.ImagePath = overlay_item.ImagePath;
+                temp_item.PlayVisible = overlay_item.PlayVisible;
+                temp_item.SoundPath = overlay_item.SoundPath;
+                temp_item.SoundVolume = overlay_item.SoundVolume;
+                temp_item.StopVisible = overlay_item.StopVisible;
+
                 // Save the overlay item to the xml file.
-                settings_manager.SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext);
+                settings_manager.SaveOverlayItem(temp_item);
 
                 // Add the new OverlayItem.
-                AddOverlayItem(overlay_item);
+                AddOverlayItem(temp_item);
             }
             else
             {
@@ -284,13 +303,9 @@ namespace CatboobGGStream
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (AppTitle_txt.Text == "Edit Item")
-            {
-                SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext);
-            }
+                SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext, true);
             else
-            {
-                SaveOverlayItem(null);
-            }
+                SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext, false);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -397,6 +412,10 @@ namespace CatboobGGStream
             // Stop Playing the selected sound.
             sound_manager.StopSound();
 
+            overlay_window.overlay_display.Stop();
+            overlay_window.overlay_display.Close();
+            overlay_window.overlay_display.Visibility = System.Windows.Visibility.Hidden;
+
             for (int count = 0; count < OverlayItems.Count; count++)
             {
                 DisplayPlay(OverlayItems[count]);
@@ -429,6 +448,8 @@ namespace CatboobGGStream
 
             // Clean up after the keyboard listner.
             global_keyboard_listner.Dispose();
+
+            overlay_window.Close();
 
             this.Close();
         }

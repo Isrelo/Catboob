@@ -255,5 +255,10 @@
             </Grid>
         </Grid>
 
+        <!-- Hotkey Dialog Overlay -->
+        <Grid x:Name="color_picker_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
+            <local:ColorPicker Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
     </Grid>
 </Window>

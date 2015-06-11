@@ -59,6 +59,10 @@ namespace CatboobGGStream
             // Set navigation drawer open width.
             AppNavDrawer.SetDarwerWidth(this.Width - System.Convert.ToDouble(App_Container.RowDefinitions[0].Height.ToString()));
 
+            // Set ShowColorPickerDialog display event.
+            AppNavDrawer.showColorPickerDialog = DisplayColorPickerDialog;
+
+            // Set ShowHotkeyDialog display event.
             add_overlay_item_container.showHotkeyDialog = DisplayHotkeyDialog;
 
             // Keep Applicaion Open
@@ -157,6 +161,9 @@ namespace CatboobGGStream
             // Show the save item button.
             Save_btn.Visibility = System.Windows.Visibility.Visible;
 
+            // Hide the color picker dialog.
+            color_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
             // Hide the hotkey diallog.
             hotkey_dialog.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -165,6 +172,12 @@ namespace CatboobGGStream
 
             // Hide the menu button.
             Menu_btn.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void DisplayColorPickerDialog()
+        {
+            // Show the color picker dialog.
+            color_picker_dialog.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void DisplayHotkeyDialog()
@@ -225,9 +238,7 @@ namespace CatboobGGStream
                         Debug.WriteLine("ImagePath: " + temp_overlay_item.ImagePath);
 
                         // Display the selected image.
-                        overlay_window.overlay_display.Visibility = System.Windows.Visibility.Visible;
-                        overlay_window.overlay_display.Source = new Uri(temp_overlay_item.ImagePath, UriKind.RelativeOrAbsolute);
-                        overlay_window.overlay_display.Play();
+                        overlay_window.DisplayOverlay(temp_overlay_item.ImagePath);
                     }
 
                     if (File.Exists(temp_overlay_item.SoundPath))
@@ -412,9 +423,7 @@ namespace CatboobGGStream
             // Stop Playing the selected sound.
             sound_manager.StopSound();
 
-            overlay_window.overlay_display.Stop();
-            overlay_window.overlay_display.Close();
-            overlay_window.overlay_display.Visibility = System.Windows.Visibility.Hidden;
+            overlay_window.HideOverlay();
 
             for (int count = 0; count < OverlayItems.Count; count++)
             {
@@ -439,30 +448,6 @@ namespace CatboobGGStream
         private void SystemTrayIcon_Double_Click(object sender, EventArgs args)
         {
             Maximize_Applicatoin();
-        }
-
-        // Application Exit Point
-        private void Close_Application(object sender, EventArgs args)
-        {
-            is_app_exiting = true;
-
-            // Clean up after the keyboard listner.
-            global_keyboard_listner.Dispose();
-
-            overlay_window.Close();
-
-            this.Close();
-        }
-
-        // Final Close Event
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            //TODO: Uncomment after debugging.
-            if (!is_app_exiting)
-                e.Cancel = true;
-
-            // Hide the application don't close it.
-            this.Hide();
         }
 
         private void OverlayItems_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -495,6 +480,31 @@ namespace CatboobGGStream
         private void HotKey_Click(object sender, RoutedEventArgs e)
         {
             DisplayHotkeyDialog();
+        }
+
+        // Application Exit Point
+        private void Close_Application(object sender, EventArgs args)
+        {
+            is_app_exiting = true;
+
+            // Clean up after the keyboard listner.
+            global_keyboard_listner.Dispose();
+
+            overlay_window.WindowsIsCloseing = true;
+            overlay_window.Close();
+
+            this.Close();
+        }
+
+        // Final Close Event
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //TODO: Uncomment after debugging.
+            if (!is_app_exiting)
+                e.Cancel = true;
+
+            // Hide the application don't close it.
+            this.Hide();
         }
     }
 }

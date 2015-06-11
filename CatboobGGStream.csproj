@@ -81,6 +81,9 @@
     <Compile Include="AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NavigationDrawer.xaml.cs">
       <DependentUpon>NavigationDrawer.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
     <Compile Include="SoundManager.cs" />
     <Compile Include="WindowUserSettings.cs" />
     <Page Include="AddOverlayItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,6 +194,9 @@
   <ItemGroup>
     <Resource Include="img\VolumeDownGrey.png" />
     <Resource Include="img\VolumeMuteGrey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ColorPicker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -20,6 +20,9 @@ namespace CatboobGGStream
 	/// </summary>
 	public partial class NavigationDrawer : UserControl
 	{
+        public delegate void ShowColorPickerDialog();
+        public ShowColorPickerDialog showColorPickerDialog;
+
 		public NavigationDrawer()
 		{
 			this.InitializeComponent();
@@ -58,6 +61,11 @@ namespace CatboobGGStream
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.CloseDrawer();
+        }
+
+        private void ColorPicker_Click(object sender, RoutedEventArgs e)
+        {
+            showColorPickerDialog();
         }
 	}
 }

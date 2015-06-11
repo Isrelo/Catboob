@@ -6,7 +6,7 @@
     <HotKey>LeftCtrl + G</HotKey>
   </OverlayItem>
   <OverlayItem>
-    <ImagePath>C:\Andy\Catboob\Images\EasyButton.jpg</ImagePath>
+    <ImagePath>C:\Andy\Catboob\Images\EasyButton.png</ImagePath>
     <SoundPath>C:\Andy\Catboob\Sounds\that_was_easy.mp3</SoundPath>
     <HotKey>LeftCtrl + E</HotKey>
   </OverlayItem>

@@ -180,11 +180,6 @@
     <Resource Include="Catboob.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OverlayItems.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="img\DeleteWhite.png" />
     <Resource Include="img\EditWhite.png" />
   </ItemGroup>
@@ -197,6 +192,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\ColorPicker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="OverlayItems_x64.xml" />
+    <Resource Include="OverlayItems_x86.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

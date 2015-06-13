@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Windows;
+using System.Windows.Media;
 
 namespace CatboobGGStream
 {
@@ -15,6 +16,7 @@ namespace CatboobGGStream
         public double WindowHeight;
         public double WindowWidth;
         public WindowState WindowState;
+        public Color WindowColor;
 
         public WindowUserSettings()
         {
@@ -34,6 +36,7 @@ namespace CatboobGGStream
                 Properties.Settings.Default.OverlayWindowHeight = WindowHeight;
                 Properties.Settings.Default.OverlayWindowWidth = WindowWidth;
                 Properties.Settings.Default.OverlayWindowState = WindowState;
+                Properties.Settings.Default.OverlayWindowColor = WindowColor;
 
                 Properties.Settings.Default.Save();
             }
@@ -46,6 +49,7 @@ namespace CatboobGGStream
             WindowHeight = Properties.Settings.Default.OverlayWindowHeight;
             WindowWidth = Properties.Settings.Default.OverlayWindowWidth;
             WindowState = Properties.Settings.Default.OverlayWindowState;
+            WindowColor = Properties.Settings.Default.OverlayWindowColor;
         }
 
         private void SizeWindowToFit()

@@ -62,6 +62,12 @@ namespace CatboobGGStream
             // Set ShowColorPickerDialog display event.
             AppNavDrawer.showColorPickerDialog = DisplayColorPickerDialog;
 
+            // Set Discard Color event.
+            color_picker.closePickColor = DiscardPickedColor;
+
+            // Set Save Color event.
+            color_picker.savePickedColor = SavePickedColor;
+
             // Set ShowHotkeyDialog display event.
             add_overlay_item_container.showHotkeyDialog = DisplayHotkeyDialog;
 
@@ -174,10 +180,33 @@ namespace CatboobGGStream
             Menu_btn.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        private void DiscardPickedColor()
+        {
+            // Hide the color picker dialog.
+            color_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Hide the navigation drawer.
+            AppNavDrawer.CloseDrawer();
+        }
+
+        private void SavePickedColor()
+        {
+            // Hide the color picker dialog.
+            color_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Set the OverlayWindow background color.
+            overlay_window.SetBackgroundColor(color_picker.BackgroundColor);
+
+            // Hide the navigation drawer.
+            AppNavDrawer.CloseDrawer();
+        }
+
         private void DisplayColorPickerDialog()
         {
             // Show the color picker dialog.
             color_picker_dialog.Visibility = System.Windows.Visibility.Visible;
+
+            color_picker.SetControlColor(overlay_window.OverlayWindowUserSettings.WindowColor);
         }
 
         private void DisplayHotkeyDialog()
@@ -499,7 +528,7 @@ namespace CatboobGGStream
         // Final Close Event
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //TODO: Uncomment after debugging.
+            // Only close the application from the exit right click menu.
             if (!is_app_exiting)
                 e.Cancel = true;
 

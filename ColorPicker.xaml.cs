@@ -20,15 +20,46 @@ namespace CatboobGGStream
     /// </summary>
     public partial class ColorPicker : UserControl
     {
+        public delegate void SavePickedColor();
+        public SavePickedColor savePickedColor;
+
+        public delegate void ClosePickColor();
+        public ClosePickColor closePickColor;
+
+        public Color BackgroundColor { get; set; }
+
         public ColorPicker()
         {
             InitializeComponent();
         }
 
+        public void SetControlColor(double red, double green, double blue)
+        {
+            Red_slider.Value = red;
+            Green_slider.Value = green;
+            Blue_slider.Value = blue;
+            BackgroundColor = Color.FromRgb((byte)red, (byte)green, (byte)blue);
+            DisplayColor.Background = new SolidColorBrush(BackgroundColor);
+        }
+
+        public void SetControlColor(Color color_to_set)
+        {
+            SetControlColor((double)color_to_set.R, (double)color_to_set.G, (double)color_to_set.B);
+        }
+
         private void Color_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Color background_color = Color.FromRgb((byte)Red_slider.Value, (byte)Green_slider.Value, (byte)Blue_slider.Value);
-            DisplayColor.Background = new SolidColorBrush(background_color);
+            SetControlColor(Red_slider.Value, Green_slider.Value, Blue_slider.Value);
+        }
+
+        private void Discard_Click(object sender, RoutedEventArgs e)
+        {
+            closePickColor();            
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            savePickedColor();
         }
     }
 }

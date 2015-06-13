@@ -17,5 +17,8 @@
     <Setting Name="OverlayWindowState" Type="System.Windows.WindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
+    <Setting Name="OverlayWindowColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#00000000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

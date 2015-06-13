@@ -21,7 +21,7 @@ namespace CatboobGGStream
     /// </summary>
     public partial class OverlayWindow : Window
     {
-        private WindowUserSettings window_user_settings;
+        public WindowUserSettings OverlayWindowUserSettings;
 
         public bool WindowsIsCloseing { get; set; }
 
@@ -31,7 +31,18 @@ namespace CatboobGGStream
 
             WindowsIsCloseing = false;
 
-            window_user_settings = new WindowUserSettings();
+            OverlayWindowUserSettings = new WindowUserSettings();
+        }
+
+        public void SetBackgroundColor(Color background_color)
+        {
+            OverlayWindowUserSettings.WindowColor = background_color;
+            this.Background = new SolidColorBrush(background_color);
+        }
+
+        public Color GetWindowColor()
+        {
+            return OverlayWindowUserSettings.WindowColor;
         }
 
         public void DisplayOverlay(String image_path)
@@ -39,7 +50,7 @@ namespace CatboobGGStream
             // Restore the window to previous state if minimized.
             if (this.WindowState == WindowState.Minimized)
             {
-                this.WindowState = window_user_settings.WindowState;
+                this.WindowState = OverlayWindowUserSettings.WindowState;
                 this.Topmost = false;
             }
 
@@ -55,23 +66,24 @@ namespace CatboobGGStream
         private void Window_Closed(object sender, EventArgs e)
         {
             // Save the last known position of the OverlayWindow.
-            window_user_settings.WindowHeight = this.Height;
-            window_user_settings.WindowWidth = this.Width;
-            window_user_settings.WindowTop = this.Top;
-            window_user_settings.WindowLeft = this.Left;
-            window_user_settings.WindowState = this.WindowState;
+            OverlayWindowUserSettings.WindowHeight = this.Height;
+            OverlayWindowUserSettings.WindowWidth = this.Width;
+            OverlayWindowUserSettings.WindowTop = this.Top;
+            OverlayWindowUserSettings.WindowLeft = this.Left;
+            OverlayWindowUserSettings.WindowState = this.WindowState;
 
-            window_user_settings.SaveWindow();
+            OverlayWindowUserSettings.SaveWindow();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Load the last know position of the OverlayWindow.
-            this.Height = window_user_settings.WindowHeight;
-            this.Width = window_user_settings.WindowWidth;
-            this.Top = window_user_settings.WindowTop;
-            this.Left = window_user_settings.WindowLeft;
-            this.WindowState = window_user_settings.WindowState;
+            this.Height = OverlayWindowUserSettings.WindowHeight;
+            this.Width = OverlayWindowUserSettings.WindowWidth;
+            this.Top = OverlayWindowUserSettings.WindowTop;
+            this.Left = OverlayWindowUserSettings.WindowLeft;
+            this.WindowState = OverlayWindowUserSettings.WindowState;
+            this.Background = new SolidColorBrush(OverlayWindowUserSettings.WindowColor);
         }
 
         private void OverlayWindow_StateChanged(object sender, EventArgs e)
@@ -79,10 +91,10 @@ namespace CatboobGGStream
             switch(this.WindowState)
             {
                 case WindowState.Maximized:
-                    window_user_settings.WindowState = this.WindowState;
+                    OverlayWindowUserSettings.WindowState = this.WindowState;
                     break;
                 case WindowState.Normal:
-                    window_user_settings.WindowState = this.WindowState;
+                    OverlayWindowUserSettings.WindowState = this.WindowState;
                     break;
             }
         }
@@ -92,8 +104,6 @@ namespace CatboobGGStream
         {
             if (!WindowsIsCloseing)
                 e.Cancel = true;
-
-            //MessageBox.Show("Overlay can not be closed manually.");
         }
     }
 }

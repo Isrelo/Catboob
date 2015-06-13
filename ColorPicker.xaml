@@ -34,14 +34,14 @@
     <Grid Background="#FFFAFAFA">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="48" />
             <RowDefinition Height="48" />
             <RowDefinition Height="48" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Name="DisplayColor" Grid.Row="0" Height="100">
+        <Grid Name="DisplayColor" Grid.Row="0" Height="100" Background="Black">
         </Grid>
 
         <!-- Red Picker Control -->
@@ -105,8 +105,8 @@
         </Grid>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" FontSize="14" FontWeight="Medium"/>
-            <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" FontSize="14" FontWeight="Medium"/>
+            <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" FontSize="14" FontWeight="Medium" Click="Discard_Click"/>
+            <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" FontSize="14" FontWeight="Medium" Click="Save_Click"/>
         </StackPanel>
 
     </Grid>

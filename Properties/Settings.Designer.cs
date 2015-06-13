@@ -82,5 +82,17 @@ namespace CatboobGGStream.Properties {
                 this["OverlayWindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00000000")]
+        public global::System.Windows.Media.Color OverlayWindowColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["OverlayWindowColor"]));
+            }
+            set {
+                this["OverlayWindowColor"] = value;
+            }
+        }
     }
 }

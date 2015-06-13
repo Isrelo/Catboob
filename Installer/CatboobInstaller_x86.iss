@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\Catboob
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputDir=C:\Andy\Catboob\Installer\v1.0.0\x86
+OutputDir=..\Installer\v1.0.0\x86
 OutputBaseFilename=CatboobSetup
 Compression=lzma
 SolidCompression=yes
@@ -30,9 +30,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Andy\Catboob\bin\Release\CatboobGGStream.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Andy\Catboob\bin\Release\Catboob.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Andy\Catboob\bin\Release\OverlayItems.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\CatboobGGStream.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\Catboob.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\OverlayItems.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\Images\*"; DestDir: "{app}\Images"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\bin\Release\Sounds\*"; DestDir: "{app}\Sounds"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

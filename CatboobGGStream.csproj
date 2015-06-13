@@ -194,8 +194,7 @@
     <Resource Include="img\ColorPicker.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="OverlayItems_x64.xml" />
-    <Resource Include="OverlayItems_x86.xml" />
+    <Resource Include="OverlayItems.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -12,12 +12,25 @@ namespace CatboobGGStream
 {
     public class OverlayItem : INotifyPropertyChanged
     {
+        private int hotkey_id;
         private double sound_volume;
         private String image_path;
         private String hot_key;
         private String sound_path;
         private Visibility play_visible;
         private Visibility stop_visible;
+
+        public int HotKeyID
+        {
+            get { return hotkey_id; }
+            set
+            {
+                hotkey_id = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            }
+        }
 
         public double SoundVolume
         {

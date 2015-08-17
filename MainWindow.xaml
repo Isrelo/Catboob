@@ -235,7 +235,7 @@
         <local:NavigationDrawer x:Name="AppNavDrawer" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Grid.RowSpan="2" Visibility="Collapsed" />
         
         <!-- Hotkey Dialog Overlay -->
-        <Grid x:Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
+        <Grid x:Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed" KeyDown="HotKey_KeyDown" KeyUp="HotKey_KeyUP" Loaded="MainWindow_Loaded">
             <Grid Background="#FFFAFAFA" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

@@ -16,6 +16,11 @@ namespace CatboobGGStream
             pressed_keys = new List<String>();
         }
 
+        public void Reset()
+        {
+            pressed_keys = new List<String>();
+        }
+
         public String GetPressedKeysString()
         {
             keys_string = "";
@@ -59,10 +64,12 @@ namespace CatboobGGStream
             return false;
         }
 
-        public bool CheckForPressedHotkey(String  hot_key_to_check)
+        public bool CheckForPressedHotkey(Dictionary<String, OverlayItem> hot_key_to_check)
         {
-            if (hot_key_to_check == GetPressedKeysString())
+            if (hot_key_to_check.ContainsKey(GetPressedKeysString()))
                 return true;
+            //if (hot_key_to_check == GetPressedKeysString())
+            //    return true;
 
             return false;
         }

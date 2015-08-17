@@ -1,6 +1,6 @@
 ### Catboob (GGStream) ###
 
-Catboob is a .Net tool for displaying an overlay and playing an accomping sound when a hotkey combination is pressed. 
+Catboob is a Material Design inspired .Net tool for displaying an overlay and playing an accomping sound when a hotkey combination is pressed. 
 
 ### License ###
 

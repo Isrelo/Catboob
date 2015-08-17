@@ -84,6 +84,7 @@
     <Compile Include="ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalHotkeyListener.cs" />
     <Compile Include="NavigationDrawer.xaml.cs">
       <DependentUpon>NavigationDrawer.xaml</DependentUpon>
     </Compile>
@@ -110,7 +111,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HotkeyManager.cs" />
-    <Compile Include="KeyboardListener.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

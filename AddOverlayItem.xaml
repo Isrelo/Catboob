@@ -39,7 +39,7 @@
             <StackPanel>
                 
                 <!-- Volume Control -->
-                <Grid>
+                <Grid Margin="0,8,0,0">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="48" />

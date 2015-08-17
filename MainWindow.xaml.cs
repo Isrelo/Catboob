@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Windows.Interop;
 using Microsoft.Win32;
 
 namespace CatboobGGStream
@@ -26,12 +27,13 @@ namespace CatboobGGStream
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool has_hotkey_been_pressed;
         private bool is_app_exiting;
+        private IntPtr hwnd_handle;
+        private HwndSource hwnd_source;
         private String working_dir;
         private SoundManager sound_manager;
+        private GlobalHotkeyListener global_hotkey_listner;
         private HotkeyManager hotkey_manager;        
-        private KeyboardListener global_keyboard_listner;
         private SettingsManager settings_manager;
         private BindingList<OverlayItem> overlay_items;
 
@@ -46,7 +48,7 @@ namespace CatboobGGStream
         public MainWindow()
         {
             InitializeComponent();
-            
+
             // Bind to the main application to receive events.
             this.DataContext = this;
 
@@ -74,15 +76,7 @@ namespace CatboobGGStream
             // Keep Applicaion Open
             is_app_exiting = false;
 
-            // Make sure no hot keys have been pressed yet.
-            has_hotkey_been_pressed = false;
-
-            // Setup the global keyboard listner.
-            global_keyboard_listner = new KeyboardListener();
-            global_keyboard_listner.KeyDown += Global_Keyboard_KeyDown;
-            global_keyboard_listner.KeyUp += Global_Keyboard_KeyUp;
-
-            // Setup the user selected hotkey.
+            // Setup the user selected hotkey managment.
             hotkey_manager = new HotkeyManager();
 
             // Setup sound manager;
@@ -92,16 +86,31 @@ namespace CatboobGGStream
             // Setup the system tray icon.
             SetupSystemTray();
 
+            overlay_window = new OverlayWindow();
+            overlay_window.Show();
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Get the current window handle.
+            var window_interop_helper = new WindowInteropHelper(this);
+            hwnd_handle = window_interop_helper.Handle;
+            
+            // Setup the global hotkey listner.
+            global_hotkey_listner = new GlobalHotkeyListener(hwnd_handle);
+            global_hotkey_listner.executeOverlayItem = ExecuteOverlayItem;
+
+            // Add the hotkey listner.
+            hwnd_source = HwndSource.FromHwnd(hwnd_handle);
+            hwnd_source.AddHook(global_hotkey_listner.HwndHook);            
+
             // Load saved overlay items.
             settings_manager = new SettingsManager(working_dir);
             settings_manager.LoadOverlayItems();
             for (int count = 0; count < settings_manager.OverlayItems.Count; count++)
             {
-                AddOverlayItem(settings_manager.OverlayItems[count]);                
+                AddOverlayItem(settings_manager.OverlayItems[count]);
             }
-
-            overlay_window = new OverlayWindow();
-            overlay_window.Show();
         }
 
         private void SetupSystemTray()
@@ -214,7 +223,8 @@ namespace CatboobGGStream
             // Show the hotkey dialog.
             hotkey_dialog.Visibility = System.Windows.Visibility.Visible;
 
-            hotkey_manager = new HotkeyManager();
+            // Reset the hotkey dialog.
+            hotkey_manager.Reset();
             pressed_key_tb.Text = "";
             pressed_key_tb.Focus();
         }
@@ -247,20 +257,22 @@ namespace CatboobGGStream
 
         private void AddOverlayItem(OverlayItem overlay_item)
         {
+            // Register the hotkey with the global listner.
+            global_hotkey_listner.RegisterGlobalHotKey(overlay_item);
+
             // Add the OverlayItem to the list of displayed items.
-            OverlayItems.Add(overlay_item);
+            OverlayItems.Add(overlay_item);            
 
             // Show Play Button
             DisplayPlay(overlay_item);
         }
 
-        private void ExecuteOverlayItem()
+        private void ExecuteOverlayItem(int hotkey_id)
         {
-            for (int count = 0; count < OverlayItems.Count; count++)
+            // Check to see if the user pressed a hotkey.                
+            foreach (OverlayItem temp_overlay_item in OverlayItems)
             {
-                // Check to see if the user pressed a hotkey.
-                OverlayItem temp_overlay_item = OverlayItems[count];
-                if (hotkey_manager.CheckForPressedHotkey(temp_overlay_item.HotKey) && !has_hotkey_been_pressed)
+                if (temp_overlay_item.HotKeyID == hotkey_id)
                 {
                     if (File.Exists(temp_overlay_item.ImagePath))
                     {
@@ -283,11 +295,6 @@ namespace CatboobGGStream
                         // Show stop button.
                         DisplayStop(temp_overlay_item);
                     }
-
-                    // Prevent the hotkey from being detected on heald keys.
-                    has_hotkey_been_pressed = true;
-
-                    return;
                 }
             }
         }
@@ -395,31 +402,6 @@ namespace CatboobGGStream
             }
         }
 
-        private void Global_Keyboard_KeyDown(object sender, RawKeyEventArgs raw_key_event_args)
-        {
-            // Add pressed keys to the hotkey manager.
-            hotkey_manager.AddPressedKey(raw_key_event_args.Key.ToString());
-
-            if (IsHotKeyDialogVisible())
-            {
-                // Display the list of key in a hotkey.
-                pressed_key_tb.Text = hotkey_manager.GetPressedKeysString();
-                return;
-            }
-
-            // Execute overlay Aations if user pressed hotkey.
-            ExecuteOverlayItem();
-        }
-
-        private void Global_Keyboard_KeyUp(object sender, RawKeyEventArgs raw_key_event_args)
-        {
-            // Remove key from hotkey manager.
-            hotkey_manager.RemovePressedKey(raw_key_event_args.Key.ToString());
-
-            // Hotkey has no longer been pressed.
-            has_hotkey_been_pressed = false;
-        }
-
         private void PlaySound_Click(object sender, RoutedEventArgs e)
         {
             Button tempButton = (Button)sender;
@@ -511,16 +493,37 @@ namespace CatboobGGStream
             DisplayHotkeyDialog();
         }
 
+        private void HotKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Add pressed keys to the hotkey manager.
+            hotkey_manager.AddPressedKey(e.Key.ToString());
+
+            // Display the list of key in a hotkey.
+            pressed_key_tb.Text = hotkey_manager.GetPressedKeysString();
+        }
+
+        private void HotKey_KeyUP(object sender, KeyEventArgs e)
+        {
+            // Remove key from hotkey manager.
+            hotkey_manager.RemovePressedKey(e.Key.ToString());
+        }
+
         // Application Exit Point
         private void Close_Application(object sender, EventArgs args)
         {
+            // Signal that the progam is closeing.
             is_app_exiting = true;
 
-            // Clean up after the keyboard listner.
-            global_keyboard_listner.Dispose();
-
+            // Allow the overlay window to close.
             overlay_window.WindowsIsCloseing = true;
             overlay_window.Close();
+
+            // Cleanup registerd hotkeys.
+            global_hotkey_listner.UnRegisterGlobalHotKeys();
+
+            // Cleanup the application hook.
+            hwnd_source.RemoveHook(global_hotkey_listner.HwndHook);
+            hwnd_source = null;
 
             this.Close();
         }

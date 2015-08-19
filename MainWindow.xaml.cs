@@ -258,7 +258,7 @@ namespace CatboobGGStream
         private void AddOverlayItem(OverlayItem overlay_item)
         {
             // Register the hotkey with the global listner.
-            global_hotkey_listner.RegisterGlobalHotKey(overlay_item);
+            global_hotkey_listner.RegisterGlobalHotkey(overlay_item);
 
             // Add the OverlayItem to the list of displayed items.
             OverlayItems.Add(overlay_item);            
@@ -519,7 +519,7 @@ namespace CatboobGGStream
             overlay_window.Close();
 
             // Cleanup registerd hotkeys.
-            global_hotkey_listner.UnRegisterGlobalHotKeys();
+            global_hotkey_listner.UnRegisterGlobalHotkeys();
 
             // Cleanup the application hook.
             hwnd_source.RemoveHook(global_hotkey_listner.HwndHook);

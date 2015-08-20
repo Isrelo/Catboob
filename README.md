@@ -1,4 +1,4 @@
-![Alt text](https://github.com/Isrelo/Catboob/tree/RegisterHotkey/Images/CatboobPreview.gif "Catboob Demo")
+![demo](Images/CatboobPreview.gif "Catboob Demo")
 
 ### Catboob (GGStream) ###
 

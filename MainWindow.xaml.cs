@@ -319,8 +319,19 @@ namespace CatboobGGStream
             }
             else
             {
+                // Remove previous hotkey bindings.
+                global_hotkey_listner.UnRegisterGlobalHotkeys();
+
                 // Resave the overlay list.
                 settings_manager.SaveOverlayItems(OverlayItems);
+
+                // Rebind hotkeys.
+                for (int count = 0; count < OverlayItems.Count; count++)
+                {
+                    OverlayItem temp_item = OverlayItems[count];
+
+                    global_hotkey_listner.RegisterGlobalHotkey(temp_item);
+                }
             }
 
             // Show the home screen.

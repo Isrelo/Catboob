@@ -150,6 +150,7 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="48" />
+                        <RowDefinition Height="48" />
                     </Grid.RowDefinitions>                    
 
                     <!-- Volume Icon -->
@@ -158,6 +159,13 @@
                     </Button>
 
                     <TextBlock Grid.Column="1" Grid.Row="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Key Color"/>
+
+                    <!-- Resolution Icon -->
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ResolutionPicker_Click">
+                        <Image Width="24" Height="24" Source="img/ResolutionPicker.png"/>
+                    </Button>
+
+                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Window Size"/>
 
                 </Grid>                
             </Grid>

@@ -81,6 +81,9 @@
     <Compile Include="AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ResolutionPicker.xaml.cs">
+      <DependentUpon>ResolutionPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
     <Page Include="AddOverlayItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResolutionPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ColorPicker.xaml">
       <SubType>Designer</SubType>
@@ -195,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="OverlayItems.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ResolutionPicker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

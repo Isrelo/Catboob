@@ -13,7 +13,8 @@
         StateChanged="OverlayWindow_StateChanged">
     <Grid UseLayoutRounding="True">
         
-        <Image Name="overlay_display" IsHitTestVisible="False" Stretch="Fill"/>
+        <!-- Scale the image uniformily. -->
+        <Image Name="overlay_display" IsHitTestVisible="False" Stretch="Uniform"/>
         
     </Grid>
 </Window>

@@ -23,7 +23,10 @@ namespace CatboobGGStream
         public delegate void ShowColorPickerDialog();
         public ShowColorPickerDialog showColorPickerDialog;
 
-		public NavigationDrawer()
+        public delegate void ShowResolutionPickerDialog();
+        public ShowResolutionPickerDialog showResolutionPickerDialog;
+
+        public NavigationDrawer()
 		{
 			this.InitializeComponent();
 		}
@@ -67,5 +70,10 @@ namespace CatboobGGStream
         {
             showColorPickerDialog();
         }
-	}
+
+        private void ResolutionPicker_Click(object sender, RoutedEventArgs e)
+        {
+            showResolutionPickerDialog();
+        }
+    }
 }

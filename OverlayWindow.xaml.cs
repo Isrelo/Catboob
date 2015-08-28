@@ -40,6 +40,12 @@ namespace CatboobGGStream
             this.Background = new SolidColorBrush(background_color);
         }
 
+        public void SetWindowWidthHeight(int width, int height)
+        {
+            this.Width = width;
+            this.Height = height;
+        }
+
         public Color GetWindowColor()
         {
             return OverlayWindowUserSettings.WindowColor;

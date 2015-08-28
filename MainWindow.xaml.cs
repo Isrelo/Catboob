@@ -31,6 +31,7 @@ namespace CatboobGGStream
         private IntPtr hwnd_handle;
         private HwndSource hwnd_source;
         private String working_dir;
+        private String app_data_dir;
         private SoundManager sound_manager;
         private GlobalHotkeyListener global_hotkey_listner;
         private HotkeyManager hotkey_manager;        
@@ -55,20 +56,25 @@ namespace CatboobGGStream
             // Setup Bound Display List
             overlay_items = new BindingList<OverlayItem>();
 
-            // Get Applicaion Directory
+            // Get Applicaion Directory.
             working_dir = Directory.GetCurrentDirectory();
+
+            // Get the %AppData% Directory.
+            app_data_dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            app_data_dir += "\\CatboobGGStream";
 
             // Set navigation drawer open width.
             AppNavDrawer.SetDarwerWidth(this.Width - System.Convert.ToDouble(App_Container.RowDefinitions[0].Height.ToString()));
 
-            // Set ShowColorPickerDialog display event.
+            // Setup ShowColorPickerDialog
             AppNavDrawer.showColorPickerDialog = DisplayColorPickerDialog;
-
-            // Set Discard Color event.
-            color_picker.closePickColor = DiscardPickedColor;
-
-            // Set Save Color event.
+            color_picker.closePickedColor = DiscardPickedColor;
             color_picker.savePickedColor = SavePickedColor;
+
+            // Setup ShowResolutionPicker
+            AppNavDrawer.showResolutionPickerDialog = DisplayResolutionPickerDialog;
+            resolution_picker.closePickedResolution = DiscardPickedResolution;
+            resolution_picker.savePickedResolution = SavePickedResolution;
 
             // Set ShowHotkeyDialog display event.
             add_overlay_item_container.showHotkeyDialog = DisplayHotkeyDialog;
@@ -105,7 +111,7 @@ namespace CatboobGGStream
             hwnd_source.AddHook(global_hotkey_listner.HwndHook);            
 
             // Load saved overlay items.
-            settings_manager = new SettingsManager(working_dir);
+            settings_manager = new SettingsManager(app_data_dir);
             settings_manager.LoadOverlayItems();
             for (int count = 0; count < settings_manager.OverlayItems.Count; count++)
             {
@@ -179,6 +185,9 @@ namespace CatboobGGStream
             // Hide the color picker dialog.
             color_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
 
+            // Hide the resolution picker dialog.
+            resolution_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
             // Hide the hotkey diallog.
             hotkey_dialog.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -216,6 +225,32 @@ namespace CatboobGGStream
             color_picker_dialog.Visibility = System.Windows.Visibility.Visible;
 
             color_picker.SetControlColor(overlay_window.OverlayWindowUserSettings.WindowColor);
+        }
+
+        private void DiscardPickedResolution()
+        {
+            // Hide the resolution picker dialog.
+            resolution_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Hide the navigation drawer.
+            AppNavDrawer.CloseDrawer();
+        }
+
+        private void SavePickedResolution(int width, int height)
+        {
+            // Hide the resolution picker dialog.
+            resolution_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            overlay_window.SetWindowWidthHeight(width, height);
+
+            // Hide the navigation drawer.
+            AppNavDrawer.CloseDrawer();
+        }
+
+        private void DisplayResolutionPickerDialog()
+        {
+            // Show the resolution picker dialog.
+            resolution_picker_dialog.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void DisplayHotkeyDialog()

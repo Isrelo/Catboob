@@ -24,7 +24,7 @@ namespace CatboobGGStream
         public SavePickedColor savePickedColor;
 
         public delegate void ClosePickColor();
-        public ClosePickColor closePickColor;
+        public ClosePickColor closePickedColor;
 
         public Color BackgroundColor { get; set; }
 
@@ -54,7 +54,7 @@ namespace CatboobGGStream
 
         private void Discard_Click(object sender, RoutedEventArgs e)
         {
-            closePickColor();            
+            closePickedColor();            
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)

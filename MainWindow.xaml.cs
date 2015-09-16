@@ -60,7 +60,7 @@ namespace CatboobGGStream
             working_dir = Directory.GetCurrentDirectory();
 
             // Get the %AppData% Directory.
-            app_data_dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            app_data_dir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             app_data_dir += "\\CatboobGGStream";
 
             // Set navigation drawer open width.

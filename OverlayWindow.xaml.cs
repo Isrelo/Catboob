@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using System.ComponentModel;
+using WpfAnimatedGif;
 
 namespace CatboobGGStream
 {
@@ -61,7 +62,7 @@ namespace CatboobGGStream
             }
 
             overlay_display.Visibility = System.Windows.Visibility.Visible;
-            overlay_display.Source = new BitmapImage(new Uri(image_path, UriKind.RelativeOrAbsolute));
+            ImageBehavior.SetAnimatedSource(overlay_display, new BitmapImage(new Uri(image_path, UriKind.RelativeOrAbsolute)));
         }
 
         public void HideOverlay()

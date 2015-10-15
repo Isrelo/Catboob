@@ -68,8 +68,6 @@ namespace CatboobGGStream
         {
             if (hot_key_to_check.ContainsKey(GetPressedKeysString()))
                 return true;
-            //if (hot_key_to_check == GetPressedKeysString())
-            //    return true;
 
             return false;
         }

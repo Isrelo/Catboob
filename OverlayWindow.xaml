@@ -12,6 +12,16 @@
         Loaded="Window_Loaded" 
         SnapsToDevicePixels="True" 
         StateChanged="OverlayWindow_StateChanged">
+    
+    <Window.Resources>
+        <Storyboard x:Key="FadeIn" Name="FadeIn">
+            <DoubleAnimation From="0" To="1" Storyboard.TargetName ="overlay_display" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:1"/>
+        </Storyboard>
+        <Storyboard x:Key="FadeOut" Name="FadeOut">
+            <DoubleAnimation From="1" To="0" Storyboard.TargetName ="overlay_display" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:1"/>
+        </Storyboard>        
+    </Window.Resources>
+    
     <Grid UseLayoutRounding="True">
         
         <!-- Scale the image uniformily. -->

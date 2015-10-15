@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.Windows.Media.Animation;
 using System.ComponentModel;
 using WpfAnimatedGif;
 
@@ -63,11 +64,15 @@ namespace CatboobGGStream
 
             overlay_display.Visibility = System.Windows.Visibility.Visible;
             ImageBehavior.SetAnimatedSource(overlay_display, new BitmapImage(new Uri(image_path, UriKind.RelativeOrAbsolute)));
+
+            Storyboard stbFadeIn = (Storyboard)FindResource("FadeIn");
+            stbFadeIn.Begin();
         }
 
         public void HideOverlay()
         {
-            overlay_display.Visibility = System.Windows.Visibility.Hidden;
+            Storyboard stbFadeOut = (Storyboard)FindResource("FadeOut");
+            stbFadeOut.Begin();
         }
 
         private void Window_Closed(object sender, EventArgs e)

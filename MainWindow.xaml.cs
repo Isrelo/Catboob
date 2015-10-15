@@ -18,6 +18,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Interop;
+using System.Windows.Media.Animation;
+using System.Timers;
 using Microsoft.Win32;
 
 namespace CatboobGGStream
@@ -36,6 +38,7 @@ namespace CatboobGGStream
         private GlobalHotkeyListener global_hotkey_listner;
         private HotkeyManager hotkey_manager;        
         private SettingsManager settings_manager;
+        private EventTimer overlay_event_timer;
         private BindingList<OverlayItem> overlay_items;
 
         private OverlayWindow overlay_window;
@@ -84,6 +87,9 @@ namespace CatboobGGStream
 
             // Setup the user selected hotkey managment.
             hotkey_manager = new HotkeyManager();
+
+            // Setup the overlay display timer.
+            overlay_event_timer = new EventTimer();
 
             // Setup sound manager;
             sound_manager = new SoundManager();
@@ -309,6 +315,11 @@ namespace CatboobGGStream
             {
                 if (temp_overlay_item.HotKeyID == hotkey_id)
                 {
+                    if (temp_overlay_item.DisplayDuration.Seconds > 0)
+                    {
+                        overlay_event_timer.StartTimer(temp_overlay_item.DisplayDuration, OverlayItem_TimerElapsed);
+                    }
+
                     if (File.Exists(temp_overlay_item.ImagePath))
                     {
                         Debug.WriteLine("ImagePath: " + temp_overlay_item.ImagePath);
@@ -331,6 +342,21 @@ namespace CatboobGGStream
                         DisplayStop(temp_overlay_item);
                     }
                 }
+            }
+        }
+
+        private void ResetOverlayItems()
+        {
+            // Hide the displayed overlay.
+            overlay_window.HideOverlay();
+
+            // Stop Playing the selected sound.
+            sound_manager.StopSound();
+
+            foreach (OverlayItem temp_overlay_item in OverlayItems)
+            {
+                // Show play button.
+                DisplayPlay(temp_overlay_item);
             }
         }
 
@@ -453,14 +479,8 @@ namespace CatboobGGStream
             Button tempButton = (Button)sender;
             OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
 
-            // Set sound volume.
-            sound_manager.SetVolume(tempOverlayItem.SoundVolume);
-
-            // Start Paying the selected sound.
-            sound_manager.PlaySound(tempOverlayItem.SoundPath);
-
-            // Show stop button.
-            DisplayStop(tempOverlayItem);
+            // Perfrom the same action as the pressed hotkey.
+            ExecuteOverlayItem(tempOverlayItem.HotKeyID);
         }
 
         private void StopSound_Click(object sender, RoutedEventArgs e)
@@ -468,19 +488,14 @@ namespace CatboobGGStream
             Button tempButton = (Button)sender;
             OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
 
-            // Stop Playing the selected sound.
-            sound_manager.StopSound();
-
-            // Show play button.
-            DisplayPlay(tempOverlayItem);
+            // Perfrom the same action for reseting the overlay.
+            ResetOverlayItems();
         }
 
         private void StopAllSounds_MediaEnded(object sender, EventArgs e)
         {
             // Stop Playing the selected sound.
-            sound_manager.StopSound();
-
-            overlay_window.HideOverlay();
+            sound_manager.StopSound();            
 
             for (int count = 0; count < OverlayItems.Count; count++)
             {
@@ -552,6 +567,15 @@ namespace CatboobGGStream
         {
             // Remove key from hotkey manager.
             hotkey_manager.RemovePressedKey(e.Key.ToString());
+        }
+
+        private void OverlayItem_TimerElapsed(Object source, EventArgs e)
+        {
+            // Hide the current OverlayItem.
+            ResetOverlayItems();
+
+            // Make sure the timer doesn't endlessly trigger.
+            overlay_event_timer.StopTimer();
         }
 
         // Application Exit Point

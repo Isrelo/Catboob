@@ -12,11 +12,12 @@ namespace CatboobGGStream
 {
     public class OverlayItem : INotifyPropertyChanged
     {
-        private int hotkey_id;
+        private int hotkey_id;        
         private double sound_volume;
         private String image_path;
         private String hot_key;
         private String sound_path;
+        private TimeSpan display_duration;
         private Visibility play_visible;
         private Visibility stop_visible;
 
@@ -80,6 +81,18 @@ namespace CatboobGGStream
             } 
         }
 
+        public TimeSpan DisplayDuration
+        {
+            get { return display_duration; }
+            set
+            {
+                display_duration = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            }
+        }
+
         public Visibility PlayVisible 
         { 
             get{ return play_visible; }
@@ -108,6 +121,8 @@ namespace CatboobGGStream
 
         public OverlayItem()
         {
+            // Default Dipslay Interval in Milliseconds
+            display_duration = new TimeSpan(0, 0, 3);
             // Default Volume Level
             sound_volume = 0.5;
             image_path = "";

@@ -85,6 +85,7 @@
     <Compile Include="AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventTimer.cs" />
     <Compile Include="ResolutionPicker.xaml.cs">
       <DependentUpon>ResolutionPicker.xaml</DependentUpon>
     </Compile>

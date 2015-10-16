@@ -82,6 +82,11 @@ namespace CatboobGGStream
             // Set ShowHotkeyDialog display event.
             add_overlay_item_container.showHotkeyDialog = DisplayHotkeyDialog;
 
+            // Set ShowTimePickerDialog display event.
+            add_overlay_item_container.showTimePickerDialog = DisplayTimePickerDialog;
+            time_picker.savePickedTime = SaveTimePicker;
+            time_picker.closePickedTime = DiscardTimePicker;
+
             // Keep Applicaion Open
             is_app_exiting = false;
 
@@ -270,6 +275,28 @@ namespace CatboobGGStream
             pressed_key_tb.Focus();
         }
 
+        private void DiscardTimePicker()
+        {
+            // Hide the TimePicker dialog.
+            time_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void SaveTimePicker(TimeSpan duration_to_use)
+        {
+            // Hide the TimePicker dialog.
+            time_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Save the selected time.
+            OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
+            temp_item.DisplayDuration = duration_to_use;
+        }
+
+        private void DisplayTimePickerDialog()
+        {
+            // Show the hotkey dialog.
+            time_picker_dialog.Visibility = System.Windows.Visibility.Visible;
+        }
+
         private void DisplayPlay(OverlayItem overlay_item)
         {
             // Show the play button.
@@ -371,6 +398,7 @@ namespace CatboobGGStream
                 temp_item.SoundPath = overlay_item.SoundPath;
                 temp_item.SoundVolume = overlay_item.SoundVolume;
                 temp_item.StopVisible = overlay_item.StopVisible;
+                temp_item.DisplayDuration = overlay_item.DisplayDuration;
 
                 // Save the overlay item to the xml file.
                 settings_manager.SaveOverlayItem(temp_item);

@@ -82,35 +82,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddOverlayItem.xaml.cs">
+    <Compile Include="UserControls\AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventTimer.cs" />
-    <Compile Include="ResolutionPicker.xaml.cs">
+    <Compile Include="UserControls\ResolutionPicker.xaml.cs">
       <DependentUpon>ResolutionPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ColorPicker.xaml.cs">
+    <Compile Include="UserControls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalHotkeyListener.cs" />
-    <Compile Include="NavigationDrawer.xaml.cs">
+    <Compile Include="UserControls\NavigationDrawer.xaml.cs">
       <DependentUpon>NavigationDrawer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OverlayWindow.xaml.cs">
+    <Compile Include="UserWindows\OverlayWindow.xaml.cs">
       <DependentUpon>OverlayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SoundManager.cs" />
+    <Compile Include="UserControls\TimePicker.xaml.cs">
+      <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowUserSettings.cs" />
-    <Page Include="AddOverlayItem.xaml">
+    <Page Include="UserControls\AddOverlayItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResolutionPicker.xaml">
+    <Page Include="UserControls\ResolutionPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ColorPicker.xaml">
+    <Page Include="UserControls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,11 +130,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NavigationDrawer.xaml">
+    <Page Include="UserControls\NavigationDrawer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="OverlayWindow.xaml">
+    <Page Include="UserWindows\OverlayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TimePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,6 +219,10 @@
   <ItemGroup>
     <Resource Include="img\ResolutionPicker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\TimePicker.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D

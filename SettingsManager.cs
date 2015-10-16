@@ -117,6 +117,19 @@ namespace CatboobGGStream
                             double.TryParse(temp_value, out temp_volume);
                             temp_overlay_item.SoundVolume = temp_volume;
                         }
+                        else if (overlay_items_xml.Name == "DisplayDuration")
+                        {
+                            temp_value = overlay_items_xml.ReadElementContentAsString();
+                            String[] time_parts = temp_value.Split(':');
+                            int minutes = 0;
+                            int.TryParse(time_parts[0], out minutes);
+                            int seconds = 0;
+                            int.TryParse(time_parts[1], out seconds);
+                            int miliseconds = 0;
+                            int.TryParse(time_parts[2], out miliseconds);
+                            TimeSpan temp_time_span = new TimeSpan(0, 0, minutes, seconds, miliseconds);
+                            temp_overlay_item.DisplayDuration = temp_time_span;
+                        }
                     }
 
                     if (overlay_items_xml.NodeType == XmlNodeType.EndElement && overlay_items_xml.Name == "OverlayItem")
@@ -160,6 +173,11 @@ namespace CatboobGGStream
             XmlElement sound_volume = xml_doc.CreateElement("SoundVolume");
             sound_volume.InnerText = overlay_item.SoundVolume.ToString();
             overlay_item_root_element.AppendChild(sound_volume);
+
+            //   <DisplayDuration>
+            XmlElement dispaly_duration = xml_doc.CreateElement("DisplayDuration");
+            dispaly_duration.InnerText = String.Format("{0}:{1}:{2}", overlay_item.DisplayDuration.Minutes, overlay_item.DisplayDuration.Seconds, overlay_item.DisplayDuration.Milliseconds);
+            overlay_item_root_element.AppendChild(dispaly_duration);
 
             // Add the new overlay item xml to the end of the document.
             document_root.AppendChild(overlay_item_root_element);

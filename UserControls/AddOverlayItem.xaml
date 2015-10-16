@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatboobGGStream" x:Class="CatboobGGStream.AddOverlayItem" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" 
+             d:DesignHeight="400" 
              d:DesignWidth="300" 
              Background="#FFFAFAFA">
     <UserControl.Resources>
@@ -121,6 +121,26 @@
                 </Grid>
 
                 <TextBlock x:Name="sound_path_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" Text="{Binding Path=SoundPath, Mode=TwoWay}"/>
+
+                <!-- Item Seperator -->
+                <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />
+
+                <!-- Image Duration -->
+                <Grid Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="48" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Display Duration" Foreground="#FF212121" />
+
+                    <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="DisplayDuration_Click">
+                        <Image Width="24" Height="24" Source="img/TimePicker.png"/>
+                    </Button>
+
+                </Grid>
+
+                <TextBlock x:Name="time_tb" Margin="16,0" Padding="0" FontSize="14" Background="{x:Null}" Text="{Binding Path=DisplayDuration, Mode=TwoWay}"/>
 
                 <!-- Item Seperator -->
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0,8" />

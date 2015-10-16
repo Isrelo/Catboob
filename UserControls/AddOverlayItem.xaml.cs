@@ -26,6 +26,9 @@ namespace CatboobGGStream
         public delegate void ShowHotkeyDialog();
         public ShowHotkeyDialog showHotkeyDialog;
 
+        public delegate void ShowTimePickerDialog();
+        public ShowTimePickerDialog showTimePickerDialog;
+
         public AddOverlayItem()
         {
             InitializeComponent();
@@ -65,6 +68,11 @@ namespace CatboobGGStream
 
             OverlayItem temp_item = (OverlayItem)this.DataContext;
             temp_item.SoundPath = sound_path;
+        }
+
+        private void DisplayDuration_Click(object sender, RoutedEventArgs e)
+        {
+            showTimePickerDialog();
         }
 
         private void HotKey_Click(object sender, RoutedEventArgs e)

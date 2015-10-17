@@ -5,7 +5,7 @@
         Title="Catboob Overlay Window" 
         Height="240" 
         Width="320" 
-        Icon="Catboob.ico" 
+        Icon="..\Catboob.ico" 
         Background="#FF26FD04" 
         Closing="Window_Closing" 
         Closed="Window_Closed" 

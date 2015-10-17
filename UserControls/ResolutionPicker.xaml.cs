@@ -23,8 +23,8 @@ namespace CatboobGGStream
         public delegate void SavePickedResolution(int width, int height);
         public SavePickedResolution savePickedResolution;
 
-        public delegate void ClosePickResolution();
-        public ClosePickResolution closePickedResolution;
+        public delegate void ClosePickedResolution();
+        public ClosePickedResolution closePickedResolution;
 
         public Color BackgroundColor { get; set; }
 

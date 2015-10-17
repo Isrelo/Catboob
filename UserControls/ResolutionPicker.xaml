@@ -39,7 +39,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Width="300" Stretch="None" Source="img/ResolutionPicker.png"/>
+        <Image Grid.Row="0" Width="300" Stretch="None" Source="../img/ResolutionPicker.png"/>
         
         <!-- Blue Picker Control -->
         <Grid Grid.Row="1">

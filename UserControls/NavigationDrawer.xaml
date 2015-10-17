@@ -130,7 +130,7 @@
 
                 <!-- Back Button -->
                 <Button x:Name="Back_btn"  Grid.Row="0" Grid.Column="0" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="BackButton_Click">
-                    <Image Width="24" Height="24" Source="img/ArrowBackWhite.png"/>
+                    <Image Width="24" Height="24" Source="../img/ArrowBackWhite.png"/>
                 </Button>
 
                 <!-- App Title -->
@@ -155,14 +155,14 @@
 
                     <!-- Volume Icon -->
                     <Button Grid.Column="0" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ColorPicker_Click">
-                        <Image Width="24" Height="24" Source="img/ColorPicker.png"/>
+                        <Image Width="24" Height="24" Source="../img/ColorPicker.png"/>
                     </Button>
 
                     <TextBlock Grid.Column="1" Grid.Row="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Key Color"/>
 
                     <!-- Resolution Icon -->
                     <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ResolutionPicker_Click">
-                        <Image Width="24" Height="24" Source="img/ResolutionPicker.png"/>
+                        <Image Width="24" Height="24" Source="../img/ResolutionPicker.png"/>
                     </Button>
 
                     <TextBlock Grid.Column="1" Grid.Row="1" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Window Size"/>

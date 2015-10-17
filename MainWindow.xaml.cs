@@ -35,8 +35,7 @@ namespace CatboobGGStream
         private String working_dir;
         private String app_data_dir;
         private SoundManager sound_manager;
-        private GlobalHotkeyListener global_hotkey_listner;
-        private HotkeyManager hotkey_manager;        
+        private GlobalHotkeyListener global_hotkey_listner;               
         private SettingsManager settings_manager;
         private EventTimer overlay_event_timer;
         private BindingList<OverlayItem> overlay_items;
@@ -81,6 +80,8 @@ namespace CatboobGGStream
 
             // Set ShowHotkeyDialog display event.
             add_overlay_item_container.showHotkeyDialog = DisplayHotkeyDialog;
+            hotkey_picker.closePickedHotkey = DiscardHotkeyDialog;
+            hotkey_picker.savePickedHotkey = SaveHotkeyDialog;
 
             // Set ShowTimePickerDialog display event.
             add_overlay_item_container.showTimePickerDialog = DisplayTimePickerDialog;
@@ -89,9 +90,6 @@ namespace CatboobGGStream
 
             // Keep Applicaion Open
             is_app_exiting = false;
-
-            // Setup the user selected hotkey managment.
-            hotkey_manager = new HotkeyManager();
 
             // Setup the overlay display timer.
             overlay_event_timer = new EventTimer();
@@ -202,6 +200,9 @@ namespace CatboobGGStream
             // Hide the hotkey diallog.
             hotkey_dialog.Visibility = System.Windows.Visibility.Collapsed;
 
+            // Hide the TimePicker dialog.
+            time_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
             // Hide the edit and delete buttons.
             RightAction_sp.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -270,9 +271,28 @@ namespace CatboobGGStream
             hotkey_dialog.Visibility = System.Windows.Visibility.Visible;
 
             // Reset the hotkey dialog.
-            hotkey_manager.Reset();
-            pressed_key_tb.Text = "";
-            pressed_key_tb.Focus();
+            hotkey_picker.ResetHotkeyDialog();
+
+            Keyboard.Focus(hotkey_picker);
+        }
+
+        private void DiscardHotkeyDialog()
+        {
+            // Hide the hotkey dialog.
+            hotkey_dialog.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void SaveHotkeyDialog(String selected_hotkey)
+        {
+            // Hide the hotkey diallog.
+            hotkey_dialog.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Save the enterted hotkey.
+            if (!String.IsNullOrEmpty(selected_hotkey))
+            {
+                OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
+                temp_item.HotKey = selected_hotkey;
+            }
         }
 
         private void DiscardTimePicker()
@@ -477,30 +497,6 @@ namespace CatboobGGStream
             // Show the add item screen.
             DisplayItemScreen("Edit Item");
         }
-        
-        private void HotkeyDiscard_Click(object sender, RoutedEventArgs e)
-        {
-            if (AppTitle_txt.Text == "Add Item")
-                DisplayItemScreen("Add Item");
-            else
-                DisplayItemScreen("Edit Item");
-        }
-
-        private void HotkeySave_Click(object sender, RoutedEventArgs e)
-        {
-            if (AppTitle_txt.Text == "Add Item")
-                DisplayItemScreen("Add Item");
-            else
-                DisplayItemScreen("Edit Item");
-
-            // Save the enterted hotkey.
-            String tempHotkey = pressed_key_tb.Text;
-            if (!String.IsNullOrEmpty(tempHotkey))
-            {
-                OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
-                temp_item.HotKey = tempHotkey;
-            }
-        }
 
         private void PlaySound_Click(object sender, RoutedEventArgs e)
         {
@@ -580,21 +576,6 @@ namespace CatboobGGStream
         private void HotKey_Click(object sender, RoutedEventArgs e)
         {
             DisplayHotkeyDialog();
-        }
-
-        private void HotKey_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Add pressed keys to the hotkey manager.
-            hotkey_manager.AddPressedKey(e.Key.ToString());
-
-            // Display the list of key in a hotkey.
-            pressed_key_tb.Text = hotkey_manager.GetPressedKeysString();
-        }
-
-        private void HotKey_KeyUP(object sender, KeyEventArgs e)
-        {
-            // Remove key from hotkey manager.
-            hotkey_manager.RemovePressedKey(e.Key.ToString());
         }
 
         private void OverlayItem_TimerElapsed(Object source, EventArgs e)

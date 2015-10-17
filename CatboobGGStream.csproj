@@ -86,6 +86,9 @@
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventTimer.cs" />
+    <Compile Include="UserControls\HotkeyPicker.xaml.cs">
+      <DependentUpon>HotkeyPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ResolutionPicker.xaml.cs">
       <DependentUpon>ResolutionPicker.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
     </Compile>
     <Compile Include="WindowUserSettings.cs" />
     <Page Include="UserControls\AddOverlayItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HotkeyPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

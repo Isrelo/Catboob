@@ -75,7 +75,7 @@
                     <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Foreground="#FF212121" Text="Image Path" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ImagePath_Click">
-                        <Image Width="24" Height="24" Source="img/AttachmentGrey.png"/>
+                        <Image Width="24" Height="24" Source="../img/AttachmentGrey.png"/>
                     </Button>
 
                 </Grid>
@@ -95,7 +95,7 @@
                     <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Hotkey" Foreground="#FF212121" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="HotKey_Click" >
-                        <Image Width="24" Height="24" Source="img/KeyboardGrey.png"/>
+                        <Image Width="24" Height="24" Source="../img/KeyboardGrey.png"/>
                     </Button>
 
                 </Grid>
@@ -115,7 +115,7 @@
                     <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Sound Path" Foreground="#FF212121" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="SoundPath_Click">
-                        <Image Width="24" Height="24" Source="img/MusicNodeGrey.png"/>
+                        <Image Width="24" Height="24" Source="../img/MusicNodeGrey.png"/>
                     </Button>
 
                 </Grid>
@@ -135,7 +135,7 @@
                     <TextBlock Grid.Column="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Text="Display Duration" Foreground="#FF212121" />
 
                     <Button Grid.Column="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="DisplayDuration_Click">
-                        <Image Width="24" Height="24" Source="img/TimePicker.png"/>
+                        <Image Width="24" Height="24" Source="../img/TimePicker.png"/>
                     </Button>
 
                 </Grid>

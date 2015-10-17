@@ -243,24 +243,8 @@
         <local:NavigationDrawer x:Name="AppNavDrawer" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Grid.RowSpan="2" Visibility="Collapsed" />
         
         <!-- Hotkey Dialog Overlay -->
-        <Grid x:Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed" KeyDown="HotKey_KeyDown" KeyUp="HotKey_KeyUP" Loaded="MainWindow_Loaded">
-            <Grid Background="#FFFAFAFA" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="48" />
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" ClipToBounds="True" TextWrapping="Wrap" FontSize="20" FontWeight="Medium" Foreground="#FF212121" Margin="24,24,24,0" Text="Press any key to pick a hotkey for your overlay." />
-
-                <TextBlock x:Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" />
-
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" Click="HotkeyDiscard_Click" FontSize="14" FontWeight="Medium"/>
-                    <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" Click="HotkeySave_Click" FontSize="14" FontWeight="Medium"/>
-                </StackPanel>
-
-            </Grid>
+        <Grid x:Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed" Loaded="MainWindow_Loaded">
+            <local:HotkeyPicker x:Name="hotkey_picker" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
 
         <!-- ColorPicker Dialog Overlay -->

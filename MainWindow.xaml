@@ -244,22 +244,22 @@
         
         <!-- Hotkey Dialog Overlay -->
         <Grid x:Name="hotkey_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed" Loaded="MainWindow_Loaded">
-            <local:HotkeyPicker x:Name="hotkey_picker" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <local:HotkeyPicker x:Name="hotkey_picker" Margin="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
 
         <!-- ColorPicker Dialog Overlay -->
         <Grid x:Name="color_picker_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
-            <local:ColorPicker x:Name="color_picker" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <local:ColorPicker x:Name="color_picker" Margin="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         
         <!-- Resolution Dialog Overlay -->
         <Grid x:Name="resolution_picker_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
-            <local:ResolutionPicker x:Name="resolution_picker" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <local:ResolutionPicker x:Name="resolution_picker" Margin="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <!-- TimePicker Dialog Overlay -->
         <Grid x:Name="time_picker_dialog" Width="{Binding ElementName=parent}" Height="{Binding ElementName=parent}" Background="#7F000000" Grid.RowSpan="2" Visibility="Collapsed">
-            <local:TimePicker x:Name="time_picker" Margin="0" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <local:TimePicker x:Name="time_picker" Margin="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
     </Grid>

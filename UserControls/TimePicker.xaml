@@ -38,6 +38,23 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0" Width="300" Height="248">
+            <Ellipse x:Name="ClockBackground" Width="240" Height="240" Margin="4" Fill="#EEEEEE" Stroke="#EEEEEE" Stretch="Uniform"/>
+            <Path x:Name="TimeSelector" Data="M14.469999,107.97 C16.402995,107.97 17.969998,109.537 17.969998,111.47 17.969998,113.403 16.402995,114.97 14.469999,114.97 12.537002,114.97 10.969999,113.403 10.97,111.47 10.969999,109.537 12.537002,107.97 14.469999,107.97 z M14.469999,0.5 C22.185416,0.5 28.439999,6.7545819 28.439999,14.469999 28.439999,21.944311 22.57022,28.047663 15.188894,28.421824 L14.969998,28.427359 14.969998,107.97 14.469999,107.97 13.969999,107.97 13.969999,28.427359 13.751105,28.421824 C6.3697776,28.047663 0.49999893,21.944311 0.5,14.469999 0.49999893,6.7545819 6.7545809,0.5 14.469999,0.5 z" Fill="#FF009688" Margin="135.53,12.53,135.53,120" RenderTransformOrigin="0.5,1" Stretch="None" Stroke="#FF009688" />
+            <Label x:Name="Time_lbl0" Content="00" Margin="0,10,135,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="White" Padding="8"/>
+            <Label x:Name="Time_lbl1" Content="05" Margin="0,24,85,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl2" Content="10" Margin="0,60,48,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl3" Content="15" Margin="0,111,35,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl4" Content="20" Margin="0,162,48,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl5" Content="25" Margin="0,198,86,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl6" Content="30" Margin="0,212,135,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl7" Content="35" Margin="0,199,186,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl8" Content="40" Margin="0,162,223,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl9" Content="45" Margin="0,111,236,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl10" Content="50" Margin="0,60,223,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+            <Label x:Name="Time_lbl11" Content="55" Margin="0,24,186,0" VerticalAlignment="Top" Height="34" HorizontalAlignment="Right" Foreground="Black" Padding="8"/>
+        </Grid>
+
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" FontSize="14" FontWeight="Medium" Click="Discard_Click"/>
             <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" FontSize="14" FontWeight="Medium" Click="Save_Click"/>

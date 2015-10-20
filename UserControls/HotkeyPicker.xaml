@@ -46,10 +46,17 @@
 
         <TextBlock x:Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" />
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" Click="HotkeyDiscard_Click" FontSize="14" FontWeight="Medium"/>
-            <Button Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" Click="HotkeySave_Click" FontSize="14" FontWeight="Medium"/>
-        </StackPanel>
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="DISCARD" Foreground="#FFFF9800" Click="HotkeyDiscard_Click" FontSize="14" FontWeight="Medium"/>
+            <Button Grid.Column="1" Style="{StaticResource RegularFlatBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="SAVE" Foreground="#FFFF9800" Click="HotkeySave_Click" FontSize="14" FontWeight="Medium"/>
+            
+        </Grid>
 
     </Grid>
     

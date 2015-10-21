@@ -23,7 +23,7 @@ namespace CatboobGGStream
     /// </summary>
     public partial class AddOverlayItem : UserControl
     {
-        public delegate void ShowHotkeyDialog();
+        public delegate void ShowHotkeyDialog(String hotkey);
         public ShowHotkeyDialog showHotkeyDialog;
 
         public delegate void ShowTimePickerDialog();
@@ -77,7 +77,9 @@ namespace CatboobGGStream
 
         private void HotKey_Click(object sender, RoutedEventArgs e)
         {
-            showHotkeyDialog();
+            OverlayItem temp_item = (OverlayItem)this.DataContext;
+
+            showHotkeyDialog(temp_item.HotKey);
         }
 
         private void VolumeImageToDisplay(double slider_value)

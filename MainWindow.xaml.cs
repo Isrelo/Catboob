@@ -265,13 +265,14 @@ namespace CatboobGGStream
             resolution_picker_dialog.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void DisplayHotkeyDialog()
+        private void DisplayHotkeyDialog(String hotkey)
         {
             // Show the hotkey dialog.
             hotkey_dialog.Visibility = System.Windows.Visibility.Visible;
 
             // Reset the hotkey dialog.
             hotkey_picker.ResetHotkeyDialog();
+            hotkey_picker.SetControlHotkey(hotkey);
 
             Keyboard.Focus(hotkey_picker);
         }
@@ -575,7 +576,7 @@ namespace CatboobGGStream
 
         private void HotKey_Click(object sender, RoutedEventArgs e)
         {
-            DisplayHotkeyDialog();
+            DisplayHotkeyDialog("");
         }
 
         private void OverlayItem_TimerElapsed(Object source, EventArgs e)

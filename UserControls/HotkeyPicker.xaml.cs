@@ -33,6 +33,11 @@ namespace CatboobGGStream
             InitializeComponent();
         }
 
+        public void SetControlHotkey(String hotkey)
+        {
+            pressed_key_tb.Text = hotkey;
+        }
+
         public void ResetHotkeyDialog()
         {
             // Setup the user selected hotkey managment.

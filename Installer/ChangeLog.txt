@@ -1,4 +1,4 @@
 ------------------------------------------------
 v1.0.2:
 * Animated .gif files now actaully animate.
-*
+* Overlay displays basied on slected time instead of by sound file's end.

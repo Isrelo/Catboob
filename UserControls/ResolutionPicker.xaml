@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" 
+             MinHeight="356"
+             d:DesignHeight="356" 
              d:DesignWidth="300">
     <UserControl.Resources>
 
@@ -34,15 +35,20 @@
     <Grid Background="#FFFAFAFA">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="56" />
             <RowDefinition Height="200" />
             <RowDefinition Height="48" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Width="300" Stretch="None" Source="../img/ResolutionPicker.png"/>
+        <!-- Dialog Toolbar -->
+        <Grid x:Name="app_toolbar" Grid.Row="0" Background="#FF009688">
+        </Grid>
+
+        <Image Grid.Row="1" Width="300" Stretch="None" Source="../img/ResolutionPicker.png"/>
         
-        <!-- Blue Picker Control -->
-        <Grid Grid.Row="1">
+        <!-- Resoulitoin Picker Control -->
+        <Grid Grid.Row="2">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -93,7 +99,7 @@
                         
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

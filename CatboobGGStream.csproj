@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OverlayListBoxItem.cs" />
     <Compile Include="UserControls\AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>

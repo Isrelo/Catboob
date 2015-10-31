@@ -28,7 +28,7 @@ namespace CatboobGGStream
             overlay_items = new List<OverlayItem>();            
         }
 
-        public void SaveOverlayItems(BindingList<OverlayItem> overlay_items)
+        public void SaveOverlayItems(BindingList<OverlayListBoxItem> overlay_list_box_items)
         {
             // Read in the overlay items xml into a single string.
             String temp_xml_string = File.ReadAllText(saved_overlay_items_path);
@@ -40,10 +40,12 @@ namespace CatboobGGStream
             XmlNode document_root = temp_xml_doc.DocumentElement;
             document_root.RemoveAll();
 
-            for (int count = 0; count < overlay_items.Count; count++)
+            for (int count = 0; count < overlay_list_box_items.Count; count++)
             {
+                OverlayItem temp_item = overlay_list_box_items[count].OverlayItemData;
+
                 // Add a OverlayItem xml child.
-                AppendOverlayItemXML(temp_xml_doc, overlay_items[count]);
+                AppendOverlayItemXML(temp_xml_doc, temp_item);
             }
 
             // Write the changes to the xml file.
@@ -120,15 +122,7 @@ namespace CatboobGGStream
                         else if (overlay_items_xml.Name == "DisplayDuration")
                         {
                             temp_value = overlay_items_xml.ReadElementContentAsString();
-                            String[] time_parts = temp_value.Split(':');
-                            int minutes = 0;
-                            int.TryParse(time_parts[0], out minutes);
-                            int seconds = 0;
-                            int.TryParse(time_parts[1], out seconds);
-                            int miliseconds = 0;
-                            int.TryParse(time_parts[2], out miliseconds);
-                            TimeSpan temp_time_span = new TimeSpan(0, 0, minutes, seconds, miliseconds);
-                            temp_overlay_item.DisplayDuration = temp_time_span;
+                            temp_overlay_item.DisplayDuration = temp_value;
                         }
                     }
 
@@ -176,7 +170,7 @@ namespace CatboobGGStream
 
             //   <DisplayDuration>
             XmlElement dispaly_duration = xml_doc.CreateElement("DisplayDuration");
-            dispaly_duration.InnerText = String.Format("{0}:{1}:{2}", overlay_item.DisplayDuration.Minutes, overlay_item.DisplayDuration.Seconds, overlay_item.DisplayDuration.Milliseconds);
+            dispaly_duration.InnerText = overlay_item.DisplayDuration;
             overlay_item_root_element.AppendChild(dispaly_duration);
 
             // Add the new overlay item xml to the end of the document.

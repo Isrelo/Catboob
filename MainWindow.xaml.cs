@@ -38,14 +38,14 @@ namespace CatboobGGStream
         private GlobalHotkeyListener global_hotkey_listner;               
         private SettingsManager settings_manager;
         private EventTimer overlay_event_timer;
-        private BindingList<OverlayItem> overlay_items;
+        private BindingList<OverlayListBoxItem> overlay_list_box_items;
 
         private OverlayWindow overlay_window;
 
-        public BindingList<OverlayItem> OverlayItems 
+        public BindingList<OverlayListBoxItem> OverlayListBoxItems 
         { 
-            get{return overlay_items;} 
-            set{overlay_items = value;}
+            get{return overlay_list_box_items; } 
+            set{ overlay_list_box_items = value;}
         }
 
         public MainWindow()
@@ -56,7 +56,7 @@ namespace CatboobGGStream
             this.DataContext = this;
 
             // Setup Bound Display List
-            overlay_items = new BindingList<OverlayItem>();
+            overlay_list_box_items = new BindingList<OverlayListBoxItem>();
 
             // Get Applicaion Directory.
             working_dir = Directory.GetCurrentDirectory();
@@ -293,6 +293,9 @@ namespace CatboobGGStream
             {
                 OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
                 temp_item.HotKey = selected_hotkey;
+
+                // Show the changed value.
+                add_overlay_item_container.hotkey_tb.Text = selected_hotkey;
             }
         }
 
@@ -302,7 +305,7 @@ namespace CatboobGGStream
             time_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void SaveTimePicker(TimeSpan duration_to_use)
+        private void SaveTimePicker(String duration_to_use)
         {
             // Hide the TimePicker dialog.
             time_picker_dialog.Visibility = System.Windows.Visibility.Collapsed;
@@ -310,30 +313,44 @@ namespace CatboobGGStream
             // Save the selected time.
             OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
             temp_item.DisplayDuration = duration_to_use;
+
+            // Show the changed value.
+            add_overlay_item_container.time_tb.Text = duration_to_use;
         }
 
-        private void DisplayTimePickerDialog()
+        private void DisplayTimePickerDialog(String selected_time)
         {
             // Show the hotkey dialog.
             time_picker_dialog.Visibility = System.Windows.Visibility.Visible;
+
+            // Reset the time dialog.
+            string[] temp_time_parts = selected_time.Split(':');
+            int minutes;
+            int.TryParse(temp_time_parts[0], out minutes);
+            int seconds;
+            int.TryParse(temp_time_parts[1], out seconds);
+            int miliseconds;
+            int.TryParse(temp_time_parts[2], out miliseconds);
+    
+            time_picker.SetControlTime(minutes, seconds);
         }
 
-        private void DisplayPlay(OverlayItem overlay_item)
+        private void DisplayPlay(OverlayListBoxItem overlay_list_box_item)
         {
             // Show the play button.
-            overlay_item.PlayVisible = Visibility.Visible;
+            overlay_list_box_item.PlayVisible = Visibility.Visible;
 
             // Hide the stop button.
-            overlay_item.StopVisible = Visibility.Collapsed;
+            overlay_list_box_item.StopVisible = Visibility.Collapsed;
         }
 
-        private void DisplayStop(OverlayItem overlay_item)
+        private void DisplayStop(OverlayListBoxItem overlay_list_box_item)
         {
             // Hide the play button.
-            overlay_item.PlayVisible = Visibility.Collapsed;
+            overlay_list_box_item.PlayVisible = Visibility.Collapsed;
 
             // Show the stop button.
-            overlay_item.StopVisible = Visibility.Visible;
+            overlay_list_box_item.StopVisible = Visibility.Visible;
         }
 
         private bool IsHotKeyDialogVisible()
@@ -349,24 +366,37 @@ namespace CatboobGGStream
             // Register the hotkey with the global listner.
             global_hotkey_listner.RegisterGlobalHotkey(overlay_item);
 
+            OverlayListBoxItem temp_overlay_list_box_item = new OverlayListBoxItem();
+            temp_overlay_list_box_item.PopulateOverlayItem(overlay_item);
+
             // Add the OverlayItem to the list of displayed items.
-            OverlayItems.Add(overlay_item);            
+            OverlayListBoxItems.Add(temp_overlay_list_box_item);            
 
             // Show Play Button
-            DisplayPlay(overlay_item);
+            DisplayPlay(temp_overlay_list_box_item);
         }
 
         private void ExecuteOverlayItem(int hotkey_id)
         {
             // Check to see if the user pressed a hotkey.                
-            foreach (OverlayItem temp_overlay_item in OverlayItems)
+            foreach (OverlayListBoxItem temp_overlay_list_box_item in OverlayListBoxItems)
             {
+                OverlayItem temp_overlay_item = temp_overlay_list_box_item.OverlayItemData;
+
                 if (temp_overlay_item.HotKeyID == hotkey_id)
                 {
-                    if (temp_overlay_item.DisplayDuration.Seconds > 0)
-                    {
-                        overlay_event_timer.StartTimer(temp_overlay_item.DisplayDuration, OverlayItem_TimerElapsed);
-                    }
+                    string[] temp_time_parts = temp_overlay_item.DisplayDuration.Split(':');
+                    int minutes;
+                    int.TryParse(temp_time_parts[0], out minutes);
+                    int seconds;
+                    int.TryParse(temp_time_parts[1], out seconds);
+                    int miliseconds;
+                    int.TryParse(temp_time_parts[2], out miliseconds);
+                    TimeSpan temp_duration = new TimeSpan(0, 0, minutes, seconds, miliseconds);
+
+                    // Set the end animation time out value.
+                    if (temp_duration.Minutes > 0 || temp_duration.Seconds > 0 || temp_duration.Milliseconds > 0)
+                        overlay_event_timer.StartTimer(temp_duration, OverlayItem_TimerElapsed);
 
                     if (File.Exists(temp_overlay_item.ImagePath))
                     {
@@ -387,7 +417,7 @@ namespace CatboobGGStream
                         sound_manager.PlaySound(temp_overlay_item.SoundPath);
 
                         // Show stop button.
-                        DisplayStop(temp_overlay_item);
+                        DisplayStop(temp_overlay_list_box_item);
                     }
                 }
             }
@@ -401,10 +431,10 @@ namespace CatboobGGStream
             // Stop Playing the selected sound.
             sound_manager.StopSound();
 
-            foreach (OverlayItem temp_overlay_item in OverlayItems)
+            foreach (OverlayListBoxItem temp_overlay_list_box_item in OverlayListBoxItems)
             {
                 // Show play button.
-                DisplayPlay(temp_overlay_item);
+                DisplayPlay(temp_overlay_list_box_item);
             }
         }
 
@@ -429,23 +459,33 @@ namespace CatboobGGStream
             }
             else
             {
-                // Remove previous hotkey bindings.
-                global_hotkey_listner.UnRegisterGlobalHotkeys();
+                // Update the editied OverlayItem.
+                OverlayListBoxItem temp_overlay_list_box_item = (OverlayListBoxItem)overlay_lv.SelectedItem;
+                temp_overlay_list_box_item.PopulateOverlayItem(overlay_item);
 
                 // Resave the overlay list.
-                settings_manager.SaveOverlayItems(OverlayItems);
+                settings_manager.SaveOverlayItems(OverlayListBoxItems);
 
-                // Rebind hotkeys.
-                for (int count = 0; count < OverlayItems.Count; count++)
-                {
-                    OverlayItem temp_item = OverlayItems[count];
-
-                    global_hotkey_listner.RegisterGlobalHotkey(temp_item);
-                }
+                // Reset the hotkey bindings.
+                RestGlobalHotkeys();
             }
 
             // Show the home screen.
             DisplayStartingScreen();
+        }
+
+        private void RestGlobalHotkeys()
+        {
+            // Remove previous hotkey bindings.
+            global_hotkey_listner.UnRegisterGlobalHotkeys();
+
+            // Rebind hotkeys.
+            for (int count = 0; count < OverlayListBoxItems.Count; count++)
+            {
+                OverlayItem temp_item = OverlayListBoxItems[count].OverlayItemData;
+
+                global_hotkey_listner.RegisterGlobalHotkey(temp_item);
+            }
         }
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
@@ -470,30 +510,37 @@ namespace CatboobGGStream
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            OverlayItem temp_item = (OverlayItem)add_overlay_item_container.DataContext;
+
             if (AppTitle_txt.Text == "Edit Item")
-                SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext, true);
+                SaveOverlayItem(temp_item, true);
             else
-                SaveOverlayItem((OverlayItem)add_overlay_item_container.DataContext, false);
+                SaveOverlayItem(temp_item, false);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             // Get the selected OverlayItem.
-            OverlayItem temp_overlay_item = (OverlayItem)overlay_lv.SelectedItem;
+            OverlayListBoxItem temp_overlay_list_box_item = (OverlayListBoxItem)overlay_lv.SelectedItem;
 
             // Remove OverlayItem
-            OverlayItems.Remove(temp_overlay_item);
+            OverlayListBoxItems.Remove(temp_overlay_list_box_item);
 
             // Resave the overlay list.
-            settings_manager.SaveOverlayItems(OverlayItems);
+            settings_manager.SaveOverlayItems(OverlayListBoxItems);
+
+            // Reset the hotkey bindings.
+            RestGlobalHotkeys();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             // Get the selected OverlayItem.
-            OverlayItem temp_overlay_item = (OverlayItem)overlay_lv.SelectedItem;
+            OverlayListBoxItem temp_overlay_list_box_item = (OverlayListBoxItem)overlay_lv.SelectedItem;
+            OverlayItem temp_overlay_item = temp_overlay_list_box_item.OverlayItemData;
 
-            add_overlay_item_container.DataContext = overlay_lv.SelectedItem;
+            // Bind the sored OverlayItem to the AddOverlayItem dialog.
+            add_overlay_item_container.DataContext = temp_overlay_item;
 
             // Show the add item screen.
             DisplayItemScreen("Edit Item");
@@ -502,17 +549,14 @@ namespace CatboobGGStream
         private void PlaySound_Click(object sender, RoutedEventArgs e)
         {
             Button tempButton = (Button)sender;
-            OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
+            OverlayListBoxItem temp_overlay_list_box_item = (OverlayListBoxItem)tempButton.DataContext;
 
             // Perfrom the same action as the pressed hotkey.
-            ExecuteOverlayItem(tempOverlayItem.HotKeyID);
+            ExecuteOverlayItem(temp_overlay_list_box_item.OverlayItemData.HotKeyID);
         }
 
         private void StopSound_Click(object sender, RoutedEventArgs e)
         {
-            Button tempButton = (Button)sender;
-            OverlayItem tempOverlayItem = (OverlayItem)tempButton.DataContext;
-
             // Perfrom the same action for reseting the overlay.
             ResetOverlayItems();
         }
@@ -520,11 +564,11 @@ namespace CatboobGGStream
         private void StopAllSounds_MediaEnded(object sender, EventArgs e)
         {
             // Stop Playing the selected sound.
-            sound_manager.StopSound();            
+            sound_manager.StopSound();
 
-            for (int count = 0; count < OverlayItems.Count; count++)
+            for (int count = 0; count < OverlayListBoxItems.Count; count++)
             {
-                DisplayPlay(OverlayItems[count]);
+                DisplayPlay(OverlayListBoxItems[count]);
             }
         }
 
@@ -617,6 +661,7 @@ namespace CatboobGGStream
 
             // Hide the application don't close it.
             this.Hide();
+
         }
     }
 }

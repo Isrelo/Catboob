@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" 
+             MinHeight="356"
+             d:DesignHeight="356" 
              d:DesignWidth="300">
     <UserControl.Resources>
 
@@ -34,6 +35,7 @@
     <Grid Background="#FFFAFAFA">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="56" />
             <RowDefinition Height="*" />
             <RowDefinition Height="48" />
             <RowDefinition Height="48" />
@@ -41,11 +43,15 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Name="DisplayColor" Grid.Row="0" Height="100" Background="Black">
+        <!-- Dialog Toolbar -->
+        <Grid x:Name="app_toolbar" Grid.Row="0" Background="#FF009688">
+        </Grid>
+
+        <Grid Name="DisplayColor" Grid.Row="1" Height="100" Background="Black">
         </Grid>
 
         <!-- Red Picker Control -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48" />
@@ -65,7 +71,7 @@
         </Grid>
 
         <!-- Green Picker Control -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48" />
@@ -85,7 +91,7 @@
         </Grid>
 
         <!-- Blue Picker Control -->
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48" />
@@ -104,7 +110,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="5">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

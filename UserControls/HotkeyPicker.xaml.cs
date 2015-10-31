@@ -57,9 +57,7 @@ namespace CatboobGGStream
 
         private void HotkeySave_Click(object sender, RoutedEventArgs e)
         {
-            String selected_hotkey = "";
-
-            savePickedHotkey(selected_hotkey);
+            savePickedHotkey(this.pressed_key_tb.Text);
         }
 
         private void HotKey_KeyDown(object sender, KeyEventArgs e)

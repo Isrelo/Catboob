@@ -161,7 +161,7 @@
         </Grid>
 
         <Grid x:Name="main_container" Grid.Row="1">
-            <ListBox x:Name="overlay_lv" ItemsSource="{Binding OverlayItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0" SelectionMode="Single" PreviewMouseUp="OverlayItems_PreviewMouseUp" PreviewMouseDown="OverlayItems_PreviewMouseDown">
+            <ListBox x:Name="overlay_lv" ItemsSource="{Binding OverlayListBoxItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0" SelectionMode="Single" PreviewMouseUp="OverlayItems_PreviewMouseUp" PreviewMouseDown="OverlayItems_PreviewMouseDown">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

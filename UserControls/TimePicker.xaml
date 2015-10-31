@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatboobGGStream"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             MinHeight="356"
+             d:DesignHeight="356" 
+             d:DesignWidth="300"
+             Background="Transparent" Loaded="TimePicker_Loaded">
     <UserControl.Resources>
 
         <!-- Action Flat Button -->
@@ -55,11 +58,27 @@
     <Grid Background="#FFFAFAFA">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="56" />
             <RowDefinition Height="248" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Width="300" Height="248">
+        <!-- Dialog Toolbar -->
+        <Grid x:Name="app_toolbar" Grid.Row="0" Background="#FF009688">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="minute_selection" Grid.Column="0" Margin="4,16" Background="Transparent" Foreground="White" BorderBrush="Transparent" FontSize="20" Text="00" HorizontalAlignment="Right" PreviewMouseUp="Time_PreviewMouseUp"/>
+            <TextBlock  Grid.Column="1" Margin="4,16" Background="Transparent" Foreground="White" FontSize="20" Text=":"/>
+            <TextBox x:Name="secod_selection" Grid.Column="2"  Margin="4,16" Background="Transparent" Foreground="White" BorderBrush="Transparent"  FontSize="20" Text="00" HorizontalAlignment="Left" PreviewMouseUp="Time_PreviewMouseUp"/>
+            
+        </Grid>
+
+        <Grid Grid.Row="1" Width="300" Height="248">
             
             <!-- Clock Background -->
             <Ellipse x:Name="ClockBackground" Width="240" Height="240" Margin="4" Fill="#EEEEEE" Stroke="#EEEEEE" Stretch="Uniform"/>
@@ -92,7 +111,7 @@
             
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

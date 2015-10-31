@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatboobGGStream"
              mc:Ignorable="d" 
-             d:DesignHeight="300" 
+             MinHeight="356"
+             d:DesignHeight="356" 
              d:DesignWidth="300"
              KeyDown="HotKey_KeyDown"
              KeyUp="HotKey_KeyUP"
@@ -42,11 +43,14 @@
             <RowDefinition Height="48" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" ClipToBounds="True" TextWrapping="Wrap" FontSize="20" FontWeight="Medium" Foreground="#FF212121" Margin="24,24,24,0" Text="Press any key to pick a hotkey for your overlay." />
+        <!-- Dialog Toolbar -->
+        <Grid x:Name="app_toolbar" Grid.Row="0" Background="#FF009688">
+            <TextBlock ClipToBounds="True" TextWrapping="Wrap" FontSize="20" FontWeight="Medium" Foreground="White" Margin="16" Text="Press any key to pick a hotkey for your overlay." />
+        </Grid>        
 
-        <TextBlock x:Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" />
+        <TextBlock x:Name="pressed_key_tb" Grid.Row="1" TextWrapping="Wrap" Margin="24,16,24,24" Foreground="#FF727272" FontSize="16" Background="{x:Null}" Focusable="True" VerticalAlignment="Center" />
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

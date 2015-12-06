@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OverlayItems>
   <OverlayItem>
-    <ImagePath>C:\Andy\Catboob\Images\GGButton.png</ImagePath>
-    <SoundPath>C:\Andy\Catboob\Sounds\gg.mp3</SoundPath>
+    <ImagePath>C:\Program Files\Catboob\Images\GGButton.png</ImagePath>
+    <SoundPath>C:\Program Files\Catboob\Images\gg.mp3</SoundPath>
     <HotKey>LeftCtrl + G</HotKey>
   </OverlayItem>
   <OverlayItem>
-    <ImagePath>C:\Andy\Catboob\Images\EasyButton.png</ImagePath>
-    <SoundPath>C:\Andy\Catboob\Sounds\that_was_easy.mp3</SoundPath>
+    <ImagePath>C:\Program Files\Catboob\Images\EasyButton.png</ImagePath>
+    <SoundPath>C:\Program Files\Catboob\Images\that_was_easy.mp3</SoundPath>
     <HotKey>LeftCtrl + E</HotKey>
   </OverlayItem>
 </OverlayItems>

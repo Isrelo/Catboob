@@ -385,6 +385,9 @@ namespace CatboobGGStream
 
                 if (temp_overlay_item.HotKeyID == hotkey_id)
                 {
+                    // Make sure to clear the last overlay action.
+                    ResetOverlayItems();
+
                     string[] temp_time_parts = temp_overlay_item.DisplayDuration.Split(':');
                     int minutes;
                     int.TryParse(temp_time_parts[0], out minutes);

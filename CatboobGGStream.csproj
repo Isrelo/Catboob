@@ -84,6 +84,9 @@
     </ApplicationDefinition>
     <Compile Include="LIstBoxItem.cs" />
     <Compile Include="OverlayListBoxItem.cs" />
+    <Compile Include="UserControls\AddApplicationItem.xaml.cs">
+      <DependentUpon>AddApplicationItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <DependentUpon>TimePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowUserSettings.cs" />
+    <Page Include="UserControls\AddApplicationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\AddOverlayItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,6 +247,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\ApplicatoinsGrey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\FolderOpenGrey.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

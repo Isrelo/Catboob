@@ -60,6 +60,8 @@ namespace CatboobGGStream.UserControls
         private void AddApplication_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Add a new application to the startup list.
+            app_settings_dialog.SetDialogTitle("Add Application");
+            app_settings_dialog.Visibility = System.Windows.Visibility.Visible;
 
             System.Diagnostics.Debug.WriteLine("Clicked on add new applicaiton to startup list!");
         }
@@ -70,20 +72,9 @@ namespace CatboobGGStream.UserControls
             this.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void MenuCancel_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: User deosn't want to change the application settings or doesn't want to add a applcation.
-            // Take the user back to the applicaiton list.
-        }
-
         private void MenuDelete_Click(object sender, RoutedEventArgs e)
         {
             //TODO: User wants the selected item in the list removed.
-        }
-
-        private void MenuSave_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: User wants the changes made to be applied to the selected or added item.
         }
 
         private void MenuEdit_Click(object sender, RoutedEventArgs e)

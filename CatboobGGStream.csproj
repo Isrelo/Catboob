@@ -82,11 +82,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LIstBoxItem.cs" />
     <Compile Include="OverlayListBoxItem.cs" />
     <Compile Include="UserControls\AddOverlayItem.xaml.cs">
       <DependentUpon>AddOverlayItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventTimer.cs" />
+    <Compile Include="UserControls\ApplicationItemList.xaml.cs">
+      <DependentUpon>ApplicationItemList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\HotkeyPicker.xaml.cs">
       <DependentUpon>HotkeyPicker.xaml</DependentUpon>
     </Compile>
@@ -110,6 +114,10 @@
     </Compile>
     <Compile Include="WindowUserSettings.cs" />
     <Page Include="UserControls\AddOverlayItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ApplicationItemList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,7 +238,9 @@
   <ItemGroup>
     <Resource Include="img\TimePicker.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\ApplicatoinsGrey.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D

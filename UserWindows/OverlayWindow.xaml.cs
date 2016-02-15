@@ -53,6 +53,11 @@ namespace CatboobGGStream
             return OverlayWindowUserSettings.WindowColor;
         }
 
+        public void ResetOverlay()
+        {
+            overlay_display.Source = null;            
+        }
+
         public void DisplayOverlay(String image_path)
         {
             // Restore the window to previous state if minimized.

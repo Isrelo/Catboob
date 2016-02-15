@@ -153,21 +153,29 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="48" />
                         <RowDefinition Height="48" />
-                    </Grid.RowDefinitions>                    
+                        <RowDefinition Height="48" />
+                    </Grid.RowDefinitions>
 
+                    <!-- Add Applications To Load Icon -->
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="AutoLoadAppSetting_Click" >
+                        <Image Width="24" Height="24" Source="../img/ApplicatoinsGrey.png"/>
+                    </Button>
+
+                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Auto Load Applications"/>
+                    
                     <!-- Volume Icon -->
-                    <Button Grid.Column="0" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ColorPicker_Click">
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ColorPicker_Click">
                         <Image Width="24" Height="24" Source="../img/ColorPicker.png"/>
                     </Button>
 
-                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Key Color"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Key Color"/>
 
                     <!-- Resolution Icon -->
-                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ResolutionPicker_Click">
+                    <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ResolutionPicker_Click">
                         <Image Width="24" Height="24" Source="../img/ResolutionPicker.png"/>
                     </Button>
 
-                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Window Size"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Margin="16,0" FontSize="14" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="#FF212121" Text="Overlay Window Size"/>
 
                 </Grid>                
             </Grid>

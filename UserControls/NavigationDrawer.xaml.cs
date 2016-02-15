@@ -26,6 +26,9 @@ namespace CatboobGGStream
         public delegate void ShowResolutionPickerDialog();
         public ShowResolutionPickerDialog showResolutionPickerDialog;
 
+        public delegate void ShowAutoAppLaunchDialog();
+        public ShowAutoAppLaunchDialog showAutoAppLaunchDialog;
+
         public NavigationDrawer()
 		{
 			this.InitializeComponent();
@@ -74,6 +77,12 @@ namespace CatboobGGStream
         private void ResolutionPicker_Click(object sender, RoutedEventArgs e)
         {
             showResolutionPickerDialog();
+        }
+
+        private void AutoLoadAppSetting_Click(object sender, RoutedEventArgs e)
+        {
+            showAutoAppLaunchDialog();
+            this.CloseDrawer();
         }
     }
 }

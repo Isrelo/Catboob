@@ -88,6 +88,9 @@ namespace CatboobGGStream
             time_picker.savePickedTime = SaveTimePicker;
             time_picker.closePickedTime = DiscardTimePicker;
 
+            // Set ShowAutoAppLaunchDialog display event.
+            AppNavDrawer.showAutoAppLaunchDialog = DisplayAutoAppLaunchDialog;
+
             // Keep Applicaion Open
             is_app_exiting = false;
 
@@ -335,6 +338,12 @@ namespace CatboobGGStream
             time_picker.SetControlTime(minutes, seconds);
         }
 
+        private void DisplayAutoAppLaunchDialog()
+        {
+            // Show the auto applicaiton launch dialog.
+            apps_to_lauch_dialog.Visibility = System.Windows.Visibility.Visible;
+        }
+
         private void DisplayPlay(OverlayListBoxItem overlay_list_box_item)
         {
             // Show the play button.
@@ -385,9 +394,6 @@ namespace CatboobGGStream
 
                 if (temp_overlay_item.HotKeyID == hotkey_id)
                 {
-                    // Make sure to clear the last overlay action.
-                    ResetOverlayItems();
-
                     string[] temp_time_parts = temp_overlay_item.DisplayDuration.Split(':');
                     int minutes;
                     int.TryParse(temp_time_parts[0], out minutes);
@@ -407,6 +413,11 @@ namespace CatboobGGStream
 
                         // Display the selected image.
                         overlay_window.DisplayOverlay(temp_overlay_item.ImagePath);
+                    }
+                    else
+                    {
+                        // If there was no image to display, clear the last image.
+                        overlay_window.ResetOverlay();
                     }
 
                     if (File.Exists(temp_overlay_item.SoundPath))

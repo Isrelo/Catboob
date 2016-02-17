@@ -22,9 +22,9 @@ namespace CatboobGGStream.UserControls
     /// </summary>
     public partial class ApplicationItemList : UserControl
     {
-        private BindingList<LIstBoxItem> applicatoin_items_l;
+        private BindingList<AppListBoxItem> applicatoin_items_l;
 
-        private BindingList<LIstBoxItem> ApplicatoinItems
+        private BindingList<AppListBoxItem> ApplicatoinItems
         {
             get { return applicatoin_items_l; }
             set { applicatoin_items_l = value; }
@@ -33,6 +33,11 @@ namespace CatboobGGStream.UserControls
         public ApplicationItemList()
         {
             InitializeComponent();
+
+            applicatoin_items_l = new BindingList<AppListBoxItem>();
+
+            // Set the itemsource to the binding list in order to have items update in the listbox.
+            application_lv.ItemsSource = ApplicatoinItems;
         }
 
         private void ApplicationItems_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -60,10 +65,17 @@ namespace CatboobGGStream.UserControls
         private void AddApplication_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Add a new application to the startup list.
+
+            AppListBoxItem temp_list_box_item_l = new AppListBoxItem();
+            temp_list_box_item_l.AppTitle = "Testing Adding Applicaiton!";
+            temp_list_box_item_l.AppPath = "";
+            temp_list_box_item_l.AppIcon = new BitmapImage();
+            applicatoin_items_l.Add(temp_list_box_item_l);
+
+            app_settings_dialog.DataContext = temp_list_box_item_l;
             app_settings_dialog.SetDialogTitle("Add Application");
             app_settings_dialog.Visibility = System.Windows.Visibility.Visible;
 
-            System.Diagnostics.Debug.WriteLine("Clicked on add new applicaiton to startup list!");
         }
 
         private void MenuBack_Click(object sender, RoutedEventArgs e)

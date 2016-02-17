@@ -141,7 +141,7 @@
         <!-- Wrap the main list and add button to seperate it from the title bar. -->
         <Grid x:Name="app_wrapper" Grid.Row="1">
 
-            <ListBox x:Name="application_lv" ItemsSource="{Binding ApplicatoinItems}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0" SelectionMode="Single" PreviewMouseUp="ApplicationItems_PreviewMouseUp" PreviewMouseDown="ApplicationItems_PreviewMouseDown">
+            <ListBox x:Name="application_lv" ItemsSource="{Binding ApplicatoinItems, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Padding="-1" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="14" Margin="0" SelectionMode="Single" PreviewMouseUp="ApplicationItems_PreviewMouseUp" PreviewMouseDown="ApplicationItems_PreviewMouseDown">
 
                 <ListBox.ItemTemplate>
 
@@ -160,14 +160,14 @@
                             </Grid.RowDefinitions>
 
                             <!-- Item Image -->
-                            <Ellipse Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <!--<Ellipse Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding ImagePath}" />
+                                    <ImageBrush ImageSource="{Binding AppIcon}" />
                                 </Ellipse.Fill>
-                            </Ellipse>
+                            </Ellipse>-->
 
                             <!-- Description -->
-                            <TextBlock Grid.Column="1" Text="{Binding ItemTitle}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="0" Padding="0" />
+                            <TextBlock Grid.Column="1" Text="{Binding AppTitle}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="0" Padding="0" />
 
                             <!-- Action Button -->
                             <Button Grid.Column="2" Width="24" Height="24" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ActionButton_Click" />

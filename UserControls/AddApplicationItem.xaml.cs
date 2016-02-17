@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Microsoft.Win32;
+
 namespace CatboobGGStream.UserControls
 {
     /// <summary>
@@ -20,6 +22,8 @@ namespace CatboobGGStream.UserControls
     /// </summary>
     public partial class AddApplicationItem : UserControl
     {
+        private String app_image_path;
+
         public AddApplicationItem()
         {
             InitializeComponent();
@@ -39,11 +43,28 @@ namespace CatboobGGStream.UserControls
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
             //TODO: User wants the changes made to be applied to the selected or added item.
+            AppListBoxItem temp_list_box_item = (AppListBoxItem)this.DataContext;
+
+            this.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void AppFileDialog_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Display a file open dialog for .exe files.
+            String app_path = "";
+            // Get the users chosen application.
+            OpenFileDialog open_file_dialog = new OpenFileDialog();
+            open_file_dialog.Title = "Choose Executable";
+            open_file_dialog.Filter = "Executable Files (*.exe) | *.exe;|All Files (*.*)|*.*";
+
+            if (open_file_dialog.ShowDialog() == true)
+                app_path = open_file_dialog.FileName;
+
+            //TODO: Save the path for later reterival.
+            //OverlayItem temp_item = (OverlayItem)this.DataContext;
+            //temp_item.ImagePath = app_path;
+
+            // Show the changed value.
+            this.app_path_tb.Text = app_path;
         }
     }
 }

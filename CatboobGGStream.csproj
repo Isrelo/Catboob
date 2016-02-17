@@ -82,7 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LIstBoxItem.cs" />
+    <Compile Include="AppLIstBoxItem.cs" />
     <Compile Include="OverlayListBoxItem.cs" />
     <Compile Include="UserControls\AddApplicationItem.xaml.cs">
       <DependentUpon>AddApplicationItem.xaml</DependentUpon>

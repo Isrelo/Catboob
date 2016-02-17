@@ -6,36 +6,50 @@ using System.Threading.Tasks;
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace CatboobGGStream
 {
-    class LIstBoxItem : INotifyPropertyChanged
+    class AppListBoxItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private String image_path_l;
-        private String item_title_l;
+        private String app_path_l;
+        private String app_title_l;
+        private BitmapImage app_icon;
 
-        public String ImagePath
+        public BitmapImage AppIcon
         {
-            get { return this.image_path_l; }
+            get { return this.app_icon; }
             set
             {
-                this.image_path_l = value;
+                this.app_icon = value;
 
                 // Required Changed Event
                 NotifyPropertyChanged();
             }
         }
 
-        public String ItemTitle
+        public String AppPath
         {
-            get { return this.item_title_l; }
+            get { return this.app_path_l; }
             set
             {
-                this.item_title_l = value;
+                this.app_path_l = value;
+
+                // Required Changed Event
+                NotifyPropertyChanged();
+            }
+        }
+
+        public String AppTitle
+        {
+            get { return this.app_title_l; }
+            set
+            {
+                this.app_title_l = value;
 
                 // Required Changed Event
                 NotifyPropertyChanged();

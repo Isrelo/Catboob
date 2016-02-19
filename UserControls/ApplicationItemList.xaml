@@ -125,6 +125,7 @@
             <TextBlock x:Name="AppTitle_txt" Grid.Row="0" Grid.Column="1" ClipToBounds="True" TextTrimming="CharacterEllipsis" Foreground="White" FontSize="20" FontWeight="Medium" Padding="16,0,0,0" UseLayoutRounding="True" Margin="0" VerticalAlignment="Center" ><Run Text="Apps to Launch"/></TextBlock>
 
             <StackPanel x:Name="RightAction_sp" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Visibility="Collapsed">
+                
                 <!-- Delete Button -->
                 <Button x:Name="Delete_btn" Width="56" Height="56" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="MenuDelete_Click" >
                     <Image Width="24" Height="24" Source="../img/DeleteWhite.png"/>
@@ -134,6 +135,7 @@
                 <Button x:Name="Edit_btn" Width="56" Height="56" BorderThickness="0" Style="{StaticResource ActionBtn_style}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OverridesDefaultStyle="True" Padding="16,0,0,0" Click="MenuEdit_Click" >
                     <Image Width="24" Height="24" Source="../img/EditWhite.png"/>
                 </Button>
+                
             </StackPanel>
 
         </Grid>
@@ -160,11 +162,11 @@
                             </Grid.RowDefinitions>
 
                             <!-- Item Image -->
-                            <!--<Ellipse Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <Ellipse Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="{Binding AppIcon}" />
                                 </Ellipse.Fill>
-                            </Ellipse>-->
+                            </Ellipse>
 
                             <!-- Description -->
                             <TextBlock Grid.Column="1" Text="{Binding AppTitle}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="0" Padding="0" />

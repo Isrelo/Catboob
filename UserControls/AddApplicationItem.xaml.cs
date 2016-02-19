@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.IO;
 using Microsoft.Win32;
 
 namespace CatboobGGStream.UserControls
@@ -34,6 +35,30 @@ namespace CatboobGGStream.UserControls
             AppTitle_txt.Text = title_p;
         }
 
+        public void ResetFrom()
+        {
+            app_name_tb.Text = "";
+            app_path_tb.Text = "";
+            app_args_tb.Text = "";
+        }
+
+        public void PopulateForm(AppListBoxItem temp_app_list_box_item_p)
+        {
+            app_name_tb.Text = temp_app_list_box_item_p.AppTitle;
+            app_path_tb.Text = temp_app_list_box_item_p.AppPath;
+            app_args_tb.Text = temp_app_list_box_item_p.AppArguments;
+        }
+
+        private ImageSource GetImageFromAppIcon(String app_path_p)
+        {
+            if (!File.Exists(app_path_p))
+                return null;
+
+            System.Drawing.Icon temp_app_icon = System.Drawing.Icon.ExtractAssociatedIcon(app_path_p);
+
+            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(temp_app_icon.Handle, new Int32Rect(0, 0, temp_app_icon.Width, temp_app_icon.Height), BitmapSizeOptions.FromEmptyOptions());
+        }
+
         private void MenuCancel_Click(object sender, RoutedEventArgs e)
         {
             // Take the user back to the applicaiton list.
@@ -42,8 +67,12 @@ namespace CatboobGGStream.UserControls
 
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: User wants the changes made to be applied to the selected or added item.
+            // Apply the changes to the selected AppListBoxItem.
             AppListBoxItem temp_list_box_item = (AppListBoxItem)this.DataContext;
+            temp_list_box_item.AppTitle = app_name_tb.Text;
+            temp_list_box_item.AppPath = app_path_tb.Text;
+            temp_list_box_item.AppIcon = GetImageFromAppIcon(app_path_tb.Text);
+            temp_list_box_item.AppArguments = app_args_tb.Text;
 
             this.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -58,10 +87,6 @@ namespace CatboobGGStream.UserControls
 
             if (open_file_dialog.ShowDialog() == true)
                 app_path = open_file_dialog.FileName;
-
-            //TODO: Save the path for later reterival.
-            //OverlayItem temp_item = (OverlayItem)this.DataContext;
-            //temp_item.ImagePath = app_path;
 
             // Show the changed value.
             this.app_path_tb.Text = app_path;

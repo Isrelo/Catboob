@@ -129,7 +129,7 @@
 
         </Grid>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ClipToBounds="True">
+        <ScrollViewer x:Name="Settings_wrapper" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ClipToBounds="True">
 
             <StackPanel>
 

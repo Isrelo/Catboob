@@ -64,34 +64,41 @@ namespace CatboobGGStream.UserControls
 
         private void AddApplication_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Add a new application to the startup list.
+            // Add a new application to the startup list.
+            AppListBoxItem temp_app_list_box_item = new AppListBoxItem();
+            applicatoin_items_l.Add(temp_app_list_box_item);
 
-            AppListBoxItem temp_list_box_item_l = new AppListBoxItem();
-            temp_list_box_item_l.AppTitle = "Testing Adding Applicaiton!";
-            temp_list_box_item_l.AppPath = "";
-            temp_list_box_item_l.AppIcon = new BitmapImage();
-            applicatoin_items_l.Add(temp_list_box_item_l);
-
-            app_settings_dialog.DataContext = temp_list_box_item_l;
+            app_settings_dialog.ResetFrom();
+            app_settings_dialog.DataContext = temp_app_list_box_item;
             app_settings_dialog.SetDialogTitle("Add Application");
             app_settings_dialog.Visibility = System.Windows.Visibility.Visible;
-
         }
 
         private void MenuBack_Click(object sender, RoutedEventArgs e)
         {
-            //User is done adding or editing applications. Take the user back to the main application screen.
+            // Reset and hide the application settings form.
+            app_settings_dialog.ResetFrom();
+
             this.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void MenuDelete_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: User wants the selected item in the list removed.
+            // Remove the selected AppListBoxItem.
+            AppListBoxItem temp_app_list_box_item = (AppListBoxItem)application_lv.SelectedItem;
+
+            ApplicatoinItems.Remove(temp_app_list_box_item);
         }
 
         private void MenuEdit_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: User wants to edit an exsiting item.
+            // Edit selected application settings.
+            AppListBoxItem temp_app_list_box_item = (AppListBoxItem)application_lv.SelectedItem; ;
+
+            app_settings_dialog.PopulateForm(temp_app_list_box_item);
+            app_settings_dialog.DataContext = temp_app_list_box_item;
+            app_settings_dialog.SetDialogTitle("Edit Application");
+            app_settings_dialog.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }

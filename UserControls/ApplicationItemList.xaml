@@ -154,7 +154,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="56" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="56" />
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
@@ -170,9 +169,6 @@
 
                             <!-- Description -->
                             <TextBlock Grid.Column="1" Text="{Binding AppTitle}" ClipToBounds="True" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Calibri" Margin="0" Padding="0" />
-
-                            <!-- Action Button -->
-                            <Button Grid.Column="2" Width="24" Height="24" Style="{StaticResource RegularBtn_style}" OverridesDefaultStyle="True" BorderThickness="0" Padding="16,0" Click="ActionButton_Click" />
 
                             <!-- Item Seperator -->
                             <Border Grid.Column="0" BorderThickness="0,0,0,1" BorderBrush="#FFB6B6B6" Margin="0" Padding="0,0,0,16" Grid.ColumnSpan="3"/>

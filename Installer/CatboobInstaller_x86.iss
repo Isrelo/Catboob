@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Catboob"
-#define MyAppVersion "1.0.3"
+#define MyAppVersion "1.0.4"
 #define MyAppPublisher "BlackLightCoders"
 #define MyAppExeName "CatboobGGStream.exe"
 
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\Catboob
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputDir=..\Installer\v1.0.3\x86
+OutputDir=..\Installer\v1.0.4\x86
 OutputBaseFilename=CatboobSetup
 Compression=lzma
 SolidCompression=yes
@@ -34,6 +34,7 @@ Source: "..\bin\Release\CatboobGGStream.exe"; DestDir: "{app}"; Flags: ignorever
 Source: "..\bin\Release\Catboob.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\WpfAnimatedGif.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\OverlayItems.xml"; DestDir: "{localappdata}\CatboobGGStream"; Flags: onlyifdoesntexist ignoreversion
+Source: "..\bin\Release\AppItems.xml"; DestDir: "{localappdata}\CatboobGGStream"; Flags: onlyifdoesntexist ignoreversion
 Source: "..\bin\Release\Images\*"; DestDir: "{app}\Images"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\bin\Release\Sounds\*"; DestDir: "{app}\Sounds"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

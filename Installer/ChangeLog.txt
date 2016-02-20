@@ -1,3 +1,6 @@
+v1.0.4
+* Added ability to load applications on startup.
+* Fixed images not showing when no sound plays.
 ------------------------------------------------
 v1.0.3:
 * Fixed it so that you can play just sounds with no overlay image.

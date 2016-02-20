@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppItems>
+  <AppItem>
+    <AppPath>C:\Program Files (x86)\Mozilla Firefox\firefox.exe</AppPath>
+    <AppTitle>Mozilla FireFox</AppTitle>
+    <AppArgs>www.twitch.tv/Isrelo</AppArgs>
+  </AppItem>
+</AppItems>

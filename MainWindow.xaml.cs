@@ -36,7 +36,7 @@ namespace CatboobGGStream
         private String app_data_dir;
         private SoundManager sound_manager;
         private GlobalHotkeyListener global_hotkey_listner;               
-        private SettingsManager settings_manager;
+        private OverlaySettingsManager settings_manager;
         private EventTimer overlay_event_timer;
         private BindingList<OverlayListBoxItem> overlay_list_box_items;
 
@@ -123,12 +123,16 @@ namespace CatboobGGStream
             hwnd_source.AddHook(global_hotkey_listner.HwndHook);            
 
             // Load saved overlay items.
-            settings_manager = new SettingsManager(app_data_dir);
+            settings_manager = new OverlaySettingsManager(app_data_dir);
             settings_manager.LoadOverlayItems();
             for (int count = 0; count < settings_manager.OverlayItems.Count; count++)
             {
-                AddOverlayItem(settings_manager.OverlayItems[count]);
+                OverlayItem temp_overlay_item = settings_manager.OverlayItems[count];
+                AddOverlayItem(temp_overlay_item);
             }
+
+            // Load and launch Applicaions
+            apps_to_lauch_dialog.LoadApplications(app_data_dir);
         }
 
         private void SetupSystemTray()

@@ -16,11 +16,11 @@ namespace CatboobGGStream
     public class AppListBoxItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         private String app_path_l;
         private String app_title_l;
-        private String app_arguments_l;
         private ImageSource app_icon_l;
+        private AppItem app_item_data_l;
 
         public ImageSource AppIcon
         {
@@ -40,6 +40,7 @@ namespace CatboobGGStream
             set
             {
                 this.app_path_l = value;
+                this.AppItemData.AppPath = value;
 
                 // Required Changed Event
                 NotifyPropertyChanged();
@@ -52,22 +53,28 @@ namespace CatboobGGStream
             set
             {
                 this.app_title_l = value;
+                this.AppItemData.AppTitle = value;
 
                 // Required Changed Event
                 NotifyPropertyChanged();
             }
         }
 
-        public String AppArguments
+        public AppItem AppItemData
         {
-            get { return this.app_arguments_l; }
+            get { return this.app_item_data_l; }
             set
             {
-                this.app_arguments_l = value;
+                this.app_item_data_l = value;
 
                 // Required Changed Event
                 NotifyPropertyChanged();
             }
+        }
+
+        public AppListBoxItem()
+        {
+            app_item_data_l = new AppItem();
         }
 
         // This method is called by the Set accessor of each property. 

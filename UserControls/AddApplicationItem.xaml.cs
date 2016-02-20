@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using System.IO;
 using Microsoft.Win32;
 
 namespace CatboobGGStream.UserControls
@@ -23,7 +22,7 @@ namespace CatboobGGStream.UserControls
     /// </summary>
     public partial class AddApplicationItem : UserControl
     {
-        private String app_image_path;
+        public AppSettingsManager AppSettingsManager { get; set; }
 
         public AddApplicationItem()
         {
@@ -46,17 +45,7 @@ namespace CatboobGGStream.UserControls
         {
             app_name_tb.Text = temp_app_list_box_item_p.AppTitle;
             app_path_tb.Text = temp_app_list_box_item_p.AppPath;
-            app_args_tb.Text = temp_app_list_box_item_p.AppArguments;
-        }
-
-        private ImageSource GetImageFromAppIcon(String app_path_p)
-        {
-            if (!File.Exists(app_path_p))
-                return null;
-
-            System.Drawing.Icon temp_app_icon = System.Drawing.Icon.ExtractAssociatedIcon(app_path_p);
-
-            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(temp_app_icon.Handle, new Int32Rect(0, 0, temp_app_icon.Width, temp_app_icon.Height), BitmapSizeOptions.FromEmptyOptions());
+            app_args_tb.Text = temp_app_list_box_item_p.AppItemData.AppArgs;
         }
 
         private void MenuCancel_Click(object sender, RoutedEventArgs e)
@@ -71,8 +60,10 @@ namespace CatboobGGStream.UserControls
             AppListBoxItem temp_list_box_item = (AppListBoxItem)this.DataContext;
             temp_list_box_item.AppTitle = app_name_tb.Text;
             temp_list_box_item.AppPath = app_path_tb.Text;
-            temp_list_box_item.AppIcon = GetImageFromAppIcon(app_path_tb.Text);
-            temp_list_box_item.AppArguments = app_args_tb.Text;
+            temp_list_box_item.AppIcon = Utility.GetImageFromAppIcon(app_path_tb.Text);
+            temp_list_box_item.AppItemData.AppArgs = app_args_tb.Text;
+
+            AppSettingsManager.SaveAppItems();
 
             this.Visibility = System.Windows.Visibility.Collapsed;
         }

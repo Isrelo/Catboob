@@ -82,7 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppItem.cs" />
     <Compile Include="AppLIstBoxItem.cs" />
+    <Compile Include="AppSettingsManager.cs" />
     <Compile Include="OverlayListBoxItem.cs" />
     <Compile Include="UserControls\AddApplicationItem.xaml.cs">
       <DependentUpon>AddApplicationItem.xaml</DependentUpon>
@@ -110,11 +112,12 @@
     <Compile Include="UserWindows\OverlayWindow.xaml.cs">
       <DependentUpon>OverlayWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsManager.cs" />
+    <Compile Include="OverlaySettingsManager.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="UserControls\TimePicker.xaml.cs">
       <DependentUpon>TimePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility.cs" />
     <Compile Include="WindowUserSettings.cs" />
     <Page Include="UserControls\AddApplicationItem.xaml">
       <SubType>Designer</SubType>
@@ -251,10 +254,14 @@
   <ItemGroup>
     <Resource Include="img\FolderOpenGrey.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AppItems.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D
 XCOPY "$(ProjectDir)OverlayItems.xml" "$(TargetDir)" /Y /D
+XCOPY "$(ProjectDir)AppItems.xml" "$(TargetDir)" /Y /D
 MKDIR $(TargetDir)Images
 XCOPY "$(ProjectDir)Images" "$(TargetDir)Images" /Y /S
 MKDIR $(TargetDir)Sounds

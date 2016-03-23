@@ -98,10 +98,10 @@ namespace CatboobGGStream.UserControls
         {
             // Add a new application to the startup list.
             AppListBoxItem temp_app_list_box_item = new AppListBoxItem();
-            applicatoin_items_l.Add(temp_app_list_box_item);
 
             app_settings_dialog.ResetFrom();
             app_settings_dialog.DataContext = temp_app_list_box_item;
+            app_settings_dialog.ApplicationItems = applicatoin_items_l;
             app_settings_dialog.AppSettingsManager = app_settings_manager_l;
             app_settings_dialog.SetDialogTitle("Add Application");
             app_settings_dialog.Visibility = System.Windows.Visibility.Visible;
@@ -140,6 +140,7 @@ namespace CatboobGGStream.UserControls
 
             app_settings_dialog.PopulateForm(temp_app_list_box_item);
             app_settings_dialog.DataContext = temp_app_list_box_item;
+            app_settings_dialog.ApplicationItems = applicatoin_items_l;
             app_settings_dialog.AppSettingsManager = app_settings_manager_l;
             app_settings_dialog.SetDialogTitle("Edit Application");
             app_settings_dialog.Visibility = System.Windows.Visibility.Visible;

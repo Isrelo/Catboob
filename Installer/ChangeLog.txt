@@ -1,3 +1,6 @@
+v1.0.5
+* Fixed blank arguments crashing 3rd party applications.
+------------------------------------------------
 v1.0.4
 * Added ability to load applications on startup.
 * Fixed images not showing when no sound plays.

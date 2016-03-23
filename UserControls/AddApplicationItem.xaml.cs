@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Microsoft.Win32;
+using System.ComponentModel;
 
 namespace CatboobGGStream.UserControls
 {
@@ -22,6 +23,7 @@ namespace CatboobGGStream.UserControls
     /// </summary>
     public partial class AddApplicationItem : UserControl
     {
+        public BindingList<AppListBoxItem> ApplicationItems { get; set; }
         public AppSettingsManager AppSettingsManager { get; set; }
 
         public AddApplicationItem()
@@ -56,12 +58,18 @@ namespace CatboobGGStream.UserControls
 
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrEmpty(app_path_tb.Text))
+                this.Visibility = System.Windows.Visibility.Collapsed;
+
             // Apply the changes to the selected AppListBoxItem.
             AppListBoxItem temp_list_box_item = (AppListBoxItem)this.DataContext;
             temp_list_box_item.AppTitle = app_name_tb.Text;
             temp_list_box_item.AppPath = app_path_tb.Text;
             temp_list_box_item.AppIcon = Utility.GetImageFromAppIcon(app_path_tb.Text);
             temp_list_box_item.AppItemData.AppArgs = app_args_tb.Text;
+
+            if (AppTitle_txt.Text.Contains("Add"))
+                this.ApplicationItems.Add(temp_list_box_item);
 
             AppSettingsManager.SaveAppItems();
 

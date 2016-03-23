@@ -113,7 +113,9 @@ namespace CatboobGGStream
                         {
                             // Read in the application arguments.
                             temp_value = app_items_xml.ReadElementContentAsString();
-                            temp_app_item.AppArgs = temp_value;
+
+                            // Bug: Blank arguments being passed to application.
+                            temp_app_item.AppArgs = temp_value.Trim();
                         }
                     }
 

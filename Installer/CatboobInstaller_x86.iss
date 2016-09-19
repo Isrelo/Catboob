@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Catboob"
-#define MyAppVersion "1.0.5"
+#define MyAppVersion "1.0.6"
 #define MyAppPublisher "BlackLightCoders"
 #define MyAppExeName "CatboobGGStream.exe"
 
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\Catboob
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputDir=..\Installer\v1.0.5\x86
+OutputDir=..\Installer\{#MyAppVersion}\x86
 OutputBaseFilename=CatboobSetup
 Compression=lzma
 SolidCompression=yes

@@ -1,3 +1,5 @@
+V1.0.6
+* Fixed auto launching 3rd party applications that need to be launched from the correct working directory.
 v1.0.5
 * Fixed blank arguments crashing 3rd party applications.
 ------------------------------------------------

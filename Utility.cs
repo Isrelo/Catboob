@@ -34,6 +34,15 @@ namespace CatboobGGStream
             // Get the info for the cmd to run.
             ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments);
             startInfo.UseShellExecute = true;
+            try
+            {
+                // Bug#9: Some progams need to reference there starting directory. Try to assign the working directory.
+                startInfo.WorkingDirectory = Path.GetDirectoryName(command);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(String.Format("Error: Invalid path entered! {0}", e.Message));
+            }
             startInfo.Verb = "runas";
 
             // Start the cmd.

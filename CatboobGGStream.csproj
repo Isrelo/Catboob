@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CA1D7BBA-7375-41F6-A67B-9240825E6C2C}</ProjectGuid>
+    <ProjectGuid>{6F9AD864-14B4-421C-82F8-3631A5F427ED}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CatboobGGStream</RootNamespace>
     <AssemblyName>CatboobGGStream</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,46 +35,23 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Catboob.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WpfAnimatedGif, Version=1.4.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\WpfAnimatedGif.1.4.13\lib\net\WpfAnimatedGif.dll</HintPath>
+    <Reference Include="WpfAnimatedGif, Version=1.4.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WpfAnimatedGif.1.4.14\lib\net\WpfAnimatedGif.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -82,68 +60,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AppItem.cs" />
-    <Compile Include="AppLIstBoxItem.cs" />
-    <Compile Include="AppSettingsManager.cs" />
-    <Compile Include="OverlayListBoxItem.cs" />
-    <Compile Include="UserControls\AddApplicationItem.xaml.cs">
-      <DependentUpon>AddApplicationItem.xaml</DependentUpon>
+    <Compile Include="View\ModifyOverlayItemView.xaml.cs">
+      <DependentUpon>ModifyOverlayItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AddOverlayItem.xaml.cs">
-      <DependentUpon>AddOverlayItem.xaml</DependentUpon>
+    <Compile Include="View\OverlayListView.xaml.cs">
+      <DependentUpon>OverlayListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EventTimer.cs" />
-    <Compile Include="UserControls\ApplicationItemList.xaml.cs">
-      <DependentUpon>ApplicationItemList.xaml</DependentUpon>
+    <Compile Include="View\ToolBarView.xaml.cs">
+      <DependentUpon>ToolBarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\HotkeyPicker.xaml.cs">
-      <DependentUpon>HotkeyPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ResolutionPicker.xaml.cs">
-      <DependentUpon>ResolutionPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ColorPicker.xaml.cs">
-      <DependentUpon>ColorPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GlobalHotkeyListener.cs" />
-    <Compile Include="UserControls\NavigationDrawer.xaml.cs">
-      <DependentUpon>NavigationDrawer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserWindows\OverlayWindow.xaml.cs">
-      <DependentUpon>OverlayWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OverlaySettingsManager.cs" />
-    <Compile Include="SoundManager.cs" />
-    <Compile Include="UserControls\TimePicker.xaml.cs">
-      <DependentUpon>TimePicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Utility.cs" />
-    <Compile Include="WindowUserSettings.cs" />
-    <Page Include="UserControls\AddApplicationItem.xaml">
+    <Page Include="ResourceDictionary\MaterialDesignResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\AddOverlayItem.xaml">
+    <Page Include="View\ModifyOverlayItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ApplicationItemList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\HotkeyPicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ResolutionPicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\ColorPicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -151,26 +85,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HotkeyManager.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\NavigationDrawer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserWindows\OverlayWindow.xaml">
+    <Page Include="View\OverlayListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\TimePicker.xaml">
+    <Page Include="View\ToolBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OverlayItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -199,74 +127,41 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="CatboobLibrary\CatboobLibrary.csproj">
+      <Project>{c583d5f8-ce9f-479f-aeee-e1165b111ad6}</Project>
+      <Name>CatboobLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="img\AddCircleOrange.png" />
+    <Resource Include="img\ApplicatoinsGrey.png" />
     <Resource Include="img\ArrowBackWhite.png" />
+    <Resource Include="img\AttachmentGrey.png" />
     <Resource Include="img\CloseWhite.png" />
+    <Resource Include="img\ColorPicker.png" />
+    <Resource Include="img\DeleteWhite.png" />
+    <Resource Include="img\EditWhite.png" />
+    <Resource Include="img\FolderOpenGrey.png" />
+    <Resource Include="img\KeyboardGrey.png" />
     <Resource Include="img\MenuWhite.png" />
     <Resource Include="img\MoreMenuVertBlack.png" />
     <Resource Include="img\MoreMenuVertWHite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\SaveWhite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\AttachmentGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\KeyboardGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="img\MusicNodeGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="img\PlayArrowGrey.png" />
+    <Resource Include="img\ResolutionPicker.png" />
+    <Resource Include="img\SaveWhite.png" />
     <Resource Include="img\StopGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Catboob.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\DeleteWhite.png" />
-    <Resource Include="img\EditWhite.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="img\TimePicker.png" />
+    <Resource Include="img\VolumeDownGrey.png" />
+    <Resource Include="img\VolumeMuteGrey.png" />
     <Resource Include="img\VolumeUpGrey.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\VolumeDownGrey.png" />
-    <Resource Include="img\VolumeMuteGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\ColorPicker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="OverlayItems.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\ResolutionPicker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\TimePicker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\ApplicatoinsGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\FolderOpenGrey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="AppItems.xml" />
+    <Resource Include="Catboob.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>XCOPY "$(ProjectDir)Catboob.ico" "$(TargetDir)" /Y /D
-XCOPY "$(ProjectDir)OverlayItems.xml" "$(TargetDir)" /Y /D
-XCOPY "$(ProjectDir)AppItems.xml" "$(TargetDir)" /Y /D
-MKDIR $(TargetDir)Images
-XCOPY "$(ProjectDir)Images" "$(TargetDir)Images" /Y /S
-MKDIR $(TargetDir)Sounds
-XCOPY "$(ProjectDir)Sounds" "$(TargetDir)Sounds" /Y /S</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,0 +1,49 @@
+﻿<Window x:Class="CatboobGGStream.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatboobGGStream"
+        xmlns:view="clr-namespace:CatboobGGStream.View"
+        mc:Ignorable="d"
+        Background="#FFFAFAFA" 
+        Icon="../Catboob.ico"
+        FontFamily="Calibri"        
+        Title="Catboob" 
+        Height="490" Width="340"
+        MinHeight="470" MinWidth="340">
+    
+    <!-- Import the styles to apply to control elements.-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionary/MaterialDesignResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- Main Applicaion Toolbar -->
+        <view:ToolBarView x:Name="ApplicationToolBar" 
+                          Grid.Row="0" Grid.Column="0"
+                          Loaded="ApplicationToolBar_Loaded" />
+
+        <!-- OverlayItems ListBox -->
+        <view:OverlayListView x:Name="OverlayItemsListBox" 
+                              Grid.Row="1" Grid.Column="0"
+                              Loaded="OverlayItemsListBox_Loaded" />
+        
+        <!-- Edit and Add Overlay Item Form -->
+        <view:ModifyOverlayItemView x:Name="ModifyOverlayItemsForm"
+                                    Grid.Row="1" Grid.Column="0"
+                                    Loaded="ModifyOverlayItemsForm_Loaded"/>
+
+    </Grid>
+    
+</Window>

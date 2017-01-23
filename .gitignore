@@ -1,8 +1,7 @@
 /bin
 /obj
 /Catboob (GGStream).csproj.user
-/Catboob (GGStream).suo
-/CatboobGGStream.v12.suo
-/CatboobGGStream.suo
+*.suo
 /Installer/v1.0.0
-/.vs/CatboobGGStream/v14/.suo
+/.vs
+/TestResults

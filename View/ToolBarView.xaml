@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="CatboobGGStream.View.ToolBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatboobGGStream.View"
+             mc:Ignorable="d" 
+             Visibility="{Binding ToolBarVisible}"
+             d:DesignHeight="56" d:DesignWidth="300">
+    <!-- Import the styles to apply to control elements.-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ResourceDictionary/MaterialDesignResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>    
+    </UserControl.Resources>
+    
+    <Grid Background="{Binding ToolBarBackgroundColor}" 
+          MaxHeight="{Binding ToolBarHeight}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ToolBarHeight}" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding ToolBarHeight}" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="{Binding ToolBarHeight}" />
+            <ColumnDefinition Width="{Binding ToolBarHeight}" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Menu Button -->
+        <Button x:Name="Menu_btn" 
+                Grid.Row="0" Grid.Column="0" 
+                Margin="0" Padding="16,0,0,0"                
+                BorderThickness="0" 
+                Style="{StaticResource ActionBtn_style}" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                OverridesDefaultStyle="True"
+                Visibility="{Binding MainMenuVisible}"
+                Command="{Binding MainMenuClick}">
+            <Image Width="24" Height="24" 
+                   Source="../img/MenuWhite.png"/>
+        </Button>
+
+        <!-- Back Button -->
+        <Button x:Name="Back_btn" 
+                Grid.Row="0" Grid.Column="0" 
+                BorderThickness="0" 
+                Style="{StaticResource ActionBtn_style}" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                OverridesDefaultStyle="True" 
+                Margin="0" Padding="16,0,0,0" 
+                Visibility="{Binding BackVisible}"
+                Command="{Binding BackClick}">
+            <Image Width="24" Height="24" 
+                   Source="../img/ArrowBackWhite.png"/>
+        </Button>
+
+        <!-- Cancel Button -->
+        <Button x:Name="Cancel_btn"  
+                Grid.Row="0" Grid.Column="0" 
+                BorderThickness="0" 
+                Style="{StaticResource ActionBtn_style}" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                OverridesDefaultStyle="True" 
+                Margin="0" Padding="16,0,0,0" 
+                Visibility="{Binding CancelVisible}"
+                Command="{Binding CancelClick}">
+            <Image Width="24" Height="24" 
+                   Source="../img/CloseWhite.png"/>
+        </Button>
+
+        <!-- Toolbar Text/Title -->
+        <TextBlock x:Name="Toolbar_Text" 
+                   Grid.Row="0" Grid.Column="1"
+                   TextTrimming="CharacterEllipsis" 
+                   Foreground="{Binding ToolBarFontColor}" 
+                   FontSize="20" 
+                   FontWeight="Medium" 
+                   Padding="16,0,0,0" 
+                   Margin="0" 
+                   UseLayoutRounding="True" 
+                   VerticalAlignment="Center">
+            <Run Text="{Binding TitleText}" />
+        </TextBlock>
+
+            
+        <!-- Delete Button -->
+        <Button x:Name="Delete_btn"
+                Grid.Row="0" Grid.Column="2"
+                Width="{Binding ToolBarHeight}" Height="{Binding ToolBarHeight}"
+                Margin="0" Padding="16,0,0,0" 
+                BorderThickness="0" 
+                Style="{StaticResource ActionBtn_style}" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                OverridesDefaultStyle="True"                     
+                Visibility="{Binding DeleteVisible}"
+                Command="{Binding DeleteClick}">
+            <Image Width="24" Height="24" 
+                    Source="../img/DeleteWhite.png"/>
+        </Button>
+
+        <!-- Edit Button -->
+        <Button x:Name="Edit_btn"
+                Grid.Row="0" Grid.Column="3"
+                Width="{Binding ToolBarHeight}" Height="{Binding ToolBarHeight}"
+                Margin="0" Padding="16,0,0,0" 
+                BorderThickness="0" 
+                Style="{StaticResource ActionBtn_style}" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                OverridesDefaultStyle="True"                    
+                Visibility="{Binding EditVisible}"
+                Command="{Binding EditClick}">
+            <Image Width="24" Height="24" 
+                    Source="../img/EditWhite.png"/>
+        </Button>
+
+        <!-- Save Button -->
+        <Button x:Name="Save_btn" 
+                Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                Style="{StaticResource ActionFlatBtn_style}" 
+                OverridesDefaultStyle="True" 
+                Margin="0" Padding="16" 
+                BorderThickness="0" 
+                FontSize="16" 
+                VerticalContentAlignment="Stretch" 
+                HorizontalContentAlignment="Stretch" 
+                Content="SAVE" 
+                Foreground="White" 
+                Visibility="{Binding SaveVisible}"
+                Command="{Binding SaveClick}">
+        </Button>
+
+    </Grid>
+    
+</UserControl>

@@ -66,6 +66,9 @@
     <Compile Include="View\OverlayListView.xaml.cs">
       <DependentUpon>OverlayListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TimePickerView.xaml.cs">
+      <DependentUpon>TimePickerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ToolBarView.xaml.cs">
       <DependentUpon>ToolBarView.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\OverlayListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TimePickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

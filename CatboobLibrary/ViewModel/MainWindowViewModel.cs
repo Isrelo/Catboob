@@ -78,14 +78,21 @@ namespace CatboobGGStream.ViewModel
             ModifyOverlayItemModel temp_modify_overlay_item_model = new ModifyOverlayItemModel();
             temp_modify_overlay_item_model.ModifyOverlayItemVisibility = Visibility.Collapsed;
             temp_modify_overlay_item_model.HotkeyClick = new DelegateCmdBase((x) => GetHotkey());
-            temp_modify_overlay_item_model.DisplayDurationClick = new DelegateCmdBase((x) => GetDisplayDuration());
-            temp_modify_overlay_item_model.FadeInDurationClick = new DelegateCmdBase((x) => GetFadeInDuration());
-            temp_modify_overlay_item_model.FadeOutDurationClick = new DelegateCmdBase((x) => GetFadeOutDuration());
+            temp_modify_overlay_item_model.DisplayDurationClick = new DelegateCmdBase((x) => ShowDisplayDurationDialog());
+            temp_modify_overlay_item_model.FadeInDurationClick = new DelegateCmdBase((x) => ShowFadeInDurationDialog());
+            temp_modify_overlay_item_model.FadeOutDurationClick = new DelegateCmdBase((x) => ShowFadeOutDurationDialog());
             temp_modify_overlay_item_model.SaveOverlayItemClick = new DelegateCmdBase((x) => SaveOverlayItem());
             temp_modify_overlay_item_model.CancelOverlayItemClick = new DelegateCmdBase((x) => CancelModifyOverlayItem());
             temp_modify_overlay_item_model.CurrentOverlayItemModel = new OverlayItemModel();
 
             modify_overlay_item_view_model_m = new ModifyOverlayItemViewModel(temp_modify_overlay_item_model);
+
+            // Create the inital Time Picker dailog.
+            TimePickerModel temp_time_picker_model = new TimePickerModel();
+            temp_time_picker_model.TimePickerVisible = Visibility.Collapsed;
+            temp_time_picker_model.DiscardClick = new DelegateCmdBase((x) => CancelTimePickerDialog());
+
+            modify_overlay_item_view_model_m.CurrentTimePickerViewModel = new TimePickerViewModel(temp_time_picker_model);
         }
 
         public void DisplayAppMenu()
@@ -119,7 +126,7 @@ namespace CatboobGGStream.ViewModel
 
             System.Diagnostics.Debug.WriteLine("Cliked edit menu button!");
 
-            modify_overlay_item_view_model_m.EditOverlayItem(overlay_list_view_model_m.SelectedOverlayItem);
+            modify_overlay_item_view_model_m.EditOverlayItem(overlay_list_view_model_m.SelectedOverlayItem.GetCopy());
 
             ShowModifyOverlayItemForm(true);
         }
@@ -128,10 +135,16 @@ namespace CatboobGGStream.ViewModel
         {
             System.Diagnostics.Debug.WriteLine("Cliked save overlay item button!");
 
-            if(main_toolbar_view_model_m.TitleText == "Add Item")
+            if (main_toolbar_view_model_m.TitleText == "Add Item")
+            {
                 overlay_list_view_model_m.AddOverlayItem(modify_overlay_item_view_model_m.CurrentOverlayItemModel);
+            }
             else
+            {
+                overlay_list_view_model_m.RemoveOverlayItem(overlay_list_view_model_m.SelectedOverlayItem);
+                overlay_list_view_model_m.AddOverlayItem(modify_overlay_item_view_model_m.CurrentOverlayItemModel);
                 overlay_list_view_model_m.SelectedOverlayItem = modify_overlay_item_view_model_m.CurrentOverlayItemModel;
+            }
 
             ShowModifyOverlayItemForm(false);
         }
@@ -148,19 +161,75 @@ namespace CatboobGGStream.ViewModel
             System.Diagnostics.Debug.WriteLine("Cliked get hotkey button!");
         }
 
-        public void GetDisplayDuration()
+        public void CancelTimePickerDialog()
+        {
+            System.Diagnostics.Debug.WriteLine("Cliked cancel get duration button!");
+
+            // Hide the time picker dialog.
+            modify_overlay_item_view_model_m.CurrentTimePickerViewModel.TimePickerVisible = Visibility.Collapsed;
+        }
+
+        public void SaveDisplayDuration()
+        {
+            System.Diagnostics.Debug.WriteLine("Cliked save duration button!");
+            CurrentModifyOverlayItemViewModel.CurrentOverlayItemModel.DisplayDuration = modify_overlay_item_view_model_m.CurrentTimePickerViewModel.SelectedTime;
+
+            CancelTimePickerDialog();
+        }
+
+        public void ShowDisplayDurationDialog()
         {
             System.Diagnostics.Debug.WriteLine("Cliked get display duration button!");
+
+            CurrentModifyOverlayItemViewModel.CurrentTimePickerViewModel.CurrentTimePickerType = TimePickerViewModel.TimePickerType.DISPLAY_DURATION;
+            CurrentModifyOverlayItemViewModel.CurrentTimePickerViewModel.SaveClick = new DelegateCmdBase((x) => SaveDisplayDuration());
+
+            string temp_display_duration = CurrentModifyOverlayItemViewModel.CurrentOverlayItemModel.DisplayDuration;
+            this.ShowTimePickerDialog(temp_display_duration);
         }
 
-        public void GetFadeInDuration()
+        public void SaveFadeInDuration()
+        {
+            System.Diagnostics.Debug.WriteLine("Cliked save fade in duration button!");
+            CurrentModifyOverlayItemViewModel.CurrentOverlayItemModel.FadeInDuration = modify_overlay_item_view_model_m.CurrentTimePickerViewModel.SelectedTime;
+
+            CancelTimePickerDialog();
+        }
+
+        public void ShowFadeInDurationDialog()
         {
             System.Diagnostics.Debug.WriteLine("Cliked get fade in duration button!");
+
+            CurrentModifyOverlayItemViewModel.CurrentTimePickerViewModel.CurrentTimePickerType = TimePickerViewModel.TimePickerType.FADE_IN_DURATION;
+            CurrentModifyOverlayItemViewModel.CurrentTimePickerViewModel.SaveClick = new DelegateCmdBase((x) => SaveFadeInDuration());
+
+            string temp_display_duration = CurrentModifyOverlayItemViewModel.CurrentOverlayItemModel.FadeInDuration;
+            this.ShowTimePickerDialog(temp_display_duration);
         }
 
-        public void GetFadeOutDuration()
+        public void SaveFadeOutDuration()
+        {
+            System.Diagnostics.Debug.WriteLine("Cliked save fade out duration button!");
+            CurrentModifyOverlayItemViewModel.CurrentOverlayItemModel.FadeOutDuration = modify_overlay_item_view_model_m.CurrentTimePickerViewModel.SelectedTime;
+
+            CancelTimePickerDialog();
+        }
+
+        public void ShowFadeOutDurationDialog()
         {
             System.Diagnostics.Debug.WriteLine("Cliked get fade out duration button!");
+
+            CurrentModifyOverlayItemViewModel.CurrentTimePickerViewModel.CurrentTimePickerType = TimePickerViewModel.TimePickerType.FADE_OUT_DURATION;
+            CurrentModifyOverlayItemViewModel.CurrentTimePickerViewModel.SaveClick = new DelegateCmdBase((x) => SaveFadeOutDuration());
+
+            string temp_display_duration = CurrentModifyOverlayItemViewModel.CurrentOverlayItemModel.FadeOutDuration;
+            this.ShowTimePickerDialog(temp_display_duration);
+        }
+
+        public void ShowTimePickerDialog(string current_time_p)
+        {
+            modify_overlay_item_view_model_m.CurrentTimePickerViewModel.SelectedTime = current_time_p;
+            modify_overlay_item_view_model_m.CurrentTimePickerViewModel.TimePickerVisible = Visibility.Visible;
         }
 
         public void ShowMainApplicationView(bool is_visible_p)

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 //using System.Windows.Data;
@@ -26,9 +26,30 @@ namespace CatboobGGStream.View
         public ModifyOverlayItemView()
         {
             InitializeComponent();
+
+            TimeDurationPicker.SaveTimePickerClick += new EventHandler(SaveTimeClick);
         }
 
-        private void ImagePathButton_Click(object sender, RoutedEventArgs e)
+        protected void SaveTimeClick(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Cliked save time button!");
+            if (this.DataContext != null)
+            {
+                ModifyOverlayItemViewModel temp_modify_overlay_item_view_model = (ModifyOverlayItemViewModel)this.DataContext;
+
+                if (temp_modify_overlay_item_view_model.CurrentTimePickerViewModel.CurrentTimePickerType == TimePickerViewModel.TimePickerType.DISPLAY_DURATION)
+                    DurationTextBox.Text = temp_modify_overlay_item_view_model.CurrentTimePickerViewModel.SelectedTime;
+
+                if (temp_modify_overlay_item_view_model.CurrentTimePickerViewModel.CurrentTimePickerType == TimePickerViewModel.TimePickerType.FADE_IN_DURATION)
+                    FadeInDurationTextBox.Text = temp_modify_overlay_item_view_model.CurrentTimePickerViewModel.SelectedTime;
+
+                if (temp_modify_overlay_item_view_model.CurrentTimePickerViewModel.CurrentTimePickerType == TimePickerViewModel.TimePickerType.FADE_OUT_DURATION)
+                    FadeOutDurationTextBox.Text = temp_modify_overlay_item_view_model.CurrentTimePickerViewModel.SelectedTime;
+
+            }
+        }
+
+        private void GetImagePathButton_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Cliked get image path button!");
 
@@ -41,11 +62,13 @@ namespace CatboobGGStream.View
             if (open_file_dialog.ShowDialog() == true)
                 temp_image_path = open_file_dialog.FileName;
 
-            this.image_path_tb.Text = temp_image_path;
+            this.ImagePathTextBox.Text = temp_image_path;
         }
 
-        private void SoundPathButton_Click(object sender, RoutedEventArgs e)
+        private void GetSoundPathButton_Click(object sender, RoutedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("Cliked get sound path button!");
+
             String temp_sound_path = "";
             // Get the users chosen sound.
             OpenFileDialog open_file_dialog = new OpenFileDialog();
@@ -55,7 +78,7 @@ namespace CatboobGGStream.View
             if (open_file_dialog.ShowDialog() == true)
                 temp_sound_path = open_file_dialog.FileName;
 
-            this.sound_path_tb.Text = temp_sound_path;
+            this.SoundPathTextBox.Text = temp_sound_path;
         }
 
         private void ModifyOverlayItemToolbar_Loaded(object sender, RoutedEventArgs e)
@@ -64,6 +87,15 @@ namespace CatboobGGStream.View
             {
                 ModifyOverlayItemViewModel temp_modify_overlay_item_view_model = (ModifyOverlayItemViewModel)this.DataContext;
                 ModifyOverlayItemToolbar.DataContext = temp_modify_overlay_item_view_model.ModifyOverlayItemToolbarViewModel;
+            }
+        }
+
+        private void TimeDurationPicker_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                ModifyOverlayItemViewModel temp_modify_overlay_item_view_model = (ModifyOverlayItemViewModel)this.DataContext;
+                TimeDurationPicker.DataContext = temp_modify_overlay_item_view_model.CurrentTimePickerViewModel;
             }
         }
     }

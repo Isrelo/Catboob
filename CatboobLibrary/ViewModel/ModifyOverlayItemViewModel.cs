@@ -16,6 +16,7 @@ namespace CatboobGGStream.ViewModel
     public class ModifyOverlayItemViewModel : INPCBase
     {
         private ModifyOverlayItemModel modify_overlay_item_model_m;
+        private TimePickerViewModel time_picker_view_model_m;
         private ToolBarViewModel modify_overlay_item_toolbar_view_model_m;        
 
         public OverlayItemModel CurrentOverlayItemModel
@@ -25,6 +26,16 @@ namespace CatboobGGStream.ViewModel
             {
                 modify_overlay_item_model_m.CurrentOverlayItemModel = value;
                 OnPropertyChanged("CurrentOverlayItemModel");
+            }
+        }
+
+        public TimePickerViewModel CurrentTimePickerViewModel
+        {
+            get { return time_picker_view_model_m; }
+            set
+            {
+                time_picker_view_model_m = value;
+                OnPropertyChanged("CurrentTimePickerViewModel");
             }
         }
 

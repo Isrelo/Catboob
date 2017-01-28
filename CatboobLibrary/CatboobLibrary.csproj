@@ -55,11 +55,13 @@
     <Compile Include="Model\ModifyOverlayItemModel.cs" />
     <Compile Include="Model\OverlayItemModel.cs" />
     <Compile Include="Model\OverlayListModel.cs" />
+    <Compile Include="Model\TimePickerModel.cs" />
     <Compile Include="Model\ToolBarModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ModifyOverlayItemViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\OverlayListViewModel.cs" />
+    <Compile Include="ViewModel\TimePickerViewModel.cs" />
     <Compile Include="ViewModel\ToolBarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -71,12 +71,36 @@ namespace CatboobGGStream
             ImageBehavior.SetAnimatedSource(overlay_display, new BitmapImage(new Uri(image_path, UriKind.RelativeOrAbsolute)));
 
             Storyboard stbFadeIn = (Storyboard)FindResource("FadeIn");
+
+            //string temp_test = "00:30:00";
+            //string[] temp_time_parts = temp_test.Split(':');
+            //int minutes;
+            //int.TryParse(temp_time_parts[0], out minutes);
+            //int seconds;
+            //int.TryParse(temp_time_parts[1], out seconds);
+            //int miliseconds;
+            //int.TryParse(temp_time_parts[2], out miliseconds);
+            //TimeSpan temp_duration = new TimeSpan(0, 0, minutes, seconds, miliseconds);
+
+            //stbFadeIn.Duration = new Duration(temp_duration);
             stbFadeIn.Begin();
         }
 
         public void HideOverlay()
         {
             Storyboard stbFadeOut = (Storyboard)FindResource("FadeOut");
+
+            //string temp_test = "00:30:00";
+            //string[] temp_time_parts = temp_test.Split(':');
+            //int minutes;
+            //int.TryParse(temp_time_parts[0], out minutes);
+            //int seconds;
+            //int.TryParse(temp_time_parts[1], out seconds);
+            //int miliseconds;
+            //int.TryParse(temp_time_parts[2], out miliseconds);
+            //TimeSpan temp_duration = new TimeSpan(0, 0, minutes, seconds, miliseconds);
+
+            //stbFadeOut.Duration = new Duration(temp_duration);
             stbFadeOut.Begin();
         }
 

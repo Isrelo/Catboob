@@ -82,10 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AppItem.cs" />
-    <Compile Include="AppLIstBoxItem.cs" />
+    <Compile Include="Models\AppItem.cs" />
+    <Compile Include="Models\AppLIstBoxItem.cs" />
     <Compile Include="AppSettingsManager.cs" />
-    <Compile Include="OverlayListBoxItem.cs" />
+    <Compile Include="Models\OverlayListBoxItem.cs" />
     <Compile Include="UserControls\AddApplicationItem.xaml.cs">
       <DependentUpon>AddApplicationItem.xaml</DependentUpon>
     </Compile>
@@ -170,7 +170,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OverlayItem.cs" />
+    <Compile Include="Models\OverlayItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -256,6 +256,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AppItems.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

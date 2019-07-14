@@ -102,10 +102,10 @@
         </Style>
 
         <Storyboard x:Key="FadeIn" Name="FadeIn">
-            <DoubleAnimation From="0" To="1" Storyboard.TargetName ="floating_action_btn" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:1"/>
+            <DoubleAnimation From="0" To="100" Storyboard.TargetName ="floating_action_btn" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:0"/>
         </Storyboard>
         <Storyboard x:Key="FadeOut" Name="FadeOut">
-            <DoubleAnimation From="1" To="0" Storyboard.TargetName ="floating_action_btn" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:1"/>
+            <DoubleAnimation From="100" To="0" Storyboard.TargetName ="floating_action_btn" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:0"/>
         </Storyboard>
 
     </Window.Resources>
